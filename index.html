@@ -35,7 +35,7 @@
     <a class="cta" href="https://www.linkedin.com/in/saumya-garg-35461b1b8/" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only"> on LinkedIn (opens in a new tab)</span></a>
   </header>
 
-  <main>
+  <main class="voyage">
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero__copy">
         <h1 id="hero-title">I'm SaGa!<span class="sr-only"> (Saumya Garg)</span></h1>
@@ -51,11 +51,15 @@
       </div>
 
       <div class="scene" role="img" aria-label="Illustration: a young pirate on a wooden ship, looking through a spyglass as the ship sails over painted waves">
+        <div class="sky">
         <div class="cloud-track cloud-track--1"><img src="assets/hero/cloud-1.webp" width="345" height="177" alt=""></div>
         <div class="cloud-track cloud-track--2"><img src="assets/hero/cloud-2.webp" width="355" height="154" alt=""></div>
         <div class="cloud-track cloud-track--3"><img src="assets/hero/cloud-3.webp" width="235" height="155" alt=""></div>
+        </div>
         <div class="sea-still"></div>
         <canvas class="sea-gl sea-gl--back" aria-hidden="true"></canvas>
+        <div class="ship-back"><div class="ship-back__bob"><img src="assets/journey/ship-back.svg" width="400" height="500" alt=""></div></div>
+        <div class="ship-exit">
         <div class="ship">
           <div class="ship__bob">
             <img class="ship__hull" src="assets/hero/ship.webp" width="890" height="823" alt="" fetchpriority="high">
@@ -68,8 +72,53 @@
             </div>
           </div>
         </div>
+        </div>
         <canvas class="sea-gl sea-gl--front" aria-hidden="true"></canvas>
       </div>
+
+      <section class="journey" aria-labelledby="journey-title">
+        <div class="journey__head">
+          <h2 id="journey-title">The voyage so far</h2>
+          <p>Every port that shaped how I design.</p>
+        </div>
+        <svg class="route" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs><mask id="route-reveal"><path class="route__reveal" d="M120,800 C155,777 308,715 330,660 C352,605 277,530 250,470 C223,410 142,349 170,300 C198,251 328,209 420,175 C512,141 622,114 720,95 C818,76 933,48 1010,60 C1087,72 1108,165 1180,170 C1252,175 1397,103 1440,90"/></mask></defs>
+          <path class="route__line" mask="url(#route-reveal)" d="M120,800 C155,777 308,715 330,660 C352,605 277,530 250,470 C223,410 142,349 170,300 C198,251 328,209 420,175 C512,141 622,114 720,95 C818,76 933,48 1010,60 C1087,72 1108,165 1180,170 C1252,175 1397,103 1440,90"/>
+          <g class="port" data-x="120" data-y="800"><circle class="route__dot" cx="120" cy="800" r="9"/><text x="114" y="848" text-anchor="middle">DOD</text></g>
+          <g class="port" data-x="330" data-y="660"><circle class="route__dot" cx="330" cy="660" r="9"/><text x="356" y="668" text-anchor="start">Learn tools, growing</text></g>
+          <g class="port" data-x="250" data-y="470"><circle class="route__dot" cx="250" cy="470" r="9"/><text x="276" y="478" text-anchor="start">Ezinore · DTU IIF</text></g>
+          <g class="port" data-x="170" data-y="300"><circle class="route__dot" cx="170" cy="300" r="9"/><text x="196" y="308" text-anchor="start">Stride</text></g>
+          <g class="port" data-x="420" data-y="175"><circle class="route__dot" cx="420" cy="175" r="9"/><text x="398" y="155" text-anchor="end">Debound</text></g>
+          <g class="port" data-x="720" data-y="95"><circle class="route__dot" cx="720" cy="95" r="9"/><text x="720" y="143" text-anchor="middle">Noise</text></g>
+          <g class="port" data-x="1010" data-y="60"><circle class="route__dot" cx="1010" cy="60" r="9"/><text x="1034" y="68" text-anchor="start">IIT Delhi</text></g>
+          <g class="port" data-x="1180" data-y="170"><circle class="route__dot" cx="1180" cy="170" r="9"/><text x="1180" y="220" text-anchor="middle">BharatPe</text></g>
+          <g class="port" data-x="1440" data-y="90"><path class="route__x" d="M1427,77 L1453,103 M1453,77 L1427,103"/><text x="1440" y="144" text-anchor="middle">Finding new</text></g>
+        </svg>
+        <ol class="ports">
+          <li>DOD</li>
+          <li>Learn tools, growing</li>
+          <li>Ezinore · DTU IIF</li>
+          <li>Stride</li>
+          <li>Debound</li>
+          <li>Noise</li>
+          <li>IIT Delhi</li>
+          <li>BharatPe</li>
+          <li>Finding new</li>
+        </ol>
+        <div class="tools">
+          <h3>Tool stack</h3>
+          <ul>
+            <li><span>Figma</span></li>
+            <li><span>FigJam</span></li>
+            <li><span>Procreate</span></li>
+            <li><span>Illustrator</span></li>
+            <li><span>Photoshop</span></li>
+            <li><span>After Effects</span></li>
+            <li><span>Framer</span></li>
+            <li><span>Notion</span></li>
+          </ul>
+        </div>
+      </section>
     </section>
   </main>
 

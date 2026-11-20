@@ -50,8 +50,9 @@
         "  {",
         "    float w = " + (0.9 + i * 0.18).toFixed(3) + ";",
         "    float sw = " + b.amp.toFixed(1) + "*(sin(x*.0045 + t*w + " + (i * 1.7).toFixed(2) + ") + .4*sin(x*.011 - t*w*1.3 + " + i + ".0));",
-        "    float row = y - (" + b.top.toFixed(1) + " - sw);",
-        "    float crest = " + b.top.toFixed(1) + " - sw + 28.0;",
+        "    float drop = uDrop*" + (18 + 50 * (i / (BANDS.length - 1))).toFixed(1) + ";",   // scrolling lowers near rows more: parallax
+        "    float row = y - (" + b.top.toFixed(1) + " - sw + drop);",
+        "    float crest = " + b.top.toFixed(1) + " - sw + drop + 28.0;",
         // a soft shadow cast by this row's crest onto the water behind it
         "    acc.rgb *= 1.0 - .28*smoothstep(crest - 26.0, crest + 4.0, y);",
         "    if (row >= 0.0) {",
@@ -71,7 +72,7 @@
     return [
       "precision highp float;",
       "varying vec2 vUv;",
-      "uniform sampler2D uTex; uniform float uT, uY0, uH;",
+      "uniform sampler2D uTex; uniform float uT, uY0, uH, uDrop;",
       "const float TW = " + TILE_W + ".0, SH = " + SEA_H + ".0;",
       "void main(){",
       "  float x = vUv.x*1920.0, y = uY0 + vUv.y*uH, t = uT;",
@@ -101,7 +102,7 @@
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
     gl.uniform1f(gl.getUniformLocation(prog, "uY0"), y0);
     gl.uniform1f(gl.getUniformLocation(prog, "uH"), h);
-    return { gl: gl, canvas: canvas, uT: gl.getUniformLocation(prog, "uT"), ready: false };
+    return { gl: gl, canvas: canvas, uT: gl.getUniformLocation(prog, "uT"), uDrop: gl.getUniformLocation(prog, "uDrop"), ready: false };
   }
 
   function upload(layer, img) {
@@ -145,6 +146,7 @@
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform1f(l.uT, t);
+      gl.uniform1f(l.uDrop, (window.SagaVoyage && window.SagaVoyage.exit) || 0);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     });
   }

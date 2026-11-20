@@ -76,7 +76,8 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 }
 .scene > * { position: absolute; }
 
-.cloud-track { left: 0; top: 0; width: 100%; height: 100%; animation: cloud-cross linear infinite; }
+.sky { inset: 0; }
+.cloud-track { position: absolute; left: 0; top: 0; width: 100%; height: 100%; animation: cloud-cross linear infinite; }
 .cloud-track img { position: absolute; height: auto; }
 .cloud-track--1 { animation-duration: 80s; animation-delay: -40s; }
 .cloud-track--2 { animation-duration: 105s; animation-delay: -52.5s; }
@@ -98,7 +99,8 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .scene:not(.has-gl) .sea-gl { display: none; }
 
 /* ship group: entry (slides in from the right) > bob (set by sea.js to ride the swell) > layers */
-.ship { left: 44.375%; top: 15.463%; width: 46.354%; z-index: 2; transform: translateX(125%); }
+.ship-exit { inset: 0; z-index: 2; }
+.ship { position: absolute; left: 44.375%; top: 15.463%; width: 46.354%; z-index: 2; transform: translateX(125%); }
 .ship__bob { position: relative; transform-origin: 50% 92%; will-change: transform; }
 .ship__bob img { height: auto; }
 .ship__bob > * { position: absolute; }
@@ -156,6 +158,61 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
   54%, 100% { opacity: 0; transform: scale(.3) rotate(140deg); }
 }
 
+/* ---------- Voyage: the hero stays pinned while scrolling sails into the journey ----------
+   js/hero.js sets --exit (hero leaves), --rise (back-view ship and map arrive),
+   --tools (tool stack) on .hero, each 0 to 1 with scroll. */
+.voyage { display: block; height: 380vh; height: 380svh; }
+.hero { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
+.nav { position: fixed; }
+
+.hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
+.sky { transform: translate3d(0, calc(var(--exit, 0) * 7%), 0); }
+.ship-exit { transform: translate3d(calc(var(--exit, 0) * -105%), calc(var(--exit, 0) * 4%), 0); }
+
+.ship-back {
+  left: calc(100% - 50vw); bottom: 3%; width: 20%; z-index: 1;
+  transform: translate3d(-50%, calc((1 - var(--rise, 0)) * 90%), 0);
+}
+.ship-back__bob { transform-origin: 50% 85%; animation: back-bob 5.2s ease-in-out infinite; }
+.ship-back img { width: 100%; height: auto; }
+@keyframes back-bob {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.2deg); }
+  50% { transform: translate3d(0, 1.6%, 0) rotate(1.2deg); }
+}
+
+.journey { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.route {
+  position: absolute; left: 50%; top: 96px;
+  width: min(94vw, calc((72svh - 96px) * 16 / 9)); height: auto;
+  transform: translateX(-50%); overflow: visible;
+}
+.route__reveal { fill: none; stroke: #fff; stroke-width: 14; stroke-linecap: round; }
+.route__line { fill: none; stroke: #9d8f3f; stroke-width: 4; stroke-dasharray: 2 13; stroke-linecap: round; }
+.port { opacity: 0; transform: scale(.6); transform-box: fill-box; transform-origin: center; transition: opacity .45s ease, transform .55s cubic-bezier(.3, 1.5, .5, 1); }
+.port.is-on { opacity: 1; transform: none; }
+.port text { font: italic 500 40px var(--f-serif); fill: #6c6224; }
+.route__dot { fill: var(--page); stroke: #9d8f3f; stroke-width: 3.5; }
+.route__x { stroke: #b03a2e; stroke-width: 7; stroke-linecap: round; }
+.ports { list-style: none; margin: 0; padding: 0; }
+.ports { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } /* read by screen readers; shown as a timeline on phones */
+
+.journey__head, .tools { position: absolute; right: clamp(24px, 6vw, 120px); width: min(400px, 32vw); }
+.journey__head { top: 36vh; opacity: clamp(0, calc(var(--rise, 0) * 2 - 1), 1); transform: translate3d(0, calc((1 - var(--rise, 0)) * 20px), 0); }
+.journey__head h2 { margin: 0; font: 600 clamp(28px, 2.4vw, 44px)/1.1 var(--f-serif); color: var(--brown); }
+.journey__head p { margin: 6px 0 0; font: italic 400 clamp(18px, 1.4vw, 24px)/1.3 var(--f-serif); color: #6c6224; }
+.tools { top: calc(36vh + 120px); }
+.tools h3 { margin: 0 0 12px; font: italic 500 clamp(22px, 1.7vw, 30px)/1 var(--f-serif); color: #6c6224; opacity: clamp(0, calc(var(--tools, 0) * 3), 1); }
+.tools ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0; padding: 0; list-style: none; }
+.tools li {
+  --t: clamp(0, calc(var(--tools, 0) * 10 - var(--i)), 1);
+  aspect-ratio: 1; display: grid; place-items: center; text-align: center; padding: 4px;
+  border: 1.5px solid #c9bd7a; border-radius: 14px; background: rgba(255, 242, 217, .9);
+  font: 500 clamp(13px, .95vw, 16px)/1.15 var(--f-serif); color: var(--brown);
+  opacity: var(--t); transform: translate3d(0, calc((1 - var(--t)) * 14px), 0) scale(calc(.9 + var(--t) * .1));
+}
+.tools li:nth-child(1) { --i: 0; } .tools li:nth-child(2) { --i: 1; } .tools li:nth-child(3) { --i: 2; } .tools li:nth-child(4) { --i: 3; }
+.tools li:nth-child(5) { --i: 4; } .tools li:nth-child(6) { --i: 5; } .tools li:nth-child(7) { --i: 6; } .tools li:nth-child(8) { --i: 7; }
+
 /* ---------- Intro after the sun loader ---------- */
 .nav, .hero__copy > *, .logos li { transition: opacity .8s ease, transform .8s ease; }
 html.is-loading .nav { opacity: 0; transform: translate(-50%, -12px); }
@@ -176,6 +233,20 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
     position: relative; right: auto; bottom: auto; flex: none;
     margin-top: auto; width: 150vw; margin-left: -51vw;
   }
+  /* no pinned voyage on phones: the journey follows as a normal section */
+  .voyage { height: auto; }
+  .hero { position: relative; height: auto; min-height: 100svh; }
+  .hero__copy, .sky, .ship-exit { transform: none; opacity: 1; }
+  .ship-back, .route { display: none; }
+  .journey { position: relative; inset: auto; padding: 48px 24px 64px; pointer-events: auto; background: var(--page); }
+  .journey__head, .tools { position: static; width: auto; opacity: 1; transform: none; }
+  .tools { margin-top: 36px; }
+  .tools h3 { opacity: 1; }
+  .tools li { --t: 1; }
+  .ports { position: relative; width: auto; height: auto; overflow: visible; clip: auto; margin-top: 28px; border-left: 2px dashed #b5a85a; padding-left: 22px; }
+  .ports li { position: relative; padding: 10px 0; font: italic 500 22px/1.2 var(--f-serif); color: #6c6224; }
+  .ports li::before { content: ""; position: absolute; left: -31px; top: 15px; width: 12px; height: 12px; border-radius: 50%; background: var(--page); border: 3px solid #9d8f3f; }
+  .ports li:last-child::before { content: "✕"; border: 0; background: none; color: #b03a2e; font: 700 18px/1 sans-serif; left: -32px; top: 12px; width: auto; height: auto; }
 }
 @media (max-width: 760px) {
   .nav { grid-template-columns: 1fr auto; padding-left: 20px; height: 58px; top: 16px; }
@@ -188,6 +259,11 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* the voyage still changes with scroll, but by fading, not moving */
+  .hero__copy, .sky, .ship-exit, .ship-back, .journey__head, .tools li { transform: none !important; }
+  .ship-exit { opacity: calc(1 - var(--exit, 0) * 1.5); }
+  .ship-back { transform: translateX(-50%) !important; opacity: var(--rise, 0); }
+  .port { transition: none; transform: none; }
   .scene *, .scene *::after { animation: none !important; }
   .ship, .hero.is-sailing .ship { transform: none; }
   .nav, .hero__copy > *, .logos li { transition: none; }
