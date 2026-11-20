@@ -173,7 +173,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
    flag and crew to follow the mast and deck */
 .ship__turn { transform-origin: 50% 88%; transform: scale(calc(1 - var(--exit, 0) * .08)); }
 .ship__frames {
-  left: -7.207%; top: -20.157%; width: 135.135%; height: 146.136%;
+  left: -7.154%; top: -20.712%; width: 134.128%; height: 145.047%;
   background: 0 0 / 500% 400% no-repeat; opacity: 0; pointer-events: none;
 }
 .ship__flag, .ship__cloth { translate: var(--fx, 0) var(--fy, 0); }

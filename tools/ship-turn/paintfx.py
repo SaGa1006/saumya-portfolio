@@ -17,7 +17,7 @@ def fx(src,dst,size):
     # bleed colour into transparent pixels so edges do not pick up black
     pre=np.stack([uniform_filter(rgb[...,i]*a[...,0],5) for i in range(3)],-1); aw=uniform_filter(a[...,0],5)[...,None]
     rgb=np.where(a>0.01,rgb,pre/np.maximum(aw,1e-4))
-    out=kuwahara(rgb,6)
+    out=kuwahara(rgb,3)
     res=np.concatenate([np.clip(out,0,1),a],-1)
     Image.fromarray((res*255).astype(np.uint8)).resize((size,size),Image.LANCZOS).save(dst)
 if __name__=='__main__':

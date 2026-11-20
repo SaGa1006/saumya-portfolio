@@ -2,7 +2,7 @@
 
 `ship.html` builds the hero ship as a small three.js model (hull, castle, portholes, mast, yards, sail)
 with a painterly shader in Saumya's colours. `render.js` renders it at given angles in headless Chromium,
-and `paintfx.py` softens each render into brush-like patches (Kuwahara filter).
+and `woodtex.py` paints the dry-brush wood texture (`woodtex.png`) the hull is wrapped in, and `paintfx.py` softens each render into brush-like patches (Kuwahara filter).
 
     npm i three@0.160.0 playwright && cp node_modules/three/build/three.module.js .
     python3 -m http.server 8766 &
