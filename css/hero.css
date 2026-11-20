@@ -76,69 +76,76 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 }
 .scene > * { position: absolute; }
 
-.clouds { left: 57.24%; top: 12.593%; width: 42.76%; animation: drift 26s ease-in-out infinite alternate; }
+.clouds { left: 57.24%; top: 12.593%; width: 42.76%; animation: drift 30s ease-in-out infinite alternate; }
 
-.sea { left: 0; width: 100%; height: 30.185%; }
-.sea--back { top: 69.815%; animation: swell 5.5s ease-in-out infinite alternate; }
-.sea--front { top: 85.093%; z-index: 3; animation: swell 4.2s ease-in-out -2s infinite alternate-reverse; }
-.sea__strip {
-  position: absolute; top: 0; bottom: 0; left: 0; width: 200%;
-  background: url("../assets/hero/sea.webp") 0 0 / 39.766% 100% repeat-x;
-  animation: flow 44s linear infinite;
-  will-change: transform;
+/* Sea: drawn by js/sea.js with WebGL from the painted sea layer. The front canvas renders
+   the very same water, masked below a moving waterline, so the hull sinks into it. */
+.sea-gl { left: 0; width: 100%; display: block; }
+.sea-gl--back { top: 64.815%; height: 35.185%; }
+.sea-gl--front { top: 81.481%; height: 18.519%; z-index: 3; }
+.sea-still { /* shown only if WebGL is unavailable */
+  left: 0; top: 69.815%; width: 100%; height: 30.185%;
+  background: url("../assets/hero/sea.webp") 0 0 / 79.531% 100% repeat-x;
 }
-.sea--front .sea__strip { background-position: 31% 0; animation-duration: 26s; }
+.scene.has-gl .sea-still { display: none; }
+.scene:not(.has-gl) .sea-gl { display: none; }
 
-/* ship group: entry (slides in from the right) > bob (rocks on the water) > layers */
+/* ship group: entry (slides in from the right) > bob (set by sea.js to ride the swell) > layers */
 .ship { left: 44.375%; top: 15.463%; width: 46.354%; z-index: 2; transform: translateX(125%); }
-.ship__bob { position: relative; transform-origin: 50% 92%; animation: bob 4.6s ease-in-out infinite; }
+.ship__bob { position: relative; transform-origin: 50% 92%; will-change: transform; }
 .ship__bob img { height: auto; }
-.ship__hull { position: relative; width: 100%; }
-.ship__flag { position: absolute; left: 58.09%; top: 0; width: 41.91%; transform-origin: 0 40%; animation: flutter 1.9s ease-in-out infinite; }
-.ship__pirate { position: absolute; left: 24.831%; top: 30.863%; width: 33.708%; }
-.spyglass { position: absolute; left: 30%; top: 38.032%; width: 5.843%; }
-.spyglass img { width: 100%; }
-.spyglass::after { /* lens glint */
-  content: ""; position: absolute; left: 4%; top: 22%; width: 48%; aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,.95) 0 18%, rgba(255,255,255,0) 62%);
+.ship__bob > * { position: absolute; }
+.ship__hull { position: relative !important; width: 100%; }
+.ship__flag { left: 58.202%; top: 0; width: 41.798%; transform-origin: 0 45%; animation: flutter 2.6s ease-in-out infinite; }
+.ship__pirate { left: 32.472%; top: 30.863%; width: 26.067%; }
+.spyglass-body { left: 30%; top: 39.368%; width: 7.079%; transform-origin: 100% 50%; }
+.spyglass-head { left: 30%; top: 38.032%; width: 3.933%; }
+.spyglass-head img { width: 100%; }
+.spyglass-head .lens { position: absolute; left: 22.857%; top: 9.804%; width: 48.571%; }
+.spyglass-head::after { /* lens glint */
+  content: ""; position: absolute; left: 18%; top: 18%; width: 64%; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,.95) 0 14%, rgba(255,255,255,0) 60%);
   opacity: 0; transform: scale(.4);
 }
 
-.hero.is-sailing .ship { animation: sail-in 3.8s cubic-bezier(.18, .7, .25, 1) forwards; }
-.hero.is-sailing .spyglass { animation: spyglass 6.5s ease-in-out 3.6s infinite; }
-.hero.is-sailing .spyglass::after { animation: glint 6.5s ease-out 3.6s infinite; }
+.hero.is-sailing .ship { animation: sail-in 4.2s cubic-bezier(.16, .68, .24, 1) forwards; }
+.hero.is-sailing .spyglass-body { animation: spy-body 7s cubic-bezier(.45, 0, .25, 1) 4s infinite; }
+.hero.is-sailing .spyglass-head { animation: spy-head 7s cubic-bezier(.45, 0, .25, 1) 4s infinite; }
+.hero.is-sailing .spyglass-head .lens { animation: spy-lens 7s ease-in-out 4s infinite; }
+.hero.is-sailing .spyglass-head::after { animation: glint 7s ease-out 4s infinite; }
 
 .scene.is-paused *, .scene.is-paused *::after { animation-play-state: paused !important; }
 
-@keyframes flow { from { transform: translate3d(-39.766%, 0, 0); } to { transform: translate3d(0, 0, 0); } }
-@keyframes swell { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -2.4%, 0); } }
-@keyframes drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-2%, 0, 0); } }
-@keyframes bob {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(0deg); }
-  25% { transform: translate3d(0, -.7%, 0) rotate(-1.1deg); }
-  50% { transform: translate3d(0, .25%, 0) rotate(0deg); }
-  75% { transform: translate3d(0, -.5%, 0) rotate(1deg); }
-}
+@keyframes drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-2.5%, .4%, 0); } }
 @keyframes flutter {
-  0%, 100% { transform: scaleX(1) skewY(0deg); }
-  30% { transform: scaleX(.95) skewY(-2.5deg); }
-  60% { transform: scaleX(.985) skewY(1.5deg); }
+  0%, 100% { transform: scale(1, 1) skewY(0deg); }
+  20% { transform: scale(.97, 1.02) skewY(-1.6deg); }
+  45% { transform: scale(.94, .99) skewY(-2.8deg); }
+  70% { transform: scale(.98, 1.01) skewY(1.2deg); }
 }
 @keyframes sail-in {
-  0% { transform: translateX(125%) rotate(-1.5deg); }
-  70% { transform: translateX(-1%) rotate(.6deg); }
-  100% { transform: translateX(0) rotate(0); }
+  0% { transform: translateX(125%); }
+  100% { transform: translateX(0); }
 }
-/* the spyglass slides out along its axis, holds while she looks, then slides back */
-@keyframes spyglass {
-  0%, 12% { transform: translate3d(0, 0, 0); }
-  24%, 70% { transform: translate3d(-28%, -2.4%, 0); }
+/* the draw tube stretches and the rim slides out: she zooms in, looks, then zooms back */
+@keyframes spy-body {
+  0%, 10% { transform: scaleX(1); }
+  24%, 68% { transform: scaleX(1.2); }
+  82%, 100% { transform: scaleX(1); }
+}
+@keyframes spy-head {
+  0%, 10% { transform: translate3d(0, 0, 0); }
+  24%, 68% { transform: translate3d(-36%, -2%, 0); }
   82%, 100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes spy-lens {
+  0%, 18%, 76%, 100% { filter: brightness(1); }
+  30%, 60% { filter: brightness(1.25) saturate(1.15); }
 }
 @keyframes glint {
   0%, 22% { opacity: 0; transform: scale(.4); }
-  27% { opacity: 1; transform: scale(1); }
-  36%, 100% { opacity: 0; transform: scale(.6); }
+  28% { opacity: 1; transform: scale(1); }
+  38%, 100% { opacity: 0; transform: scale(.6); }
 }
 
 /* ---------- Intro after the sun loader ---------- */

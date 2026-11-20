@@ -52,16 +52,21 @@
 
       <div class="scene" role="img" aria-label="Illustration: a young pirate on a wooden ship, looking through a spyglass as the ship sails over painted waves">
         <img class="clouds" src="assets/hero/clouds.webp" width="821" height="459" alt="">
-        <div class="sea sea--back"><div class="sea__strip"></div></div>
+        <div class="sea-still"></div>
+        <canvas class="sea-gl sea-gl--back" aria-hidden="true"></canvas>
         <div class="ship">
           <div class="ship__bob">
-            <img class="ship__flag" src="assets/hero/flag.webp" width="373" height="134" alt="">
             <img class="ship__hull" src="assets/hero/ship.webp" width="890" height="823" alt="" fetchpriority="high">
-            <img class="ship__pirate" src="assets/hero/pirate.webp" width="300" height="336" alt="">
-            <div class="spyglass"><img src="assets/hero/spyglass.webp" width="52" height="55" alt=""></div>
+            <img class="ship__flag" src="assets/hero/flag.webp" width="372" height="134" alt="">
+            <img class="spyglass-body" src="assets/hero/spyglass-body.webp" width="63" height="36" alt="">
+            <img class="ship__pirate" src="assets/hero/pirate.webp" width="232" height="330" alt="">
+            <div class="spyglass-head">
+              <img src="assets/hero/spyglass-rim.webp" width="35" height="51" alt="">
+              <img class="lens" src="assets/hero/spyglass-lens.webp" width="17" height="36" alt="">
+            </div>
           </div>
         </div>
-        <div class="sea sea--front"><div class="sea__strip"></div></div>
+        <canvas class="sea-gl sea-gl--front" aria-hidden="true"></canvas>
       </div>
     </section>
   </main>
@@ -69,5 +74,6 @@
   <noscript><style>.sun-loader{display:none}html.is-loading body{overflow:auto}html.is-loading .nav{opacity:1;transform:translateX(-50%)}html.is-loading .hero__copy>*,html.is-loading .logos li{opacity:1;transform:none}.ship{transform:none}</style></noscript>
   <script src="js/loader.js"></script>
   <script src="js/hero.js"></script>
+  <script src="js/sea.js"></script>
 </body>
 </html>
