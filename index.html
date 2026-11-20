@@ -23,6 +23,16 @@
     .hero h1 { font-weight: 500; font-style: normal; font-size: clamp(36px, 6.4vw, 76px); line-height: 1.1; text-wrap: balance; margin: 0; }
     .hero .star { color: var(--wash); font-size: .7em; vertical-align: .2em; margin: 0 .1em; }
     .hero p { font-size: clamp(18px, 2.4vw, 24px); color: var(--ink-soft); margin: 16px 0 0; }
+    .hero .connect { margin-top: 28px; font-size: clamp(17px, 2vw, 20px); }
+    .cta {
+      display: inline-flex; align-items: center; gap: .4em; margin-top: 14px;
+      font: 500 20px/1 var(--f-serif); color: var(--ink); text-decoration: none;
+      padding: 14px 28px; border: 1px solid var(--ink); border-radius: 999px;
+      transition: background-color .25s ease, color .25s ease;
+    }
+    .cta:hover { background: var(--ink); color: var(--paper); }
+    .cta:focus-visible { outline: 2px solid var(--wash); outline-offset: 3px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
     .hero > div { opacity: 0; transform: translateY(8px); transition: opacity .8s ease .1s, transform .8s ease .1s; }
     html:not(.is-loading) .hero > div { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) { .hero > div { transition: none; } }
@@ -40,7 +50,9 @@
   <main class="hero">
     <div>
       <h1>Howdy, I'm SaGa (Saumya Garg) <span class="star" aria-hidden="true">&#10022;</span></h1>
-      <p>UX &amp; product designer. Portfolio coming soon.</p>
+      <p>Product Designer. Portfolio coming soon.</p>
+      <p class="connect">In the meantime, you can connect with me.</p>
+      <a class="cta" href="https://www.linkedin.com/in/saumya-garg-35461b1b8/" target="_blank" rel="noopener noreferrer">Get in touch <span aria-hidden="true">&#8599;</span><span class="sr-only"> on LinkedIn (opens in a new tab)</span></a>
     </div>
   </main>
 
