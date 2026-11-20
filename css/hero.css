@@ -167,18 +167,9 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
 .hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
 .sky { transform: translate3d(0, calc(var(--exit, 0) * 7%), 0); }
-.ship-exit { transform: translate3d(calc(var(--exit, 0) * -105%), calc(var(--exit, 0) * 4%), 0); }
 
-.ship-back {
-  left: calc(100% - 50vw); bottom: 3%; width: 20%; z-index: 1;
-  transform: translate3d(-50%, calc((1 - var(--rise, 0)) * 90%), 0);
-}
-.ship-back__bob { transform-origin: 50% 85%; animation: back-bob 5.2s ease-in-out infinite; }
-.ship-back img { width: 100%; height: auto; }
-@keyframes back-bob {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(-1.2deg); }
-  50% { transform: translate3d(0, 1.6%, 0) rotate(1.2deg); }
-}
+/* the boat turns toward the viewer as it glides to the centre (translate set by js/hero.js) */
+.ship__turn { transform-origin: 50% 88%; transform: perspective(900px) rotateY(calc(var(--exit, 0) * 62deg)) scale(calc(1 - var(--exit, 0) * .08)); }
 
 .journey { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
 .route {
@@ -237,7 +228,9 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .voyage { height: auto; }
   .hero { position: relative; height: auto; min-height: 100svh; }
   .hero__copy, .sky, .ship-exit { transform: none; opacity: 1; }
-  .ship-back, .route { display: none; }
+  .route { display: none; }
+  .ship-exit { transform: none !important; }
+  .ship__turn { transform: none; }
   .journey { position: relative; inset: auto; padding: 48px 24px 64px; pointer-events: auto; background: var(--page); }
   .journey__head, .tools { position: static; width: auto; opacity: 1; transform: none; }
   .tools { margin-top: 36px; }
@@ -259,12 +252,11 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 }
 
 @media (prefers-reduced-motion: reduce) {
-  /* the voyage still changes with scroll, but by fading, not moving */
-  .hero__copy, .sky, .ship-exit, .ship-back, .journey__head, .tools li { transform: none !important; }
-  .ship-exit { opacity: calc(1 - var(--exit, 0) * 1.5); }
-  .ship-back { transform: translateX(-50%) !important; opacity: var(--rise, 0); }
+  /* the voyage still changes with scroll, mostly by fading rather than moving */
+  .hero__copy, .sky, .journey__head, .tools li { transform: none !important; }
   .port { transition: none; transform: none; }
   .scene *, .scene *::after { animation: none !important; }
   .ship, .hero.is-sailing .ship { transform: none; }
+  .ship__turn { transform: none; }  /* the boat still glides with the scroll, but does not spin */
   .nav, .hero__copy > *, .logos li { transition: none; }
 }

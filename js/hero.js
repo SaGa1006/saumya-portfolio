@@ -23,8 +23,8 @@
 
 /*
  * Voyage: while the hero is pinned, scroll progress drives three 0-1 values on .hero
- *   --exit  the hero copy lifts away and the side-view ship sails off to the left
- *   --rise  the back-view ship rises on the same sea and the journey heading appears
+ *   --exit  the hero copy lifts away while the boat turns toward the viewer and glides to the centre
+ *   --rise  the journey heading appears
  *   --tools the tool stack tiles arrive one by one
  * and draws the route across the map, lighting each port as the line reaches it.
  * Phones get a plain stacked section instead (see css), so nothing runs there.
@@ -33,6 +33,7 @@
   var voyage = document.querySelector(".voyage");
   var hero = document.querySelector(".hero");
   var reveal = document.querySelector(".route__reveal");
+  var scene = document.querySelector(".scene"), shipExit = document.querySelector(".ship-exit");
   if (!voyage || !hero || !reveal) return;
   var stacked = window.matchMedia("(max-aspect-ratio: 1/1), (max-width: 760px)");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -58,6 +59,7 @@
     if (stacked.matches) {
       ["--exit", "--rise", "--tools"].forEach(function (k) { hero.style.removeProperty(k); });
       window.SagaVoyage.exit = 0;
+      if (shipExit) shipExit.style.transform = "";
       return;
     }
     var total = voyage.offsetHeight - window.innerHeight;
@@ -70,6 +72,13 @@
     reveal.style.strokeDashoffset = (L * (1 - route)).toFixed(1);
     ports.forEach(function (pt) { pt.el.classList.toggle("is-on", route > 0 && route >= pt.f - 0.002); });
     window.SagaVoyage.exit = exit;
+    // glide the boat from its hero spot to the centre of the screen, sinking with the sea rows
+    if (shipExit && scene) {
+      var r = scene.getBoundingClientRect(), k = r.width / 1920;
+      var dx = window.innerWidth / 2 - (r.left + 1297 * k);   // 1297 = boat centre on the artboard
+      var dy = 55 * k;                                        // how far the rows at the hull drop
+      shipExit.style.transform = "translate3d(" + (dx * exit).toFixed(1) + "px," + (dy * exit).toFixed(1) + "px,0)";
+    }
   }
   function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
   window.addEventListener("scroll", onScroll, { passive: true });
