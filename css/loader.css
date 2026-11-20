@@ -46,21 +46,6 @@
 }
 .sun-loader__pct small { font-size: 0.6em; margin-left: 1px; color: var(--ink-soft); }
 
-.sun-loader__bar {
-  width: 140px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--line);
-  position: relative;
-  overflow: hidden;
-}
-.sun-loader__bar i {
-  position: absolute;
-  inset: 0;
-  background: var(--wash);
-  transform-origin: left;
-  transform: scaleX(var(--p, 0));
-}
 
 @media (prefers-reduced-motion: reduce) {
   .sun-loader, .sun-loader__inner { transition: none; }
