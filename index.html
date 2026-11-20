@@ -3,40 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Saumya Garg · UX & Product Designer</title>
-  <meta name="description" content="Portfolio of Saumya Garg, UX and product designer.">
-  <meta name="theme-color" content="#fcfde8">
+  <title>Saumya Garg · UX Designer & Artist</title>
+  <meta name="description" content="Saumya Garg (SaGa) is a UX designer and artist building experiences that are functional and visually compelling.">
+  <meta name="theme-color" content="#fffaef">
   <link rel="preload" href="assets/sun-sprite.webp" as="image" type="image/webp">
+  <link rel="preload" href="assets/hero/sea.webp" as="image" type="image/webp">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap">
   <link rel="stylesheet" href="css/loader.css">
-  <style>
-    html, body { margin: 0; min-height: 100%; }
-    body { background: var(--paper); color: var(--ink); font-family: var(--f-serif); }
-    html.is-loading body { overflow: hidden; }
-    .hero {
-      min-height: 100vh; min-height: 100svh;
-      display: grid; place-items: center; text-align: center;
-      padding: 32px 16px; box-sizing: border-box;
-    }
-    .hero h1 { font-weight: 500; font-style: normal; font-size: clamp(36px, 6.4vw, 76px); line-height: 1.1; text-wrap: balance; margin: 0; }
-    .hero .star { color: var(--wash); font-size: .7em; vertical-align: .2em; margin: 0 .1em; }
-    .hero p { font-size: clamp(18px, 2.4vw, 24px); color: var(--ink-soft); margin: 16px 0 0; }
-    .hero .connect { margin-top: 28px; font-size: clamp(17px, 2vw, 20px); }
-    .cta {
-      display: inline-flex; align-items: center; gap: .4em; margin-top: 14px;
-      font: 500 20px/1 var(--f-serif); color: var(--ink); text-decoration: none;
-      padding: 14px 28px; border: 1px solid var(--ink); border-radius: 999px;
-      transition: background-color .25s ease, color .25s ease;
-    }
-    .cta:hover { background: var(--ink); color: var(--paper); }
-    .cta:focus-visible { outline: 2px solid var(--wash); outline-offset: 3px; }
-    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-    .hero > div { opacity: 0; transform: translateY(8px); transition: opacity .8s ease .1s, transform .8s ease .1s; }
-    html:not(.is-loading) .hero > div { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { .hero > div { transition: none; } }
-  </style>
+  <link rel="stylesheet" href="css/hero.css">
 </head>
 <body>
   <div id="sun-loader" class="sun-loader" role="progressbar" aria-label="Loading Saumya's portfolio"
@@ -47,16 +23,112 @@
     </div>
   </div>
 
-  <main class="hero">
-    <div>
-      <h1>Howdy, I'm SaGa (Saumya Garg) <span class="star" aria-hidden="true">&#10022;</span></h1>
-      <p>Product Designer. Portfolio coming soon.</p>
-      <p class="connect">In the meantime, you can connect with me.</p>
-      <a class="cta" href="https://www.linkedin.com/in/saumya-garg-35461b1b8/" target="_blank" rel="noopener noreferrer">Get in touch <span aria-hidden="true">&#8599;</span><span class="sr-only"> on LinkedIn (opens in a new tab)</span></a>
-    </div>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#my-lens">My Lens</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://www.linkedin.com/in/saumya-garg-35461b1b8/" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only"> on LinkedIn (opens in a new tab)</span></a>
+  </header>
+
+  <main class="voyage">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__copy">
+        <h1 id="hero-title">I'm SaGa!<span class="sr-only"> (Saumya Garg)</span></h1>
+        <p>A UX designer and Artist building experiences that are functional and visually compelling.</p>
+        <ul class="logos" aria-label="Places I've worked and studied">
+          <li><img src="assets/hero/dif.webp" width="160" height="160" alt="DIF"></li>
+          <li><img src="assets/hero/debound.webp" width="160" height="160" alt="Debound"></li>
+          <li><img src="assets/hero/iit-delhi.webp" width="160" height="160" alt="IIT Delhi"></li>
+          <li><img src="assets/hero/logo-4.webp" width="160" height="160" alt="Partner logo"></li>
+          <li><img src="assets/hero/bharatpe.webp" width="160" height="160" alt="BharatPe"></li>
+          <li><img src="assets/hero/ion.webp" width="160" height="160" alt="ION"></li>
+        </ul>
+      </div>
+
+      <div class="scene" role="img" aria-label="Illustration: a young pirate on a wooden ship, looking through a spyglass as the ship sails over painted waves">
+        <div class="sky">
+        <div class="cloud-track cloud-track--1"><img src="assets/hero/cloud-1.webp" width="345" height="177" alt=""></div>
+        <div class="cloud-track cloud-track--2"><img src="assets/hero/cloud-2.webp" width="355" height="154" alt=""></div>
+        <div class="cloud-track cloud-track--3"><img src="assets/hero/cloud-3.webp" width="235" height="155" alt=""></div>
+        </div>
+        <div class="sea-still"></div>
+        <canvas class="sea-gl sea-gl--back" aria-hidden="true"></canvas>
+        <div class="ship-exit">
+        <div class="ship">
+          <div class="ship__turn">
+          <div class="ship__bob">
+            <img class="ship__hull" src="assets/hero/ship.webp" width="890" height="823" alt="" fetchpriority="high">
+            <canvas class="ship__3d" aria-hidden="true"></canvas>
+            <span class="ship__glint" aria-hidden="true"></span>
+            <img class="ship__flag" src="assets/hero/flag.webp" width="372" height="134" alt="">
+            <img class="spyglass-body" src="assets/hero/spyglass-body.webp" width="63" height="36" alt="">
+            <img class="ship__pirate" src="assets/hero/pirate.webp" width="232" height="330" alt="">
+            <div class="spyglass-head">
+              <img src="assets/hero/spyglass-rim.webp" width="35" height="51" alt="">
+              <img class="lens" src="assets/hero/spyglass-lens.webp" width="17" height="36" alt="">
+            </div>
+          </div>
+          </div>
+        </div>
+        </div>
+        <canvas class="sea-gl sea-gl--front" aria-hidden="true"></canvas>
+      </div>
+
+      <section class="journey" aria-labelledby="journey-title">
+        <div class="journey__head">
+          <h2 id="journey-title">The voyage so far</h2>
+          <p>Every port that shaped how I design.</p>
+        </div>
+        <svg class="route" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+          <defs><mask id="route-reveal"><path class="route__reveal" d="M120,800 C155,777 308,715 330,660 C352,605 277,530 250,470 C223,410 142,349 170,300 C198,251 328,209 420,175 C512,141 622,114 720,95 C818,76 933,48 1010,60 C1087,72 1108,165 1180,170 C1252,175 1397,103 1440,90"/></mask></defs>
+          <path class="route__line" mask="url(#route-reveal)" d="M120,800 C155,777 308,715 330,660 C352,605 277,530 250,470 C223,410 142,349 170,300 C198,251 328,209 420,175 C512,141 622,114 720,95 C818,76 933,48 1010,60 C1087,72 1108,165 1180,170 C1252,175 1397,103 1440,90"/>
+          <g class="port" data-x="120" data-y="800"><circle class="route__dot" cx="120" cy="800" r="9"/><text x="114" y="848" text-anchor="middle">DOD</text></g>
+          <g class="port" data-x="330" data-y="660"><circle class="route__dot" cx="330" cy="660" r="9"/><text x="356" y="668" text-anchor="start">Learn tools, growing</text></g>
+          <g class="port" data-x="250" data-y="470"><circle class="route__dot" cx="250" cy="470" r="9"/><text x="276" y="478" text-anchor="start">Ezinore · DTU IIF</text></g>
+          <g class="port" data-x="170" data-y="300"><circle class="route__dot" cx="170" cy="300" r="9"/><text x="196" y="308" text-anchor="start">Stride</text></g>
+          <g class="port" data-x="420" data-y="175"><circle class="route__dot" cx="420" cy="175" r="9"/><text x="398" y="155" text-anchor="end">Debound</text></g>
+          <g class="port" data-x="720" data-y="95"><circle class="route__dot" cx="720" cy="95" r="9"/><text x="720" y="143" text-anchor="middle">Noise</text></g>
+          <g class="port" data-x="1010" data-y="60"><circle class="route__dot" cx="1010" cy="60" r="9"/><text x="1034" y="68" text-anchor="start">IIT Delhi</text></g>
+          <g class="port" data-x="1180" data-y="170"><circle class="route__dot" cx="1180" cy="170" r="9"/><text x="1180" y="220" text-anchor="middle">BharatPe</text></g>
+          <g class="port" data-x="1440" data-y="90"><path class="route__x" d="M1427,77 L1453,103 M1453,77 L1427,103"/><text x="1440" y="144" text-anchor="middle">Finding new</text></g>
+        </svg>
+        <ol class="ports">
+          <li>DOD</li>
+          <li>Learn tools, growing</li>
+          <li>Ezinore · DTU IIF</li>
+          <li>Stride</li>
+          <li>Debound</li>
+          <li>Noise</li>
+          <li>IIT Delhi</li>
+          <li>BharatPe</li>
+          <li>Finding new</li>
+        </ol>
+        <div class="tools">
+          <h3>Tool stack</h3>
+          <ul>
+            <li><span>Figma</span></li>
+            <li><span>FigJam</span></li>
+            <li><span>Procreate</span></li>
+            <li><span>Illustrator</span></li>
+            <li><span>Photoshop</span></li>
+            <li><span>After Effects</span></li>
+            <li><span>Framer</span></li>
+            <li><span>Notion</span></li>
+          </ul>
+        </div>
+      </section>
+    </section>
   </main>
 
-  <noscript><style>.sun-loader{display:none}html.is-loading body{overflow:auto}.hero>div{opacity:1;transform:none}</style></noscript>
+  <noscript><style>.sun-loader{display:none}html.is-loading body{overflow:auto}html.is-loading .nav{opacity:1;transform:translateX(-50%)}html.is-loading .hero__copy>*,html.is-loading .logos li{opacity:1;transform:none}.ship{transform:none}</style></noscript>
   <script src="js/loader.js"></script>
+  <script src="js/hero.js"></script>
+  <script src="js/sea.js"></script>
+  <script type="module" src="js/ship3d.js"></script>
 </body>
 </html>

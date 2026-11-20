@@ -2,5 +2,6 @@
 
 Static site, deployed by Vercel from `main`.
 
-- `index.html`: home page with the sun loader
-- `css/loader.css`, `js/loader.js`: the sun loader (47 watercolour frames in `assets/sun-sprite.webp`, tied to real loading progress, capped at the original 17 fps)
+- `index.html`: home page: sun loader, then the animated ship hero
+- `css/hero.css`, `js/hero.js`, `js/sea.js`: hero layout and animation. The scene is Saumya's painted layers in `assets/hero/` (sea, three clouds, ship, flag, pirate, and the spyglass as body, rim and lens), mirrored to match the design and placed on the 1920 x 1080 artboard with percentages. `sea.js` draws the sea with WebGL as five rows of painted waves, far rows slow, pale and low, near rows fast, deep blue and tall, each casting a soft shadow on the row behind; the last two rows are drawn in front of the hull. The ship heaves and pitches on the rows at its hull, and the flag is redrawn each frame as rippling cloth. Clouds cross from right to left. The ship sails in after the loader, the flag flutters, the spyglass extends and glints. Without WebGL the still sea shows; prefers-reduced-motion gets one still frame; everything pauses off screen.
+- Scrolling: `main.voyage` is tall and the hero stays pinned (`position: sticky`) while `js/hero.js` turns scroll into `--exit`, `--rise` and `--tools` on `.hero`. The hero copy lifts away, the live 3D boat (`js/ship3d.js`, three.js) turns its bow toward the viewer while it glides to the centre and SaGa lowers her telescope and steps up at the bow, the sea rows drop at different speeds (parallax), the career route draws itself across the sky with each port lighting up, and the tool stack fills in. Phones and portrait screens get a plain stacked timeline instead.
