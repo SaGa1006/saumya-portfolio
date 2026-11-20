@@ -1,0 +1,67 @@
+/* Sun loader: Saumya's watercolour sun, one painted frame per step of loading progress. */
+:root {
+  --paper: #fcfde8;
+  --ink: #5b4a12;
+  --ink-soft: #8d7b3f;
+  --wash: #e8c32e;
+  --line: #ece6bf;
+  --f-serif: "Cormorant", "Cormorant Garamond", Garamond, Georgia, serif;
+}
+
+.sun-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  transition: opacity 0.6s ease, visibility 0s linear 0.6s;
+}
+.sun-loader.is-done { opacity: 0; visibility: hidden; }
+
+.sun-loader__inner {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  transition: transform 0.6s ease;
+}
+.sun-loader.is-done .sun-loader__inner { transform: scale(1.04); }
+
+.sun-loader__art {
+  width: min(220px, 55vw);
+  aspect-ratio: 322 / 352;
+  background: url("../assets/sun-sprite.webp") 0 0 / 800% 600% no-repeat;
+}
+
+.sun-loader__pct {
+  font-family: var(--f-serif);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  font-variant-numeric: lining-nums tabular-nums;
+  min-width: 4ch;
+  text-align: center;
+}
+.sun-loader__pct small { font-size: 0.6em; margin-left: 1px; color: var(--ink-soft); }
+
+.sun-loader__bar {
+  width: 140px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line);
+  position: relative;
+  overflow: hidden;
+}
+.sun-loader__bar i {
+  position: absolute;
+  inset: 0;
+  background: var(--wash);
+  transform-origin: left;
+  transform: scaleX(var(--p, 0));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun-loader, .sun-loader__inner { transition: none; }
+}
