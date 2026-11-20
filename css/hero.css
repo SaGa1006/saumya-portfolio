@@ -136,12 +136,12 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 /* the draw tube stretches and the rim slides out: she zooms in, looks, then zooms back */
 @keyframes spy-body {
   0%, 10% { transform: scale(1, 1); }
-  24%, 68% { transform: scale(1.55, 1.14); }
+  24%, 68% { transform: scale(1.85, 1.14); }
   82%, 100% { transform: scale(1, 1); }
 }
 @keyframes spy-head {
   0%, 10% { transform: translate3d(0, 0, 0) scale(1); }
-  24%, 68% { transform: translate3d(-78%, -3%, 0) scale(1.22); }
+  24%, 68% { transform: translate3d(-70%, -3%, 0) scale(1.22); }
   82%, 100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 @keyframes spy-lens {
