@@ -1,0 +1,162 @@
+<!doctype html><html><body style="margin:0;background:transparent">
+<script type="module">
+import * as THREE from './three.module.js';
+THREE.ColorManagement.enabled = false;
+const S = 900;
+const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true, preserveDrawingBuffer:true});
+renderer.outputColorSpace = THREE.LinearSRGBColorSpace; renderer.setSize(S,S); renderer.setClearColor(0x000000,0);
+document.body.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+const cam = new THREE.PerspectiveCamera(18,1,1,200);
+const EL = 9*Math.PI/180, DIST = 52;
+cam.position.set(0, Math.sin(EL)*DIST + 3.2, Math.cos(EL)*DIST); cam.lookAt(0,3.2,0);
+const L = new THREE.Vector3(-0.55,0.75,0.6).normalize();
+
+/* painterly material: toon light + brush-stroke noise + darker edges */
+const NOISE = `
+float h(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
+float n3(vec3 x){vec3 i=floor(x),f=fract(x);f=f*f*(3.-2.*f);
+return mix(mix(mix(h(i),h(i+vec3(1,0,0)),f.x),mix(h(i+vec3(0,1,0)),h(i+vec3(1,1,0)),f.x),f.y),
+mix(mix(h(i+vec3(0,0,1)),h(i+vec3(1,0,1)),f.x),mix(h(i+vec3(0,1,1)),h(i+vec3(1,1,1)),f.x),f.y),f.z);}
+float fbm(vec3 p){float a=.5,s=0.;for(int i=0;i<4;i++){s+=a*n3(p);p*=2.03;a*=.5;}return s;}`;
+function paint(base, dark, light, opt={}){
+  return new THREE.ShaderMaterial({
+    side: opt.side ?? THREE.FrontSide,
+    uniforms:{ uB:{value:new THREE.Color(base)}, uD:{value:new THREE.Color(dark)}, uL:{value:new THREE.Color(light)},
+      uLight:{value:L}, uGrain:{value:new THREE.Vector3(...(opt.grain||[1,6,6]))}, uBlot:{value:new THREE.Color(opt.blot||dark)}, uBlotAmt:{value:opt.blotAmt||0}, uInner:{value:opt.inner?1:0} },
+    vertexShader:`varying vec3 vN; varying vec3 vP; varying vec3 vO; varying vec3 vV;
+      void main(){ vO=position; vec4 w=modelMatrix*vec4(position,1.); vP=w.xyz; vN=normalize(mat3(modelMatrix)*normal);
+      vV=normalize(cameraPosition-w.xyz); gl_Position=projectionMatrix*viewMatrix*w; }`,
+    fragmentShader:`uniform vec3 uB,uD,uL,uLight,uGrain,uBlot; uniform float uBlotAmt,uInner; varying vec3 vN,vP,vO,vV;`+NOISE+`
+      void main(){ vec3 n=normalize(vN); if(!gl_FrontFacing) n=-n;
+        float l=dot(n,uLight);
+        float t=smoothstep(-.25,.15,l)*.55+smoothstep(.35,.6,l)*.45;      // two soft painted tones
+        float g=fbm(vO*uGrain);                                          // brush grain along the wood
+        float g2=fbm(vO*uGrain*2.7+7.);
+        vec3 c=mix(uD,uB,t);
+        c=mix(c,uL,smoothstep(.55,.8,g)*.45*t);
+        c=mix(c,uD,smoothstep(.5,.75,g2)*.35);
+        float b=fbm(vO*.9+3.); c=mix(c,uBlot,smoothstep(.55,.72,b)*uBlotAmt);
+        float rim=1.-abs(dot(n,normalize(vV)));
+        c=mix(c,uD*.8,pow(rim,2.5)*.55);                               // darker brushed edges like the painting
+        if(uInner>.5 && !gl_FrontFacing) c*=.72;
+        gl_FragColor=vec4(c,1.); }`
+  });
+}
+const WOOD = paint('#a9794a','#6b4524','#c99c69',{grain:[.9,7,7],side:THREE.DoubleSide,inner:true});
+const WOOD2 = paint('#9a6c40','#5e3b1e','#bb8d5c',{grain:[.9,7,7]});
+const POLE = paint('#9e6f43','#5a391c','#c09062',{grain:[1,1,9]});
+const SAIL = paint('#d3d4a6','#a7ad84','#e6e4bf',{grain:[1.5,1.5,1.5],side:THREE.DoubleSide,blot:'#8f9d78',blotAmt:.55});
+const GLASS = new THREE.MeshBasicMaterial({color:'#2b4a63'});
+const GLASSD = new THREE.MeshBasicMaterial({color:'#17283a'});
+const INK = new THREE.MeshBasicMaterial({color:'#4a2c15', side:THREE.BackSide});
+const SHADOW = new THREE.MeshBasicMaterial({color:'#3b2410'});
+
+const ship = new THREE.Group(); scene.add(ship);
+const outlined = [];
+function add(mesh, ink=0.045){ ship.add(mesh); if(ink) outlined.push([mesh,ink]); return mesh; }
+
+/* ---- hull: lofted sections, bow at -x ---- */
+const X0=-4.7, X1=4.1;
+const sm=(a,b,x)=>{x=Math.min(1,Math.max(0,(x-a)/(b-a)));return x*x*(3-2*x);};
+const W = u => 2.25*Math.pow(Math.sin(Math.min(1,u/0.6)*Math.PI/2),0.75) - 0.22*sm(.8,1,u);
+const YB = u => -2.1 + 1.9*Math.pow(Math.max(0,1-u/0.32),2) + 0.35*sm(.8,1,u);
+const YT = u => 1.0 + 1.1*Math.pow(Math.max(0,1-u/0.4),1.6) + 0.55*sm(.55,.85,u);
+function hullGeo(){
+  const NU=80, NV=40, pos=[], idx=[];
+  for(let i=0;i<=NU;i++){ const u=i/NU, x=X0+(X1-X0)*u, w=Math.max(.02,W(u)), yt=YT(u), yb=YB(u);
+    for(let j=0;j<=NV;j++){ const v=j/NV, a=v*Math.PI, s=Math.cos(a), d=Math.sin(a);
+      const z = w*Math.sign(s)*Math.pow(Math.abs(s),0.45);
+      const y = yt-(yt-yb)*Math.pow(d,2.2);
+      pos.push(x,y,z); } }
+  for(let i=0;i<NU;i++)for(let j=0;j<NV;j++){const a=i*(NV+1)+j,b=a+NV+1; idx.push(a,b,a+1,b,b+1,a+1);}
+  // transom cap
+  const c0=pos.length/3; pos.push(X1,(YT(1)+YB(1))/2,0);
+  for(let j=0;j<NV;j++){ idx.push(c0, NU*(NV+1)+j, NU*(NV+1)+j+1); }
+  const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); g.setIndex(idx); g.computeVertexNormals(); return g;
+}
+const hull = add(new THREE.Mesh(hullGeo(), WOOD), 0.05);
+// deck
+{ const s=new THREE.Shape(); const N=40;
+  for(let i=0;i<=N;i++){const u=.05+.95*i/N; s[i?'lineTo':'moveTo'](X0+(X1-X0)*u, W(u)*.93);}
+  for(let i=N;i>=0;i--){const u=.05+.95*i/N; s.lineTo(X0+(X1-X0)*u,-W(u)*.93);}
+  const d=new THREE.Mesh(new THREE.ShapeGeometry(s), paint('#8a5d35','#5a391c','#a87a4c',{grain:[.8,6,6],side:THREE.DoubleSide}));
+  d.rotation.x=-Math.PI/2; d.position.y=0.55; ship.add(d); }
+// a dark band (wale) along the hull
+{ const pts=[]; for(let i=0;i<=60;i++){const u=.06+.94*i/60; pts.push(new THREE.Vector3(X0+(X1-X0)*u, 0.55+0.25*Math.pow(Math.max(0,1-u/0.4),1.6), 0));}
+  for (const side of [1,-1]) { const p2=pts.map((p,i)=>{const u=.06+.94*i/60; const yt=YT(u),yb=YB(u); const d=Math.pow((yt-p.y)/(yt-yb),1/2.2); const a=Math.asin(Math.min(1,d)); const s=Math.cos(a);
+      return new THREE.Vector3(p.x,p.y,side*(Math.max(.02,W(u))*Math.pow(s,0.45)+0.06));});
+    add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(p2),80,0.11,8), WOOD2),0.03); } }
+// rail cap along the top edge
+for (const side of [1,-1]) { const p=[]; for(let i=0;i<=60;i++){const u=.02+.98*i/60; p.push(new THREE.Vector3(X0+(X1-X0)*u, YT(u)+.05, side*Math.max(.02,W(u))));}
+  add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(p),90,0.09,8), WOOD2),0.03); }
+
+/* ---- stern castle with arched windows ---- */
+const castle = new THREE.Group(); ship.add(castle);
+{ const len=2.1, x=X1-len/2-0.05, w=W(0.88)*2*.98, h=1.55, y0=YT(.88)-0.05;
+  const box = new THREE.Mesh(new THREE.BoxGeometry(len,h,w), WOOD2); box.position.set(x,y0+h/2,0); castle.add(box); outlined.push([box,.05]);
+  const top = new THREE.Mesh(new THREE.BoxGeometry(len+0.7,0.32,w+0.3), WOOD); top.position.set(x+0.2,y0+h+0.12,0); castle.add(top); outlined.push([top,.04]);
+  const arch = new THREE.Shape(); arch.moveTo(-.22,-.45); arch.lineTo(-.22,.18); arch.absarc(0,.18,.22,Math.PI,0,true); arch.lineTo(.22,-.45); arch.lineTo(-.22,-.45);
+  for (const side of [1,-1]) for (const dx of [-.3,.32]) { const m=new THREE.Mesh(new THREE.ShapeGeometry(arch), SHADOW);
+    m.position.set(x+dx, y0+h*.55, side*(w/2+0.01)); if(side<0) m.rotation.y=Math.PI; castle.add(m); }
+  for (const dz of [-.45,0,.45]) { const m=new THREE.Mesh(new THREE.ShapeGeometry(arch), SHADOW); m.scale.setScalar(.8);
+    m.position.set(x+len/2+0.01, y0+h*.55, dz); m.rotation.y=Math.PI/2; castle.add(m); }
+}
+/* ---- raised bow with notched bulwark ---- */
+{ const u=.12, x=X0+(X1-X0)*u+0.2;
+  const g=new THREE.BoxGeometry(1.3,0.7,W(u+.05)*2*0.9); const m=new THREE.Mesh(g,WOOD2); m.position.set(x+0.3,YT(u)+0.1,0); add(m,.04); }
+
+/* ---- portholes ---- */
+for (const side of [1,-1]) for (const px of [-0.6,0.9,2.35]) {
+  const u=(px-X0)/(X1-X0), yt=YT(u), yb=YB(u), y=-0.15, d=Math.pow((yt-y)/(yt-yb),1/2.2), s=Math.cos(Math.asin(Math.min(1,d)));
+  const z=side*(W(u)*Math.pow(s,0.45));
+  const g=new THREE.Group(); g.position.set(px,y,z+side*0.04);
+  const nrm=new THREE.Vector3(0,0.15,side).normalize(); g.lookAt(g.position.clone().add(nrm));
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(0.36,0.11,10,28), WOOD2); g.add(ring);
+  const glass=new THREE.Mesh(new THREE.CircleGeometry(0.33,28), GLASS); g.add(glass);
+  const bar=new THREE.Mesh(new THREE.PlaneGeometry(0.05,0.62), GLASSD); bar.position.z=.01; g.add(bar);
+  const bar2=bar.clone(); bar2.rotation.z=Math.PI/2; g.add(bar2);
+  ship.add(g); outlined.push([ring,.03]);
+}
+/* ---- stern scroll ---- */
+for (const side of [1,-1]) { const t=new THREE.Mesh(new THREE.TorusGeometry(0.32,0.1,8,24,Math.PI*1.6), WOOD2);
+  t.position.set(X1+0.15, 0.55, side*1.25); add(t,.03); }
+
+/* ---- bowsprit, mast, yards, sail ---- */
+function pole(a,b,r){ const v=new THREE.Vector3().subVectors(b,a), m=new THREE.Mesh(new THREE.CylinderGeometry(r*.85,r,v.length(),10), POLE);
+  m.position.copy(a).addScaledVector(v,.5); m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), v.clone().normalize()); return add(m,.03); }
+pole(new THREE.Vector3(X0+0.6,1.75,0), new THREE.Vector3(X0-2.6,2.75,0), .13);
+const MX=0.2;
+pole(new THREE.Vector3(MX,0.5,0), new THREE.Vector3(MX,10.2,0), .15);
+const BR = 52*Math.PI/180;              // yards braced round so the sail shows from the side and the front
+const rig = new THREE.Group(); rig.position.x=MX; rig.rotation.y=BR; ship.add(rig);
+function yard(y,len){ const m=new THREE.Mesh(new THREE.CylinderGeometry(.11,.11,len,10),POLE); m.rotation.x=Math.PI/2; m.position.set(-0.32,y,0); rig.add(m); outlined.push([m,.03]);
+  for(const e of [-1,1]){const k=new THREE.Mesh(new THREE.TorusGeometry(.13,.05,6,14),POLE); k.position.set(-0.32,y,e*len/2); k.rotation.y=Math.PI/2; rig.add(k);} }
+yard(8.4,3.1); yard(5.9,2.9); yard(5.35,3.6);
+function sailGeo(yTop,yBot,wTop,wBot,belly,curveFoot){
+  const NU=24,NV=24,pos=[],idx=[];
+  for(let i=0;i<=NV;i++){const v=i/NV, y=yTop+(yBot-yTop)*v, w=wTop+(wBot-wTop)*v;
+    for(let j=0;j<=NU;j++){const u=j/NU, z=(u-.5)*w, bul=belly*Math.sin(Math.PI*u)*Math.sin(Math.PI*(0.15+0.85*v));
+      pos.push(bul + 0.25*Math.sin(v*3)*0, y + (i===NV?curveFoot*Math.sin(Math.PI*u):0) + 0.25*(u-.5)*v, z);} }
+  for(let i=0;i<NV;i++)for(let j=0;j<NU;j++){const a=i*(NU+1)+j,b=a+NU+1;idx.push(a,b,a+1,b,b+1,a+1);}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));g.setIndex(idx);g.computeVertexNormals();return g;}
+{ const s1=new THREE.Mesh(sailGeo(8.35,1.9,2.9,4.0,1.1,0.45),SAIL); rig.add(s1); outlined.push([s1,.035]); }
+
+/* ---- ink outlines (inverted hulls) ---- */
+for (const [m,w] of outlined) {
+  const o = new THREE.Mesh(m.geometry, INK);
+  o.onBeforeRender = () => {};
+  const mat = new THREE.ShaderMaterial({ side:THREE.BackSide, uniforms:{uW:{value:w}},
+    vertexShader:`uniform float uW; void main(){ vec3 p=position+normal*uW; gl_Position=projectionMatrix*modelViewMatrix*vec4(p,1.); }`,
+    fragmentShader:`void main(){ gl_FragColor=vec4(.29,.17,.08,1.); }` });
+  o.material = mat; m.add(o);
+}
+
+ship.scale.setScalar(1);
+window.renderAt = (deg) => { ship.rotation.y = deg*Math.PI/180; renderer.render(scene,cam);
+  // project the mast top and the deck point under the mast, for the flag and the character
+  const tip=new THREE.Vector3(MX,10.2,0).applyMatrix4(ship.matrixWorld).project(cam);
+  const deck=new THREE.Vector3(MX-1.6,0.55,0).applyMatrix4(ship.matrixWorld).project(cam);
+  return { png: renderer.domElement.toDataURL('image/png'), tip:[(tip.x+1)/2,(1-tip.y)/2], deck:[(deck.x+1)/2,(1-deck.y)/2] }; };
+window.ready = true;
+</script></body></html>

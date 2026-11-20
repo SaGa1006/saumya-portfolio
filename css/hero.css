@@ -168,8 +168,16 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
 .sky { transform: translate3d(0, calc(var(--exit, 0) * 7%), 0); }
 
-/* the boat turns toward the viewer as it glides to the centre (translate set by js/hero.js) */
-.ship__turn { transform-origin: 50% 88%; transform: perspective(900px) rotateY(calc(var(--exit, 0) * 62deg)) scale(calc(1 - var(--exit, 0) * .08)); }
+/* the boat turns toward the viewer as it glides to the centre: js/hero.js picks a frame of the
+   turn (assets/hero/ship-turn.webp, 20 painted frames from side view to bow-on) and slides the
+   flag and crew to follow the mast and deck */
+.ship__turn { transform-origin: 50% 88%; transform: scale(calc(1 - var(--exit, 0) * .08)); }
+.ship__frames {
+  left: -7.207%; top: -20.157%; width: 135.135%; height: 146.136%;
+  background: 0 0 / 500% 400% no-repeat; opacity: 0; pointer-events: none;
+}
+.ship__flag, .ship__cloth { translate: var(--fx, 0) var(--fy, 0); }
+.ship__pirate, .spyglass-body, .spyglass-head { translate: var(--px, 0) var(--py, 0); }
 
 .journey { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
 .route {
@@ -231,6 +239,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .route { display: none; }
   .ship-exit { transform: none !important; }
   .ship__turn { transform: none; }
+  .ship__frames { display: none; }
   .journey { position: relative; inset: auto; padding: 48px 24px 64px; pointer-events: auto; background: var(--page); }
   .journey__head, .tools { position: static; width: auto; opacity: 1; transform: none; }
   .tools { margin-top: 36px; }
@@ -257,6 +266,5 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .port { transition: none; transform: none; }
   .scene *, .scene *::after { animation: none !important; }
   .ship, .hero.is-sailing .ship { transform: none; }
-  .ship__turn { transform: none; }  /* the boat still glides with the scroll, but does not spin */
   .nav, .hero__copy > *, .logos li { transition: none; }
 }
