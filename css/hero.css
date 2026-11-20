@@ -168,16 +168,21 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
 .sky { transform: translate3d(0, calc(var(--exit, 0) * 7%), 0); }
 
-/* the boat turns toward the viewer as it glides to the centre: js/hero.js picks a frame of the
-   turn (assets/hero/ship-turn.webp, 20 painted frames from side view to bow-on) and slides the
-   flag and crew to follow the mast and deck */
+/* the ship and SaGa as a live 3D scene (js/ship3d.js); the painted layers stay as the fallback
+   when WebGL or modules are unavailable. The boat turns toward the viewer as it glides to the centre. */
 .ship__turn { transform-origin: 50% 88%; transform: scale(calc(1 - var(--exit, 0) * .08)); }
-.ship__frames {
-  left: -7.154%; top: -20.712%; width: 134.128%; height: 145.047%;
-  background: 0 0 / 500% 400% no-repeat; opacity: 0; pointer-events: none;
+.ship__3d { left: -7.154%; top: -20.712%; width: 134.128%; aspect-ratio: 1; display: none; pointer-events: none; }
+.scene.has-ship3d .ship__3d { display: block; }
+.scene.has-ship3d .ship__hull { visibility: hidden; }
+.scene.has-ship3d :is(.ship__flag, .ship__cloth, .ship__pirate, .spyglass-body, .spyglass-head) { display: none; }
+.ship__glint { display: none; }
+.scene.has-ship3d .ship__glint { /* star sparkle on the telescope lens, placed by js/ship3d.js */
+  display: block; position: absolute; width: 4.2%; aspect-ratio: 1; margin: -2.1% 0 0 -2.1%; left: -9%; top: 0;
+  background: radial-gradient(circle, #fff 0 7%, rgba(255,255,255,.85) 12%, rgba(255,250,220,0) 42%);
+  clip-path: polygon(50% 0, 55% 43%, 100% 50%, 55% 57%, 50% 100%, 45% 57%, 0 50%, 45% 43%);
+  opacity: 0; transform: scale(.2);
 }
-.ship__flag, .ship__cloth { translate: var(--fx, 0) var(--fy, 0); }
-.ship__pirate, .spyglass-body, .spyglass-head { translate: var(--px, 0) var(--py, 0); }
+.hero.is-sailing .ship__glint { animation: glint 7s ease-out 4s infinite; }
 
 .journey { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
 .route {
@@ -239,7 +244,6 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .route { display: none; }
   .ship-exit { transform: none !important; }
   .ship__turn { transform: none; }
-  .ship__frames { display: none; }
   .journey { position: relative; inset: auto; padding: 48px 24px 64px; pointer-events: auto; background: var(--page); }
   .journey__head, .tools { position: static; width: auto; opacity: 1; transform: none; }
   .tools { margin-top: 36px; }

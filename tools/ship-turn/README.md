@@ -1,4 +1,8 @@
-# Ship turn frames
+# 3D ship and SaGa
+
+The live scene is `js/ship3d.js` (three.js r160, vendored in `assets/vendor/`). `woodtex.py` paints the dry-brush
+wood texture (`assets/hero/wood.webp`). `ship.html`, `render.js` and `paintfx.py` are the earlier offline
+renderer, kept for making stills of the boat.
 
 `ship.html` builds the hero ship as a small three.js model (hull, castle, portholes, mast, yards, sail)
 with a painterly shader in Saumya's colours. `render.js` renders it at given angles in headless Chromium,
