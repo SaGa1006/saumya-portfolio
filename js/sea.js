@@ -22,62 +22,64 @@
   var bob = scene.querySelector(".ship__bob");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  var SEA_TOP = 754, SEA_H = 326, TILE_W = 1527, WATERLINE = 948;
+  var SEA_TOP = 754, SEA_H = 326, TILE_W = 1527;
 
-  // Same swell as the shader (keep in sync). Positive = water surface raised.
-  function wave(x, d, t) {
-    var a = 5 + 11 * d;
-    return a * (0.55 * Math.sin(x * 0.0052 - t * 0.85 + d * 2.3) +
-                0.30 * Math.sin(x * 0.0115 + t * 0.60 + d * 5.1 + 1.7) +
-                0.15 * Math.sin(x * 0.0240 - t * 1.55 + d * 9.0 + 0.4));
+  // Rows of waves, back to front: where the painted crest sits, how fast the row rolls toward
+  // the stern (px/s) and how tall its swell is. Far rows are slow and low, near rows fast and tall.
+  var BANDS = [
+    { top: 754, speed: 22, amp: 4,  off: 0 },
+    { top: 800, speed: 36, amp: 6,  off: 611 },
+    { top: 852, speed: 54, amp: 8,  off: 233 },
+    { top: 908, speed: 78, amp: 10, off: 947 },   // in front of the hull
+    { top: 978, speed: 104, amp: 13, off: 412 }
+  ];
+  var FRONT_FROM = 3;
+
+  // vertical swell of one row at x (positive = raised); the shader uses the same formula
+  function swell(i, x, t) {
+    var b = BANDS[i], w = 0.9 + i * 0.18;
+    return b.amp * (Math.sin(x * 0.0045 + t * w + i * 1.7) + 0.4 * Math.sin(x * 0.011 - t * w * 1.3 + i));
   }
 
   var VERT = "attribute vec2 p; varying vec2 vUv; void main(){ vUv = vec2(p.x*.5+.5, .5-p.y*.5); gl_Position = vec4(p,0.,1.); }";
-  var FRAG = [
-    "precision highp float;",
-    "varying vec2 vUv;",
-    "uniform sampler2D uTex; uniform float uT, uY0, uH, uFront;",
-    "const float TW = " + TILE_W + ".0, ST = " + SEA_TOP + ".0, SH = " + SEA_H + ".0;",
-    "float wave(float x, float d, float t){",
-    "  float a = 5.0 + 11.0*d;",
-    "  return a*( .55*sin(x*.0052 - t*.85 + d*2.3)",
-    "           + .30*sin(x*.0115 + t*.60 + d*5.1 + 1.7)",
-    "           + .15*sin(x*.0240 - t*1.55 + d*9.0 + .4) );",
-    "}",
-    "void main(){",
-    "  float x = vUv.x*1920.0, y = uY0 + vUv.y*uH, t = uT;",
-    "  float d = clamp((y - ST)/SH, 0.0, 1.0);",
-    "  float h = wave(x, d, t);",
-    // sideways sway, strongest near the viewer, plus a slow current toward the stern
-    "  float sx = x + (3.0 + 7.0*d)*sin(x*.0037 + t*.45 + d*3.0) + 2.0*sin(y*.045 - t*1.1) - t*14.0;",
-    "  float sy = y - ST + h;",
-    "  if (sy < 0.0) { gl_FragColor = vec4(0.0); return; }",
-    "  vec4 c = texture2D(uTex, vec2(fract(sx/TW), min(sy, SH - 1.0)/SH));",
-    "  if (c.a < .002) { gl_FragColor = vec4(0.0); return; }",
-    "  vec3 col = c.rgb/c.a;",
-    // light: crests a touch brighter, the side facing away a touch darker
-    "  float slope = (wave(x + 4.0, d, t) - wave(x - 4.0, d, t))/8.0;",
-    "  float lift = clamp(h/(5.0 + 11.0*d), -1.0, 1.0);",
-    "  col *= 1.0 + .07*lift + .20*slope;",
-    // slow drifting wash between Saumya's teal and deep blue
-    "  float n = sin(x*.0021 + t*.21 + y*.006)*sin(x*.0013 - t*.17 + 1.3);",
-    "  vec3 tint = mix(vec3(.05,.33,.36), vec3(.08,.24,.46), .5 + .5*n);",
-    "  col = mix(col, col*.55 + tint*.45, .16*(.5 + .5*n)*(.35 + .65*d));",
-    // foam shimmer on the light strokes
-    "  float lum = dot(col, vec3(.3,.59,.11));",
-    "  float foam = smoothstep(.45, .75, lum);",
-    "  col += foam*.09*(.5 + .5*sin(t*2.2 + x*.06 + y*.11 + sin(x*.013 + t)));",
-    "  float a = c.a;",
-    "  if (uFront > .5) {",
-    "    float wl = " + WATERLINE + ".0 - wave(x, " + ((WATERLINE - SEA_TOP) / SEA_H).toFixed(4) + ", t)",
-    "             + 3.0*sin(x*.09 + t*1.3)*sin(x*.031 - t*.7);",
-    "    a *= smoothstep(wl - 4.0, wl + 8.0, y);",
-    "  }",
-    "  gl_FragColor = vec4(clamp(col, 0.0, 1.0)*a, a);",
-    "}"
-  ].join("\n");
+  function frag(first, last) {
+    var body = [];
+    for (var i = first; i <= last; i++) {
+      var b = BANDS[i], d = (i / (BANDS.length - 1)).toFixed(3);
+      body.push(
+        "  {",
+        "    float w = " + (0.9 + i * 0.18).toFixed(3) + ";",
+        "    float sw = " + b.amp.toFixed(1) + "*(sin(x*.0045 + t*w + " + (i * 1.7).toFixed(2) + ") + .4*sin(x*.011 - t*w*1.3 + " + i + ".0));",
+        "    float row = y - (" + b.top.toFixed(1) + " - sw);",
+        "    float crest = " + b.top.toFixed(1) + " - sw + 28.0;",
+        // a soft shadow cast by this row's crest onto the water behind it
+        "    acc.rgb *= 1.0 - .28*smoothstep(crest - 26.0, crest + 4.0, y);",
+        "    if (row >= 0.0) {",
+        "      float sx = x - t*" + b.speed.toFixed(1) + " + " + b.off.toFixed(1) + ";",
+        "      vec4 c = texture2D(uTex, vec2(fract(sx/TW), min(row, SH - 1.0)/SH));",
+        "      if (c.a > .002) {",
+        "        vec3 col = c.rgb/c.a;",
+        "        col = mix(col, col*.6 + vec3(.20,.44,.47)*.4, .22*(1.0 - " + d + "));",   // far rows: lighter, greener
+        "        col = mix(col, col*.6 + vec3(.04,.15,.34)*.4, .18*" + d + ");",            // near rows: deeper blue
+        "        float lum = dot(col, vec3(.3,.59,.11));",
+        "        col += smoothstep(.45, .75, lum)*.10*(.5 + .5*sin(t*2.6 + x*.05 + y*.09 + " + i + ".0));",
+        "        acc = vec4(clamp(col, 0.0, 1.0)*c.a, c.a) + acc*(1.0 - c.a);",
+        "      }",
+        "    }",
+        "  }");
+    }
+    return [
+      "precision highp float;",
+      "varying vec2 vUv;",
+      "uniform sampler2D uTex; uniform float uT, uY0, uH;",
+      "const float TW = " + TILE_W + ".0, SH = " + SEA_H + ".0;",
+      "void main(){",
+      "  float x = vUv.x*1920.0, y = uY0 + vUv.y*uH, t = uT;",
+      "  vec4 acc = vec4(0.0);"
+    ].concat(body, ["  gl_FragColor = acc;", "}"]).join("\n");
+  }
 
-  function makeLayer(canvas, y0, h, isFront) {
+  function makeLayer(canvas, y0, h, fragSrc) {
     var gl = canvas.getContext("webgl", { premultipliedAlpha: true, alpha: true, antialias: false });
     if (!gl) return null;
     function sh(type, src) {
@@ -87,7 +89,7 @@
     }
     var prog = gl.createProgram();
     gl.attachShader(prog, sh(gl.VERTEX_SHADER, VERT));
-    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, FRAG));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fragSrc));
     gl.linkProgram(prog);
     if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
     gl.useProgram(prog);
@@ -99,7 +101,6 @@
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
     gl.uniform1f(gl.getUniformLocation(prog, "uY0"), y0);
     gl.uniform1f(gl.getUniformLocation(prog, "uH"), h);
-    gl.uniform1f(gl.getUniformLocation(prog, "uFront"), isFront ? 1 : 0);
     return { gl: gl, canvas: canvas, uT: gl.getUniformLocation(prog, "uT"), ready: false };
   }
 
@@ -117,7 +118,7 @@
 
   var layers;
   try {
-    layers = [makeLayer(back, 700, 380, false), makeLayer(front, 880, 200, true)];
+    layers = [makeLayer(back, 700, 380, frag(0, FRONT_FROM - 1)), makeLayer(front, 880, 200, frag(FRONT_FROM, BANDS.length - 1))];
     if (!layers[0] || !layers[1]) return;
   } catch (e) {
     return; // keep the still painting
@@ -148,18 +149,53 @@
     });
   }
 
-  // the ship rides the same swell: heave from the average height, pitch from bow vs stern
-  var dW = (WATERLINE - SEA_TOP) / SEA_H, heave = 0, pitch = 0;
+  // the ship rides the row of waves at its hull: heave from the average, pitch from bow vs stern
+  var heave = 0, pitch = 0;
   function rideShip(t) {
     var sceneLeft = scene.getBoundingClientRect().left;
     var shipLeft = (ship.getBoundingClientRect().left - sceneLeft) / scale; // artboard px, follows the entry
     var xb = shipLeft + 150, xs = shipLeft + 800;                         // bow and stern at the waterline
-    var hb = wave(xb, dW, t), hs = wave(xs, dW, t);
+    var hb = (swell(2, xb, t) + swell(3, xb, t)) / 2, hs = (swell(2, xs, t) + swell(3, xs, t)) / 2;
     var targetHeave = -(hb + hs) / 2;
-    var targetPitch = Math.atan2(hb - hs, xs - xb) * 0.85;
-    heave += (targetHeave - heave) * 0.12;   // a little inertia: the hull lags the water slightly
-    pitch += (targetPitch - pitch) * 0.12;
+    var targetPitch = Math.atan2(hb - hs, xs - xb) * 0.9;
+    heave += (targetHeave - heave) * 0.1;    // a little inertia: the hull lags the water slightly
+    pitch += (targetPitch - pitch) * 0.1;
     bob.style.transform = "translate3d(0," + (heave * scale).toFixed(2) + "px,0) rotate(" + pitch.toFixed(4) + "rad)";
+  }
+
+  // the flag as cloth: columns of the painted flag ride a wave that travels from the mast to
+  // the tip, growing toward the free end, with light and shade on the folds
+  var flagImg = scene.querySelector(".ship__flag"), cloth = null, PAD = 0.14;
+  function setupCloth() {
+    if (cloth || !flagImg || !flagImg.naturalWidth) return;
+    var c = document.createElement("canvas");
+    c.className = "ship__cloth"; c.setAttribute("aria-hidden", "true");
+    c.width = flagImg.naturalWidth;
+    c.height = Math.round(flagImg.naturalHeight * (1 + 2 * PAD));
+    flagImg.parentNode.insertBefore(c, flagImg.nextSibling);
+    cloth = c.getContext("2d");
+    scene.classList.add("has-cloth");
+  }
+  function drawCloth(t) {
+    if (!cloth) return;
+    var w = flagImg.naturalWidth, h = flagImg.naturalHeight, pad = h * PAD, H = cloth.canvas.height, STEP = 2;
+    cloth.globalCompositeOperation = "source-over";
+    cloth.clearRect(0, 0, w, H);
+    var slopes = [];
+    for (var x = 0; x < w; x += STEP) {
+      var u = x / w, amp = h * 0.10 * Math.pow(u, 1.15) + 0.5;
+      var p1 = x * 0.038 - t * 5.2, p2 = x * 0.083 - t * 8.3 + 1.2;
+      var dy = amp * (Math.sin(p1) + 0.35 * Math.sin(p2));
+      slopes.push(amp * (0.038 * Math.cos(p1) + 0.35 * 0.083 * Math.cos(p2)));
+      cloth.drawImage(flagImg, x, 0, STEP, h, x, pad + dy, STEP, h);
+    }
+    cloth.globalCompositeOperation = "source-atop";   // fold shading only where the flag is
+    for (var i = 0; i < slopes.length; i++) {
+      var k = slopes[i];
+      cloth.fillStyle = k > 0 ? "rgba(10,14,30," + Math.min(0.3, k * 0.22).toFixed(3) + ")"
+                              : "rgba(220,230,245," + Math.min(0.18, -k * 0.14).toFixed(3) + ")";
+      cloth.fillRect(i * STEP, 0, STEP, H);
+    }
   }
 
   var running = false, visible = true, start = performance.now(), raf = 0;
@@ -169,6 +205,7 @@
     var t = (now - start) / 1000;
     draw(t);
     rideShip(t);
+    drawCloth(t);
     raf = requestAnimationFrame(frame);
   }
   function play() { if (!running && visible && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
@@ -180,6 +217,7 @@
     scene.classList.add("has-gl"); // show the canvases first so they have a size
     resize();
     draw(0);
+    if (!reduce) { if (flagImg.complete) setupCloth(); else flagImg.addEventListener("load", setupCloth); }
     play();
   };
   img.src = "assets/hero/sea.webp";
