@@ -51,7 +51,7 @@
 .motive p { margin: .45em 0 0; max-width: 46em; font: 500 clamp(17px, 1.67vw, 32px)/1.6 var(--f-sans); }
 
 /* ---------- Messages received + From my lens ---------- */
-.msgs, .lens { margin-top: clamp(80px, 8.5vw, 164px); }
+.msgs, .photos { margin-top: clamp(80px, 8.5vw, 164px); }
 .rail {
   list-style: none; margin: clamp(28px, 3.6vw, 70px) 0 0; padding: 0 var(--gutter) 12px;
   display: flex; gap: clamp(20px, 4.17vw, 80px);
