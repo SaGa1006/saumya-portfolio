@@ -129,3 +129,5 @@ a.card:hover .card__go, a.card:focus-visible .card__go { opacity: 1; transform: 
 .case__media { position: relative; }
 .case__media > img { display: block; width: 100%; height: auto; }
 .case__media > video { position: absolute; object-fit: cover; }
+.case__film { aspect-ratio: 16 / 9; display: flex; justify-content: center; }
+.case__film > video { height: 100%; width: auto; max-width: 100%; display: block; }
