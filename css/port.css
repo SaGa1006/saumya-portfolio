@@ -102,3 +102,20 @@ html:has(.port), body:has(.port) { height: 100%; overflow: hidden; }
   .gcard--wide .gcard__img { width: 56%; }
   .gcard--wide .gcard__body { align-items: center; }
 }
+
+/* ---------- case study pages: the full project, shown here instead of on Behance ---------- */
+.case { padding: clamp(104px, 9vw, 136px) 0 64px; background: linear-gradient(180deg, #fae4b2, #f1d8a1); min-height: 100vh; }
+.case__bar { width: min(1440px, calc(100% - 32px)); margin: 0 auto 16px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.case__back { display: inline-flex; align-items: center; gap: 8px; font: var(--t-label); color: var(--h-ink); text-decoration: none; padding: 8px 16px 8px 12px; border-radius: 999px; background: rgba(255, 255, 255, .5); transition: background-color .2s ease; }
+.case__back:hover, .case__back:focus-visible { background: rgba(255, 255, 255, .85); }
+.case__back svg { width: 18px; height: 18px; }
+.case__title { margin: 0; font: var(--h-font); color: var(--h-ink); }
+.case__body { width: min(1440px, calc(100% - 32px)); margin: 0 auto; border-radius: 16px; overflow: hidden; box-shadow: 0 24px 48px -24px rgba(75, 44, 22, .45); background: #0b2a33; }
+.case__body > * { display: block; width: 100%; height: auto; margin: 0; }
+.case__embed { position: relative; aspect-ratio: 16 / 9; background: #0b2a33; }
+.case__embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+@media (max-width: 760px) { .case { padding-top: 88px; } .case__body { border-radius: 10px; } .case__title { font-size: 24px; } }
+.port__frame a.card { display: block; }
+.card__go { position: absolute; right: 4%; bottom: 3.5%; padding: 6px 14px; border-radius: 999px; background: var(--teal, #1b3e55); color: #fff; font: 500 13px/1.3 "Poppins", sans-serif; opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease; pointer-events: none; }
+a.card:hover .card__go, a.card:focus-visible .card__go { opacity: 1; transform: none; }
+@media (hover: none) { .card__go { opacity: 1; transform: none; } }
