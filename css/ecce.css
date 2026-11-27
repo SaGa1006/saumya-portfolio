@@ -7,7 +7,7 @@
   color: var(--brown);
 }
 .ec__bar { justify-content: flex-start; }
-.ec > section, .ec__hero, .ec > .ec__step, .ec > .ec__process { width: min(1200px, calc(100% - 48px)); margin-inline: auto; }
+.ec__sheet > section, .ec__hero, .ec__sheet > .ec__step, .ec__sheet > .ec__process { width: min(1200px, calc(100% - 48px)); margin-inline: auto; }
 
 /* hero */
 .ec__hero { padding: 48px 0 32px; }
@@ -214,7 +214,7 @@ button.pb__dial:active { transform: rotate(-20deg) scale(.97); }
   .ec__split { grid-template-columns: 1fr; gap: 40px; }
 }
 @media (max-width: 760px) {
-  .ec > section, .ec__hero, .ec > .ec__step, .ec > .ec__process { width: calc(100% - 32px); }
+  .ec__sheet > section, .ec__hero, .ec__sheet > .ec__step, .ec__sheet > .ec__process { width: calc(100% - 32px); }
   .ec__facts { grid-template-columns: 1fr 1fr; }
   .ec__cards3, .ec__domains, .ec__theory, .ec__kit, .ec__flow, .ec__acts, .bk { grid-template-columns: 1fr; }
   .ec__card, .ec__kit li, .ec__flow li { padding: 24px; }
@@ -324,7 +324,7 @@ button.pb__dial:active { transform: rotate(-20deg) scale(.97); }
 }
 
 /* Nov 27: whitish page, stacked step headers, centred principle pills */
-.ec { background: #fffcf6; --card: #f8efdd; --card-hi: #fff; }
+.ec { --card: #f8efdd; --card-hi: #fff; }
 .ec__card, .ec__kit li, .ec__flow li, .ec__goals li, .ec__theory article, .ec__process a { background: var(--card); }
 .ec__card.is-picked, .ec__domains li, .psn, .sbp, .ft, .ec__table, .ec__acts li { background: var(--card-hi); }
 .ec__domains li, .psn, .ec__acts li { box-shadow: 0 0 0 1px rgba(75, 44, 22, .1), 0 16px 32px -24px rgba(75, 44, 22, .45); }
@@ -336,3 +336,8 @@ button.pb__dial:active { transform: rotate(-20deg) scale(.97); }
 .ec__keys { align-items: stretch; }
 .ec__keys li { display: flex; align-items: center; justify-content: center; text-align: center; }
 .ec__step .ec__stepno { align-self: center; }
+
+/* Nov 27: same frame as the other case studies: parchment page, white sheet for the study */
+.ec.case { background: linear-gradient(180deg, #fae4b2, #f1d8a1); padding-bottom: 64px; }
+.ec__sheet { display: block; width: min(1440px, calc(100% - 32px)); margin: 0 auto; padding: 16px 0 var(--gap-section); border-radius: 16px; background: #fffcf6; box-shadow: 0 24px 48px -24px rgba(75, 44, 22, .45); overflow: hidden; }
+@media (max-width: 760px) { .ec__sheet { border-radius: 10px; padding-bottom: 64px; } }
