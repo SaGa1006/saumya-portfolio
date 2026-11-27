@@ -221,7 +221,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
   animation: island-float 6s ease-in-out infinite; -webkit-tap-highlight-color: transparent;
 }
 .island--bridge { animation-delay: -1s; } .island--compass { animation-delay: -2.2s; } .island--scope { animation-delay: -3.1s; }
-.island--chest { animation-delay: -4.4s; } .island--x { animation-delay: -5.2s; }
+.island--chest { animation-delay: -4.4s; } .island--board { animation-delay: -1.6s; } .island--x { animation-delay: -5.2s; }
 .island img { display: block; width: 100%; height: auto; transition: transform .35s cubic-bezier(.3, 1.4, .5, 1), filter .35s ease; }
 .island:hover img, .island:focus-visible img { transform: translateY(-4%) scale(1.06); filter: drop-shadow(0 0 10px rgba(255, 226, 140, .95)) brightness(1.05); }
 .island:focus-visible { outline: none; }
