@@ -335,3 +335,4 @@ button.pb__dial:active { transform: rotate(-20deg) scale(.97); }
 .ec__stepname, .ec__stepline { margin: 0; }
 .ec__keys { align-items: stretch; }
 .ec__keys li { display: flex; align-items: center; justify-content: center; text-align: center; }
+.ec__step .ec__stepno { align-self: center; }
