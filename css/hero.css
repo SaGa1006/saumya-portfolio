@@ -196,9 +196,13 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .mapl__box > * { position: absolute; }
 
 /* the dotted route, compass rose and sea creatures */
+.mapl__rose-letters { display: block; width: 100%; height: auto; }
+/* the dial (ring + star) turns on its own; centre sits at 202,214 of the 400x428 drawing */
+.mapl__rose-dial { position: absolute; left: 13%; top: 14.95%; width: 75%; height: auto; transform: rotate(var(--rose, 0deg)); will-change: transform; user-select: none; }
+.mapl__rose.is-dragging { cursor: grabbing; }
 .mapl__route { left: 0; top: 0; width: 100%; height: 100%; overflow: visible; opacity: clamp(0, calc(var(--enter, 0) * 8 - 3), 1); }
 .mapl__route-mask { fill: none; stroke: #fff; stroke-width: 90; stroke-dasharray: 1 1; stroke-dashoffset: calc(1 - clamp(0, calc(var(--enter, 0) * 1.6 - .55), 1)); }
-.mapl__rose { height: auto; opacity: clamp(0, calc(var(--enter, 0) * 2 - 1), 1); transform: translate3d(0, calc((1 - var(--enter, 0)) * 60px), 0); }
+.mapl__rose { pointer-events: none; cursor: grab; touch-action: none; opacity: clamp(0, calc(var(--enter, 0) * 2 - 1), 1); transform: translate3d(0, calc((1 - var(--enter, 0)) * 60px), 0); }
 
 /* islands rise into place one after another, each at its own speed */
 .mapl__islands { inset: 0; margin: 0; padding: 0; list-style: none; }
@@ -299,8 +303,7 @@ html.map-explored .map-hint { opacity: 0; }
 .port-card__kicker[hidden] { display: none; }
 .port-card__img { width: 56%; height: auto; margin: 0 auto 12px; display: block; filter: drop-shadow(0 6px 8px rgba(75, 44, 22, .25)); }
 .port-card__kicker { margin: 0; font: var(--t-label); font-size: 14px; color: var(--teal); letter-spacing: .04em; text-transform: uppercase; }
-.port-card__title { margin: 8px 0 0; font: var(--t-h3); color: var(--h-ink); }
-.port-card__title::after { content: ""; display: block; width: 96px; height: 0; margin: 12px auto 16px; border-top: 2px dashed rgba(75, 44, 22, .55); }
+.port-card__title { margin: 8px 0 12px; font: var(--t-h3); color: var(--h-ink); }
 .port-card__text { margin: 0; font: var(--t-body); color: var(--h-ink); }
 
 /* ---------- Intro after the sun loader ---------- */
