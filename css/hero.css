@@ -220,7 +220,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 /* the map's boat sails in from the horizon, between the back and front rows of waves */
 .mapl__boat {
   transform-origin: 50% 100%; opacity: clamp(0, calc(var(--enter, 0) * 4 - .4), 1);
-  transform: translate3d(0, calc((1 - var(--enter, 0)) * -24%), 0) scale(calc((.32 + var(--enter, 0) * .68) * var(--fit, 1) * .72));
+  transform: translate3d(0, calc((1 - var(--enter, 0)) * -24%), 0) scale(calc((.32 + var(--enter, 0) * .68) * var(--fit, 1) * .82));
 }
 .mapl__boat img, .map__boat img { display: block; width: 100%; height: auto; transform-origin: 50% 92%; animation: boat-sail 5.5s ease-in-out infinite; }
 @keyframes boat-sail {
