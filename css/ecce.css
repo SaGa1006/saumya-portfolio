@@ -320,5 +320,18 @@ button.pb__dial:active { transform: rotate(-20deg) scale(.97); }
   .psn { padding: 24px; }
   .psn__dl div { grid-template-columns: 1fr; gap: 2px; }
   .ec__step { grid-template-columns: 1fr; row-gap: 12px; }
-  .ec__stepno { justify-self: start; grid-row: auto; }
+  .ec__stepno { grid-row: auto; }
 }
+
+/* Nov 27: whitish page, stacked step headers, centred principle pills */
+.ec { background: #fffcf6; --card: #f8efdd; --card-hi: #fff; }
+.ec__card, .ec__kit li, .ec__flow li, .ec__goals li, .ec__theory article, .ec__process a { background: var(--card); }
+.ec__card.is-picked, .ec__domains li, .psn, .sbp, .ft, .ec__table, .ec__acts li { background: var(--card-hi); }
+.ec__domains li, .psn, .ec__acts li { box-shadow: 0 0 0 1px rgba(75, 44, 22, .1), 0 16px 32px -24px rgba(75, 44, 22, .45); }
+.ft__table tbody th { background: #fff; }
+.ec__keys li { background: #fff; }
+.ec__step { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+.ec__stepno { grid-row: auto; }
+.ec__stepname, .ec__stepline { margin: 0; }
+.ec__keys { align-items: stretch; }
+.ec__keys li { display: flex; align-items: center; justify-content: center; text-align: center; }
