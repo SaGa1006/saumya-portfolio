@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Saal Bhar, a wooden ECCE calendar · Saumya Garg</title>
-  <meta name="description" content="Saal Bhar: a year-round wooden pegboard calendar and activity booklet for Anganwadi centres, designed at UxLab, IIT Delhi. A case study by Saumya Garg.">
+  <title>Sadabahar, an evergreen ECCE calendar · Saumya Garg</title>
+  <meta name="description" content="Sadabahar (सदाबहार): an evergreen, wooden pegboard calendar and activity booklet for Anganwadi centres, designed at UxLab, IIT Delhi. A case study by Saumya Garg.">
   <meta name="theme-color" content="#fae4b2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500;600&family=Tiro+Devanagari+Hindi&display=swap">
   <link rel="stylesheet" href="css/hero.css">
   <link rel="stylesheet" href="css/port.css">
   <link rel="stylesheet" href="css/ecce.css">
@@ -35,13 +35,14 @@
     <!-- 1. Hero -->
     <header class="ec__hero">
       <p class="ec__kicker">UxLab, IIT Delhi · Early Childhood Care &amp; Education</p>
-      <h1 class="ec__title">Saal Bhar: a calendar that lasts the whole year, every year</h1>
-      <p class="ec__lede">A wooden pegboard calendar and an activity booklet for Anganwadi centres. Teachers re-hang it once a month, children set it every morning, and every festival on it comes with a ready, age-right activity.</p>
+      <h1 class="ec__title">Sadabahar <span class="ec__hi" lang="hi">सदाबहार</span><span class="ec__sub">An evergreen calendar for Anganwadi classrooms</span></h1>
+      <p class="ec__lede">Sadabahar means evergreen. It is a wooden pegboard calendar and an activity booklet for Anganwadi centres that work for at least ten years without a reprint. Teachers re-hang it once a month, children set it every morning, and every festival on it comes with a ready, age-right activity.</p>
       <ul class="ec__facts">
         <li><span>Users</span>Anganwadi workers and children aged 3 to 6</li>
         <li><span>Output</span>Physical product, activity booklet, year plan</li>
         <li><span>Framework</span>NCF for the Foundational Stage</li>
-        <li><span>Scale</span>2 activities a week, 104 a year</li>
+        <li><span>Scale</span>2 activities a week, 104 a year, 2025 to 2035</li>
+        <li><span>Team</span>Saumya Garg, Avishi Bishnoi</li>
       </ul>
       <a class="ec__jump" href="#board">Play with the board<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </header>
@@ -139,8 +140,9 @@
     <section class="ec__sec ec__boardsec" id="board" aria-labelledby="h-board">
       <p class="ec__num">05 · The board</p>
       <h2 id="h-board" class="ec__h2">Try it: pick a month, then a day</h2>
-      <p class="ec__p">This is the 2025 board the team mapped. Watch the date blocks re-hang under the right weekday, tap a block to see its activity, and tap the weather and mood discs the way children would each morning.</p>
+      <p class="ec__p">The board opens on today. Pick any year up to 2035 and any month, and watch the date blocks re-hang under the right weekday while the moving festivals find their new dates. Tap a block to see its activity, and tap the weather and mood discs the way children would each morning.</p>
 
+      <div class="pb__chips pb__chips--years" data-years role="group" aria-label="Choose a year"></div>
       <div class="pb__chips" data-months role="group" aria-label="Choose a month"></div>
       <div class="ec__stage">
         <div class="pb" data-board>
@@ -180,9 +182,33 @@
       </div>
     </section>
 
+    <!-- 6b. Ten years -->
+    <section class="ec__sec" aria-labelledby="h-ten">
+      <p class="ec__num">06 · Built to last</p>
+      <h2 id="h-ten" class="ec__h2">Ten years on one board, without reprinting the booklet</h2>
+      <div class="ec__cards3">
+        <article class="ec__card">
+          <h3>Weekdays: the board</h3>
+          <p>Any month starts on one of seven weekdays and needs at most six rows. The 7 by 6 pegs cover every combination, forever. The teacher only finds which weekday day 1 falls on.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Activities: tied to the festival</h3>
+          <p>A booklet card belongs to Holi or Onam, not to 14 March. Fixed days, theme weeks and "second Sunday" days never change, so no page goes out of date when a festival moves.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Dates: one back page</h3>
+          <p>Only moving festivals change, so they live on a single table at the back of the booklet. It runs to 2035; after that, one new printed page renews the whole kit.</p>
+        </article>
+      </div>
+      <figure class="ft">
+        <figcaption class="ft__cap"><b>Back page of the booklet: moving festivals, 2025 to 2035.</b> Tap a date to see that board. Worked out from each festival's rule: the lunar day at sunrise for Hindu festivals, the Hijri calendar plus a day for Indian moon sighting, Easter for Good Friday. A date can differ by a day by region, so workers confirm it with the local calendar.</figcaption>
+        <div class="ft__scroll" tabindex="0" role="region" aria-label="Festival dates by year"><table class="ft__table" data-fest-table></table></div>
+      </figure>
+    </section>
+
     <!-- 7. Anatomy -->
     <section class="ec__sec" aria-labelledby="h-kit">
-      <p class="ec__num">06 · What's in the box</p>
+      <p class="ec__num">07 · What's in the box</p>
       <h2 id="h-kit" class="ec__h2">Every piece has one job</h2>
       <ol class="ec__kit">
         <li><b>The pegboard</b>A 7 by 6 grid of pegs under Monday-to-Sunday rails. Forty-two pegs cover every month, whichever weekday it starts on.</li>
@@ -190,13 +216,13 @@
         <li><b>Painted festival blocks</b>One per festival or day, painted in its category colour, replacing that date's plain block. Holidays carry a leaf: celebrate the day before.</li>
         <li><b>Year and month blocks</b>Four year digits and three letter blocks spell the month, so children learn to read JAN, FEB, MAR by handling them.</li>
         <li><b>Four morning discs</b>Season, weather, moon and mood. Children set them in circle time, which turns the calendar into a daily talk about the world and their feelings.</li>
-        <li><b>The activity booklet</b>Twelve chapters. Each opens with how the board should look that month, then the activity cards for its days.</li>
+        <li><b>The activity booklet</b>Twelve chapters. Each opens with the month's body theme and festival list, then the activity cards. The back page holds ten years of festival dates.</li>
       </ol>
     </section>
 
     <!-- 8. Booklet -->
     <section class="ec__sec" aria-labelledby="h-book">
-      <p class="ec__num">07 · The booklet</p>
+      <p class="ec__num">08 · The booklet</p>
       <h2 id="h-book" class="ec__h2">A worker shouldn't have to invent 104 activities</h2>
       <p class="ec__p">Two activities a week gives 104 a year. Each one is a single card with the same parts (materials, time, steps, the teacher's concerns, the skills it builds), written for a worker with ten minutes to prepare and a mixed group of three-to-six-year-olds.</p>
 
@@ -244,10 +270,10 @@
 
     <!-- 9. Rhythm -->
     <section class="ec__sec" aria-labelledby="h-use">
-      <p class="ec__num">08 · How it's used</p>
+      <p class="ec__num">09 · How it's used</p>
       <h2 id="h-use" class="ec__h2">Three rhythms, one board</h2>
       <ol class="ec__flow">
-        <li><span>Once a month</span><b>The teacher re-hangs</b>The teacher opens the booklet chapter, matches the board map, hangs day 1 under its weekday and swaps in that month's festival blocks. About five minutes.</li>
+        <li><span>Once a month</span><b>The teacher re-hangs</b>The teacher opens the month's chapter, looks up this year's festival dates on the back page, hangs day 1 under its weekday and swaps in the festival blocks. About five minutes.</li>
         <li><span>Every morning</span><b>Children set the day</b>In circle time a child moves the marker to today and turns the season, weather, moon and mood discs. Counting, naming and talking, before anything else starts.</li>
         <li><span>The day before</span><b>Prep, not panic</b>A leaf on tomorrow's block means the centre will be closed, so today is the celebration. The booklet card lists the materials to gather.</li>
       </ol>
@@ -256,7 +282,7 @@
     <!-- 10. Visual language -->
     <section class="ec__sec ec__split ec__split--even" aria-labelledby="h-vis">
       <div>
-        <p class="ec__num">09 · Visual language</p>
+        <p class="ec__num">10 · Visual language</p>
         <h2 id="h-vis" class="ec__h2">Clean, minimal, big, and colour that means something</h2>
         <p class="ec__p">Most of the board's users can't read yet, and many workers read better in their home language than in English. So the board leans on what everyone can read: numbers, colour and pictures.</p>
       </div>
@@ -267,11 +293,11 @@
 
     <!-- 11. Next -->
     <section class="ec__sec ec__next" aria-labelledby="h-next">
-      <p class="ec__num">10 · What's next</p>
+      <p class="ec__num">11 · What's next</p>
       <h2 id="h-next" class="ec__h2">Taking it into a centre</h2>
       <ul class="ec__nextlist">
         <li>Pilot the board and one booklet chapter with Anganwadi workers, and time the monthly re-hang.</li>
-        <li>Add a five-year table of moving festival dates to the booklet, so it stays right after 2025.</li>
+        <li>Each year, check the moving festival dates against the local panchang and the moon sighting, since a festival can shift by a day from region to region.</li>
         <li>Translate the booklet into regional languages, keeping the colour and picture system the same.</li>
         <li>Test block sizes and finishes with children for grip, safety and non-toxic paint.</li>
       </ul>

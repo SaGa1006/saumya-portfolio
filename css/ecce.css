@@ -1,4 +1,4 @@
-/* ---------- Saal Bhar: the wooden ECCE calendar case study (ecce-calendar.html) ---------- */
+/* ---------- Sadabahar: the wooden ECCE calendar case study (ecce-calendar.html) ---------- */
 .ec {
   --cat-holiday: #a9e2b2; --cat-fixed: #f6a9d3; --cat-variable: #f6a08c; --cat-week: #f9d98a; --cat-weekday: #c8b4f2; --cat-body: #93ddd8;
   --wood-ink: #5a3517;
@@ -233,3 +233,31 @@ button.pb__dial:active { transform: rotate(-20deg) scale(.97); }
   .pb__blocks.is-hanging .pb__blk { animation: none; }
 }
 .sbp__prep[hidden] { display: none; }
+
+/* name, team, year chips */
+.ec__title { max-width: none; }
+.ec__hi { display: inline-block; margin-left: .3em; font: 400 .82em/1 "Tiro Devanagari Hindi", serif; color: #2f7a46; }
+.ec__sub { display: block; margin-top: 12px; font: var(--h-font); color: #6b4423; max-width: 22ch; }
+.ec__facts { grid-template-columns: repeat(5, 1fr); }
+.pb__chips--years { margin-top: 32px; }
+.pb__chips--years + .pb__chips { margin-top: 8px; }
+.pb__chips--years .pb__chip { font-weight: 600; }
+
+/* the ten-year festival table (back page of the booklet) */
+.ft { margin: var(--gap-content) 0 0; padding: 24px; border-radius: 16px; background: #fffaef; box-shadow: 0 24px 48px -28px rgba(75, 44, 22, .5); }
+.ft__cap { font: 400 14px/1.5 "Poppins", sans-serif; color: #6b4423; max-width: 90ch; }
+.ft__cap b { display: block; margin-bottom: 4px; font: var(--t-h3); font-size: clamp(20px, 1.4vw, 24px); color: var(--h-ink); }
+.ft__scroll { margin-top: 16px; overflow-x: auto; max-height: 560px; overflow-y: auto; border-radius: 10px; border: 1px solid rgba(75, 44, 22, .15); }
+.ft__scroll:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+.ft__table { border-collapse: separate; border-spacing: 0; width: 100%; min-width: 1080px; font: 400 13px/1.35 "Poppins", sans-serif; }
+.ft__table th, .ft__table td { padding: 8px 10px; border-bottom: 1px solid rgba(75, 44, 22, .1); text-align: left; white-space: nowrap; }
+.ft__table thead th { position: sticky; top: 0; z-index: 2; background: #f3dcaa; font-weight: 600; color: var(--h-ink); }
+.ft__table tbody th { position: sticky; left: 0; z-index: 1; background: #fffaef; font-weight: 500; color: var(--h-ink); }
+.ft__table thead th:first-child { left: 0; z-index: 3; }
+.ft__table tbody th .sw { width: 12px; height: 12px; margin-right: 8px; border-radius: 3px; vertical-align: -1px; }
+.ft__table tbody tr:hover td, .ft__table tbody tr:hover th { background: #fbefd2; }
+.ft__d { padding: 2px 6px; border: 0; border-radius: 6px; background: none; font: inherit; color: var(--teal); cursor: pointer; }
+.ft__d:hover, .ft__d:focus-visible { background: var(--teal); color: #fffaef; }
+.ft__none { color: #b39a7c; font-size: 12px; }
+@media (max-width: 1080px) { .ec__facts { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 760px) { .ec__facts { grid-template-columns: 1fr 1fr; } .ft { padding: 16px; } }

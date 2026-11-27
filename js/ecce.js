@@ -1,10 +1,18 @@
-// Saal Bhar: the wooden pegboard calendar on ecce-calendar.html.
+// Sadabahar: the wooden pegboard calendar on ecce-calendar.html.
 // A 7 x 6 grid of pegs. Each month the teacher re-hangs the date blocks so day 1 sits under
 // the right weekday, swaps in painted festival blocks, and the children set the season,
 // weather, moon and mood discs every morning.
 (function () {
   "use strict";
-  var YEAR = 2025; // the year the team mapped in the research boards
+  var YEAR = 2025; // the year the team mapped; the board and booklet run to 2035
+  var FIRST_YEAR = 2025, LAST_YEAR = 2035;
+
+  // Moving festivals, worked out for 2025 to 2035 from their own rules: lunar tithi at
+  // sunrise in IST with Lahiri sidereal months (Hindu), Umm al-Qura + 1 day (Islamic,
+  // as India usually sights the moon a day later), Easter computus (Good Friday), and the
+  // Shahenshahi calendar (Parsi New Year). [month index, day]; a festival can fall
+  // twice in one year or not at all.
+  var FEST = {"2025":{"gurugobind":[[0,6],[11,27]],"basant":[[1,3]],"shivratri":[[1,26]],"holi":[[2,14]],"ugadi":[[2,30]],"ramnavami":[[3,6]],"mahavir":[[3,10]],"buddha":[[4,12]],"rathyatra":[[5,27]],"rakhi":[[7,9]],"janmashtami":[[7,16]],"ganesh":[[7,27]],"dussehra":[[9,2]],"diwali":[[9,20]],"govardhan":[[9,22]],"bhaidooj":[[9,23]],"chhath":[[9,28]],"gurunanak":[[10,5]],"onam":[[8,5]],"goodfriday":[[3,18]],"eid":[[2,31]],"bakrid":[[5,7]],"muharram":[[6,6]],"milad":[[8,5]],"parsi":[[7,15]]},"2026":{"basant":[[0,23]],"shivratri":[[1,15]],"holi":[[2,3]],"ugadi":[[2,20]],"ramnavami":[[2,27]],"mahavir":[[2,31]],"buddha":[[4,1]],"rathyatra":[[6,16]],"rakhi":[[7,28]],"janmashtami":[[8,4]],"ganesh":[[8,15]],"dussehra":[[9,21]],"diwali":[[10,8]],"govardhan":[[10,10]],"bhaidooj":[[10,11]],"chhath":[[10,15]],"gurunanak":[[10,24]],"onam":[[7,26]],"goodfriday":[[3,3]],"eid":[[2,21]],"bakrid":[[4,28]],"muharram":[[5,26]],"milad":[[7,26]],"parsi":[[7,15]]},"2027":{"gurugobind":[[0,15]],"basant":[[1,11]],"shivratri":[[2,6]],"holi":[[2,23]],"ugadi":[[3,7]],"ramnavami":[[3,15]],"mahavir":[[3,19]],"buddha":[[4,20]],"rathyatra":[[6,5]],"rakhi":[[7,17]],"janmashtami":[[7,25]],"ganesh":[[8,4]],"dussehra":[[9,10]],"diwali":[[9,29]],"govardhan":[[9,30]],"bhaidooj":[[9,31]],"chhath":[[10,4]],"gurunanak":[[10,14]],"onam":[[8,12]],"goodfriday":[[2,26]],"eid":[[2,10]],"bakrid":[[4,17]],"muharram":[[5,16]],"milad":[[7,15]],"parsi":[[7,15]]},"2028":{"gurugobind":[[0,4],[11,23]],"basant":[[1,1]],"shivratri":[[1,23]],"holi":[[2,11]],"ugadi":[[2,27]],"ramnavami":[[3,4]],"mahavir":[[3,7]],"buddha":[[4,8]],"rathyatra":[[5,24]],"rakhi":[[7,5]],"janmashtami":[[7,13]],"ganesh":[[7,23]],"dussehra":[[8,28]],"diwali":[[9,17]],"govardhan":[[9,19]],"bhaidooj":[[9,19]],"chhath":[[9,23]],"gurunanak":[[10,2]],"onam":[[8,1]],"goodfriday":[[3,14]],"eid":[[1,27]],"bakrid":[[4,6]],"muharram":[[5,4]],"milad":[[7,4]],"parsi":[[7,14]]},"2029":{"basant":[[0,19]],"shivratri":[[1,11]],"holi":[[2,1]],"ugadi":[[3,14]],"ramnavami":[[3,23]],"mahavir":[[3,26]],"buddha":[[4,27]],"rathyatra":[[6,13]],"rakhi":[[7,24]],"janmashtami":[[8,1]],"ganesh":[[8,12]],"dussehra":[[9,16]],"diwali":[[10,5]],"govardhan":[[10,7]],"bhaidooj":[[10,8]],"chhath":[[10,11]],"gurunanak":[[10,21]],"onam":[[7,22]],"goodfriday":[[2,30]],"eid":[[1,15]],"bakrid":[[3,25]],"muharram":[[4,24]],"milad":[[6,25]],"parsi":[[7,14]]},"2030":{"gurugobind":[[0,10],[11,31]],"basant":[[1,7]],"shivratri":[[2,2]],"holi":[[2,20]],"ugadi":[[3,3]],"ramnavami":[[3,12]],"mahavir":[[3,16]],"buddha":[[4,17]],"rathyatra":[[6,2]],"rakhi":[[7,13]],"janmashtami":[[7,21]],"ganesh":[[8,1]],"dussehra":[[9,6]],"diwali":[[9,26]],"govardhan":[[9,27]],"bhaidooj":[[9,28]],"chhath":[[10,1]],"gurunanak":[[10,10]],"onam":[[8,9]],"goodfriday":[[3,19]],"eid":[[1,5]],"bakrid":[[3,14]],"muharram":[[4,13]],"milad":[[6,14]],"parsi":[[7,14]]},"2031":{"basant":[[0,27]],"shivratri":[[1,20]],"holi":[[2,9]],"ugadi":[[2,24]],"ramnavami":[[3,1]],"mahavir":[[3,5]],"buddha":[[4,7]],"rathyatra":[[5,22]],"rakhi":[[7,3]],"janmashtami":[[7,10]],"ganesh":[[8,20]],"dussehra":[[9,25]],"diwali":[[10,14]],"govardhan":[[10,15]],"bhaidooj":[[10,16]],"chhath":[[10,20]],"gurunanak":[[10,28]],"onam":[[7,30]],"goodfriday":[[3,11]],"eid":[[0,25]],"bakrid":[[3,3]],"muharram":[[4,3]],"milad":[[6,3]],"parsi":[[7,14]]},"2032":{"gurugobind":[[0,19]],"basant":[[1,15]],"shivratri":[[2,10]],"holi":[[2,27]],"ugadi":[[3,11]],"ramnavami":[[3,19]],"mahavir":[[3,23]],"buddha":[[4,25]],"rathyatra":[[6,9]],"rakhi":[[7,21]],"janmashtami":[[7,28]],"ganesh":[[8,9]],"dussehra":[[9,14]],"diwali":[[10,2]],"govardhan":[[10,4]],"bhaidooj":[[10,5]],"chhath":[[10,9]],"gurunanak":[[10,17]],"onam":[[7,20]],"goodfriday":[[2,26]],"eid":[[0,15]],"bakrid":[[2,23]],"muharram":[[3,21]],"milad":[[5,21]],"parsi":[[7,13]]},"2033":{"gurugobind":[[0,7],[11,28]],"basant":[[1,4]],"shivratri":[[1,28]],"holi":[[2,16]],"ugadi":[[2,31]],"ramnavami":[[3,8]],"mahavir":[[3,12]],"buddha":[[4,14]],"rathyatra":[[5,28]],"rakhi":[[7,10]],"janmashtami":[[7,17]],"ganesh":[[7,29]],"dussehra":[[9,4]],"diwali":[[9,22]],"govardhan":[[9,24]],"bhaidooj":[[9,25]],"chhath":[[9,29]],"gurunanak":[[10,6]],"onam":[[8,6]],"goodfriday":[[3,15]],"eid":[[0,3],[11,24]],"bakrid":[[2,12]],"muharram":[[3,11]],"milad":[[5,10]],"parsi":[[7,13]]},"2034":{"basant":[[0,25]],"shivratri":[[1,17]],"holi":[[2,5]],"ugadi":[[2,21]],"ramnavami":[[2,28]],"mahavir":[[3,1]],"buddha":[[4,3]],"rathyatra":[[6,17]],"rakhi":[[7,29]],"janmashtami":[[8,6]],"ganesh":[[8,16]],"dussehra":[[9,23]],"diwali":[[10,10]],"govardhan":[[10,12]],"bhaidooj":[[10,13]],"chhath":[[10,17]],"gurunanak":[[10,26]],"onam":[[7,28]],"goodfriday":[[3,7]],"eid":[[11,13]],"bakrid":[[2,2]],"muharram":[[2,31]],"milad":[[4,31]],"parsi":[[7,13]]},"2035":{"gurugobind":[[0,16]],"basant":[[1,13]],"shivratri":[[2,8]],"holi":[[2,24]],"ugadi":[[3,9]],"ramnavami":[[3,16]],"mahavir":[[3,20]],"buddha":[[4,22]],"rathyatra":[[6,7]],"rakhi":[[7,18]],"janmashtami":[[7,26]],"ganesh":[[8,5]],"dussehra":[[9,12]],"diwali":[[9,30]],"govardhan":[[10,1]],"bhaidooj":[[10,2]],"chhath":[[10,6]],"gurunanak":[[10,15]],"onam":[[7,18]],"goodfriday":[[2,23]],"eid":[[11,2]],"bakrid":[[1,19]],"muharram":[[2,21]],"milad":[[4,21]],"parsi":[[7,13]]}};
   var MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
   var MONTH_NAMES = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var DAY_NAMES = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
@@ -36,67 +44,70 @@
     ["My Body in Play", "Obstacle course, reaction games"]
   ];
 
-  // [day, name, category, theme, activity, development goal]  (2025 dates)
-  var E = [
+  // [day or festival key, name, category, theme, activity, development goal]
+  var TEMPLATE = [
     [[1, "New Year", "holiday", "New beginnings", "A 'what I will try this year' circle, one wish each", "Socio-emotional, Language"],
-     [6, "Guru Gobind Singh's Birthday", "variable", "Courage & equality", "Story time on standing up for others", "Fine motor, Socio-emotional"],
+     ["gurugobind", "Guru Gobind Singh's Birthday", "variable", "Courage & equality", "Story time on standing up for others", "Fine motor, Socio-emotional"],
      [12, "National Youth Day", "fixed", "Leadership", "Pretend play: 'line leader for a day'", "Cognitive, Socio-emotional"],
      [14, "Makar Sankranti · Pongal · Magh Bihu", "holiday", "Harvest", "Paper kites and a grain-sorting tray", "Physical, Creative"],
      [24, "Day of Education · National Girl Child Day", "fixed", "Gender equality", "'When I grow up' drawing wall", "Language, Socio-emotional"],
      [26, "Republic Day", "holiday", "Patriotism", "Tricolour hand-print flag, made together", "Cognitive, Physical"],
      [30, "Martyrs' Day", "fixed", "Peace", "Fold a paper dove, two minutes of quiet", "Socio-emotional, Fine motor"]],
-    [[2, "Basant Panchami", "variable", "Knowledge", "Yellow colour hunt and first letters", "Pre-writing, Colour recognition"],
+    [["basant", "Basant Panchami", "variable", "Knowledge", "Yellow colour hunt and first letters", "Pre-writing, Colour recognition"],
      [4, "World Cancer Day", "fixed", "Health", "Healthy-plate sorting game", "Cognitive, Physical"],
      [21, "Mother Language Day", "fixed", "Many languages", "Say 'hello' in every home language in the room", "Language, Social"],
      [22, "Science Week", "week", "Inquiry", "Float or sink? One small experiment a day", "Scientific thinking"],
-     [26, "Maha-Shivratri", "variable", "Balance", "Rhythm clapping and stillness game", "Rhythm, Self-control"],
+     ["shivratri", "Maha-Shivratri", "variable", "Balance", "Rhythm clapping and stillness game", "Rhythm, Self-control"],
      [28, "National Science Day", "fixed", "Curiosity", "Shadow play with a torch", "Cognitive, Inquiry"]],
     [[8, "International Women's Day", "fixed", "Empowerment", "Thank-you cards for women at home", "Creative, Socio-emotional"],
-     [14, "Holi", "variable", "Joy & colour", "Flower-petal colours, mixing primaries", "Sensory, Colour"],
+     ["holi", "Holi", "variable", "Joy & colour", "Flower-petal colours, mixing primaries", "Sensory, Colour"],
      [22, "World Water Day", "fixed", "Saving water", "'Nal band karo' tap-off mime and chant", "Cognitive, Eco-literacy"],
-     [30, "Gudi Padwa · Ugadi", "variable", "Renewal", "Taste six flavours, sweet to bitter", "Cultural awareness"],
-     [31, "Eid-ul-Fitr", "variable", "Sharing food", "Moon-phase walk and a sweet-box to share", "Social-emotional, Fine motor"]],
-    [[6, "Ram Navami", "variable", "Journeys", "Puppet path retelling", "Cognitive, Values"],
+     ["ugadi", "Gudi Padwa · Ugadi", "variable", "Renewal", "Taste six flavours, sweet to bitter", "Cultural awareness"],
+     ["eid", "Eid-ul-Fitr", "variable", "Sharing food", "Moon-phase walk and a sweet-box to share", "Social-emotional, Fine motor"]],
+    [["ramnavami", "Ram Navami", "variable", "Journeys", "Puppet path retelling", "Cognitive, Values"],
      [7, "World Health Day", "fixed", "Hygiene", "Handwashing song, six steps", "Physical, Health"],
-     [10, "Mahavir Jayanti", "variable", "Kindness to animals", "Care for a plant sapling or toy pet", "Emotional, Value for life"],
+     ["mahavir", "Mahavir Jayanti", "variable", "Kindness to animals", "Care for a plant sapling or toy pet", "Emotional, Value for life"],
      [13, "Vaisakhi", "holiday", "Harvest", "Harvest dance, grinding-wheat role play", "Gross motor, Culture"],
      [14, "Ambedkar Jayanti", "holiday", "Equality", "Everyone gets a turn: a fair-share game", "Moral, Creative"],
      [16, "Earth Week", "week", "Nature", "A daily green-task chart", "Environmental sensitivity"],
-     [18, "Good Friday", "variable", "Kindness", "Puppet story of sacrifice and care", "Emotional processing"],
+     ["goodfriday", "Good Friday", "variable", "Kindness", "Puppet story of sacrifice and care", "Emotional processing"],
      [22, "Earth Day", "fixed", "Ecology", "Natural vs made-by-us sorting", "Eco-consciousness"]],
     [[1, "Labour Day", "fixed", "Professions", "Dress up as the helpers around us", "Cognitive, Social"],
      [7, "Rabindranath Tagore Jayanti", "fixed", "Poetry", "Read a Tagore poem, decorate it with lines", "Language, Aesthetic"],
-     [11, "Mother's Day", "weekday", "Gratitude", "Art as a gift for mothers", "Emotional, Language"],
-     [12, "Buddha Purnima", "variable", "Calm", "Silent circle time, breathing with a bell", "Self-regulation"],
+     ["mother", "Mother's Day", "weekday", "Gratitude", "Art as a gift for mothers", "Emotional, Language"],
+     ["buddha", "Buddha Purnima", "variable", "Calm", "Silent circle time, breathing with a bell", "Self-regulation"],
      [31, "World No Tobacco Day", "fixed", "Health", "Clean-air poster with hand prints", "Physical, Awareness"]],
     [[5, "World Environment Day", "fixed", "Nature", "Seed planting in old cups", "Eco-literacy, Creative"],
-     [7, "Bakrid", "variable", "Sharing", "Paper sheep and a story about giving", "Socio-emotional, Creative"],
-     [15, "Father's Day", "weekday", "Family", "'My father's job' story circle", "Language, Emotional"],
+     ["bakrid", "Bakrid", "variable", "Sharing", "Paper sheep and a story about giving", "Socio-emotional, Creative"],
+     ["father", "Father's Day", "weekday", "Family", "'My father's job' story circle", "Language, Emotional"],
      [21, "International Day of Yoga", "fixed", "Mindfulness", "Animal yoga poses", "Physical, Self-regulation"],
-     [27, "Rath Yatra", "variable", "Community", "Toy chariot parade with a pull-along cart", "Gross motor, Retelling"]],
-    [[6, "Muharram", "variable", "Peace & reflection", "Quiet candle circle", "Emotional awareness"],
+     ["rathyatra", "Rath Yatra", "variable", "Community", "Toy chariot parade with a pull-along cart", "Gross motor, Retelling"]],
+    [["muharram", "Muharram", "variable", "Peace & reflection", "Quiet candle circle", "Emotional awareness"],
      [11, "World Population Day", "fixed", "Counting us", "Count the class, boys, girls, everyone", "Math, Social"],
      [26, "Kargil Vijay Diwas", "fixed", "Courage", "Thank-you cards for soldiers", "Socio-emotional, Creative"]],
-    [[3, "Friendship Day", "weekday", "Friendship", "Make a friendship band for a classmate", "Fine motor, Emotional"],
-     [9, "Raksha Bandhan", "variable", "Siblings", "Rakhi threading with big beads", "Fine motor, Social"],
-     [15, "Independence Day · Parsi New Year", "holiday", "Freedom", "Kite colours and a sun drawing", "Physical, Creative"],
-     [16, "Janmashtami", "variable", "Stories", "Butter-pot (matki) balance game", "Gross motor, Story"],
-     [27, "Ganesh Chaturthi", "variable", "Problem solving", "Clay modelling with small hands", "Fine motor, Cognitive"],
+    [["friendship", "Friendship Day", "weekday", "Friendship", "Make a friendship band for a classmate", "Fine motor, Emotional"],
+     ["rakhi", "Raksha Bandhan", "variable", "Siblings", "Rakhi threading with big beads", "Fine motor, Social"],
+     [15, "Independence Day", "holiday", "Freedom", "Tricolour kites and a freedom song", "Physical, Creative"],
+     ["parsi", "Parsi New Year", "variable", "Renewal", "Draw a sun, taste something new", "Renewal, Taste senses"],
+     ["janmashtami", "Janmashtami", "variable", "Stories", "Butter-pot (matki) balance game", "Gross motor, Story"],
+     ["ganesh", "Ganesh Chaturthi", "variable", "Problem solving", "Clay modelling with small hands", "Fine motor, Cognitive"],
      [29, "National Sports Day", "fixed", "Play", "Relay races and cheering", "Gross motor, Social"]],
     [[1, "Hindi Pakhwada", "week", "Mother tongue fortnight", "One Hindi rhyme a day, building to the alphabet tree", "Language, Cognitive"],
-     [5, "Onam · Teachers' Day", "variable", "Abundance & gratitude", "Onam flower circle (pookalam) and a thank-you card", "Aesthetic, Fine motor"],
-     [7, "Grandparents' Day", "weekday", "Family", "Ask a grandparent: 'what did you play?'", "Intergenerational bonding"],
+     ["onam", "Onam", "variable", "Abundance", "Onam flower circle (pookalam)", "Aesthetic, Fine motor"],
+     [5, "Teachers' Day", "fixed", "Gratitude", "Thank You, Teacher card", "Language, Socio-emotional"],
+     ["grandparents", "Grandparents' Day", "weekday", "Family", "Ask a grandparent: 'what did you play?'", "Intergenerational bonding"],
      [8, "International Literacy Day", "fixed", "Reading", "My first storybook, 3 to 4 pages", "Early literacy"],
      [14, "Hindi Diwas", "fixed", "Mother tongue", "Hindi alphabet tree", "Language, Confidence"]],
-    [[2, "Gandhi Jayanti · Dussehra", "holiday", "Non-violence, good over evil", "Clean-up drive and a charkha spin", "Moral, Fine motor"],
+    [[2, "Gandhi Jayanti", "holiday", "Non-violence", "Clean-up drive and a charkha spin", "Moral, Fine motor"],
+     ["dussehra", "Dussehra", "variable", "Good over evil", "Act out the story with paper masks", "Language, Socio-emotional"],
      [11, "International Day of the Girl Child", "fixed", "Empowerment", "'I can' strength cards", "Cognitive, Aspirational"],
      [16, "World Food Day", "fixed", "Nutrition", "Rainbow plate from local vegetables", "Health, Eco-awareness"],
-     [20, "Diwali", "variable", "Light over darkness", "Decorate a clay diya", "Fine motor, Creative"],
-     [22, "Govardhan Puja", "variable", "Caring for nature", "Mountain of leaves, counting cows", "Eco-awareness, Math"],
-     [23, "Bhai Dooj", "variable", "Sibling bonds", "Tilak cards for brothers and sisters", "Socio-emotional, Creative"],
-     [27, "Chhath Puja", "variable", "Sun energy", "Sunrise and sunset shadow drawing", "Science, Socio-emotional"],
+     ["diwali", "Diwali", "variable", "Light over darkness", "Decorate a clay diya", "Fine motor, Creative"],
+     ["govardhan", "Govardhan Puja", "variable", "Caring for nature", "Mountain of leaves, counting cows", "Eco-awareness, Math"],
+     ["bhaidooj", "Bhai Dooj", "variable", "Sibling bonds", "Tilak cards for brothers and sisters", "Socio-emotional, Creative"],
+     ["chhath", "Chhath Puja", "variable", "Sun energy", "Sunrise and sunset shadow drawing", "Science, Socio-emotional"],
      [31, "National Unity Day", "fixed", "Unity", "One big class collage", "Social, Creative"]],
-    [[5, "Guru Nanak Jayanti", "variable", "Service", "Langar play: serve each other", "Socio-emotional, Moral"],
+    [["gurunanak", "Guru Nanak Jayanti", "variable", "Service", "Langar play: serve each other", "Socio-emotional, Moral"],
      [14, "Children's Day", "holiday", "Child rights", "Children choose the day's games", "Socio-emotional, Moral"],
      [20, "Constitution Week", "week", "Rights", "Make our class rules together", "Socio-emotional, Language"],
      [26, "Constitution Day", "fixed", "Democracy", "Vote for the story of the day", "Civic awareness"]],
@@ -105,6 +116,28 @@
      [22, "National Mathematics Day", "fixed", "Numbers", "Ramanujan number play", "Logical, Spatial"],
      [25, "Christmas", "holiday", "Joy", "Christmas joy jar of kind deeds", "Creative, Emotional"]]
   ];
+
+  function nthSunday(y, m, nth) { var d = 1 + (7 - new Date(y, m, 1).getDay()) % 7; return d + 7 * (nth - 1); }
+  var WEEKDAY_RULES = {
+    mother: function (y) { return [[4, nthSunday(y, 4, 2)]]; },        // 2nd Sunday of May
+    father: function (y) { return [[5, nthSunday(y, 5, 3)]]; },        // 3rd Sunday of June
+    friendship: function (y) { return [[7, nthSunday(y, 7, 1)]]; },    // 1st Sunday of August
+    grandparents: function (y) {                                        // Sunday after the 1st Monday of September
+      var mon = 1 + (8 - new Date(y, 8, 1).getDay()) % 7; return [[8, mon + 6]];
+    }
+  };
+  function datesFor(key, y) { return WEEKDAY_RULES[key] ? WEEKDAY_RULES[key](y) : (FEST[y][key] || []); }
+  var E;
+  function build(y) {
+    E = [[], [], [], [], [], [], [], [], [], [], [], []];
+    TEMPLATE.forEach(function (list, m) {
+      list.forEach(function (t) {
+        if (typeof t[0] === "number") { E[m].push(t); return; }
+        datesFor(t[0], y).forEach(function (md) { E[md[0]].push([md[1]].concat(t.slice(1)).concat([t[0]])); });
+      });
+    });
+    E.forEach(function (l) { l.sort(function (a, b) { return a[0] - b[0]; }); });
+  }
 
   var SEASONS = ["Winter", "Winter", "Spring", "Spring", "Summer", "Summer", "Monsoon", "Monsoon", "Monsoon", "Autumn", "Autumn", "Winter"];
   var WEATHER = ["Sunny", "Cloudy", "Rainy", "Windy"];
@@ -149,6 +182,8 @@
   var moEl = board.querySelector(".pb__mo");
   var dial = function (k) { return board.querySelector('[data-dial="' + k + '"]'); };
   var chips = document.querySelector("[data-months]");
+  var yearChips = document.querySelector("[data-years]");
+  var yrEl = board.querySelector(".pb__yr");
   var panel = document.querySelector("[data-panel]");
   var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -168,7 +203,14 @@
     chips.appendChild(c);
   });
 
+  for (var y = FIRST_YEAR; y <= LAST_YEAR; y++) {
+    var yc = el("button", "pb__chip", y); yc.type = "button"; yc.dataset.y = y;
+    yearChips.appendChild(yc);
+  }
+
   var now = new Date();
+  if (now.getFullYear() >= FIRST_YEAR && now.getFullYear() <= LAST_YEAR) YEAR = now.getFullYear();
+  build(YEAR);
   var state = { m: now.getMonth(), n: now.getDate(), weather: 0, mood: 0 };
 
   function daysIn(m) { return new Date(YEAR, m + 1, 0).getDate(); }
@@ -182,6 +224,9 @@
   function renderMonth() {
     var m = state.m, max = daysIn(m), off = weekday(m, 1);
     chips.querySelectorAll(".pb__chip").forEach(function (c, i) { c.setAttribute("aria-pressed", i === m ? "true" : "false"); });
+    yearChips.querySelectorAll(".pb__chip").forEach(function (c) { c.setAttribute("aria-pressed", +c.dataset.y === YEAR ? "true" : "false"); });
+    String(YEAR).split("").forEach(function (d, i) { yrEl.children[i].textContent = d; });
+    yrEl.setAttribute("aria-label", "Year " + YEAR);
     var letters = MONTHS[m].split("");
     moEl.querySelectorAll(".pb__letter").forEach(function (s, i) { s.textContent = letters[i]; });
     blocks.forEach(function (b, i) {
@@ -253,8 +298,17 @@
     nx.dataset.jump = up ? up[0] + "-" + up[1][0] : "";
   }
 
-  function set(m, n) { var changed = m !== state.m; state.m = m; state.n = n; if (changed) renderMonth(); renderDay(); }
+  function set(m, n, y) {
+    var changed = m !== state.m || (y && y !== YEAR);
+    if (y && y !== YEAR) { YEAR = y; build(y); }
+    state.m = m; state.n = n; if (changed) renderMonth(); renderDay();
+  }
 
+  yearChips.addEventListener("click", function (e) {
+    var c = e.target.closest(".pb__chip"); if (!c) return;
+    var y = +c.dataset.y, max = new Date(y, state.m + 1, 0).getDate();
+    set(state.m, Math.min(state.n, max), y);
+  });
   chips.addEventListener("click", function (e) {
     var c = e.target.closest(".pb__chip"); if (!c) return;
     var m = +c.dataset.m; set(m, Math.min(state.n, daysIn(m)));
@@ -268,14 +322,34 @@
   document.querySelectorAll("[data-step]").forEach(function (b) {
     b.addEventListener("click", function () {
       var d = new Date(YEAR, state.m, state.n + (+b.dataset.step));
-      set(d.getMonth(), d.getDate());
+      if (d.getFullYear() < FIRST_YEAR || d.getFullYear() > LAST_YEAR) return;
+      set(d.getMonth(), d.getDate(), d.getFullYear());
     });
   });
   document.addEventListener("click", function (e) {
     var j = e.target.closest("[data-jump]"); if (!j || !j.dataset.jump) return;
-    var p = j.dataset.jump.split("-"); set(+p[0], +p[1]);
+    var p = j.dataset.jump.split("-"); set(+p[0], +p[1], p[2] ? +p[2] : YEAR);
     if (!j.closest("[data-panel]")) board.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
   });
 
   state.m = -1; set(now.getMonth(), now.getDate());
+
+  // The booklet's back page: every moving festival, 2025 to 2035.
+  var table = document.querySelector("[data-fest-table]");
+  if (table) {
+    var SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var rows = [];
+    TEMPLATE.forEach(function (list) { list.forEach(function (t) { if (typeof t[0] === "string") rows.push(t); }); });
+    var thead = "<thead><tr><th scope=\"col\">Festival</th>";
+    for (var yy = FIRST_YEAR; yy <= LAST_YEAR; yy++) thead += "<th scope=\"col\">" + yy + "</th>";
+    var body = rows.map(function (t) {
+      var tr = "<tr><th scope=\"row\"><i class=\"sw sw--" + t[2] + "\"></i>" + t[1] + "</th>";
+      for (var yy = FIRST_YEAR; yy <= LAST_YEAR; yy++) {
+        var ds = datesFor(t[0], yy);
+        tr += "<td>" + (ds.length ? ds.map(function (md) { return '<button type="button" class="ft__d" data-jump="' + md[0] + "-" + md[1] + "-" + yy + '">' + md[1] + " " + SHORT[md[0]] + "</button>"; }).join("<br>") : "<span class=\"ft__none\">not this year</span>") + "</td>";
+      }
+      return tr + "</tr>";
+    }).join("");
+    table.innerHTML = thead + "</tr></thead><tbody>" + body + "</tbody>";
+  }
 })();
