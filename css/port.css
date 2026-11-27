@@ -121,3 +121,32 @@ a.card:hover .card__go, a.card:focus-visible .card__go { opacity: 1; transform: 
 @media (hover: none) { .card__go { opacity: 1; transform: none; } }
 
 .port--html .port__frame:has(.gcard--wide) { max-width: 960px; }
+
+/* ---------- Off the Map: 2 x 2 grid of side projects ---------- */
+.ocards { list-style: none; margin: var(--gap-content) auto 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  width: min(100%, calc((100svh - 330px) * 2.9)); }
+.ocards > li { display: flex; }
+.ocard {
+  position: relative; flex: 1; box-sizing: border-box; display: flex; align-items: center; gap: 20px; padding: 14px;
+  border-radius: 20px; text-decoration: none; color: var(--h-ink);
+  background: linear-gradient(180deg, rgba(255, 250, 235, .55), rgba(255, 245, 220, .25));
+  border: 2px solid rgba(255, 255, 255, .55); box-shadow: inset 0 0 24px rgba(255, 255, 255, .25), 0 10px 30px -20px rgba(120, 80, 20, .5);
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s ease;
+}
+a.ocard:hover, a.ocard:focus-visible { transform: translateY(-4px); box-shadow: inset 0 0 24px rgba(255, 255, 255, .25), 0 18px 36px -18px rgba(120, 80, 20, .55); }
+a.ocard:hover .card__go, a.ocard:focus-visible .card__go { opacity: 1; transform: none; }
+.ocard__img { width: 52%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; flex: none; }
+.ocard__body { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; min-width: 0; }
+.ocard__kind { padding: 4px 12px; border-radius: 999px; background: #fff6e2; font: 500 13px/1.3 "Poppins", sans-serif; color: #1d1d1b; }
+.ocard__title { font: 600 clamp(20px, 1.6vw, 28px)/1.15 var(--f-serif, "Cormorant", serif); }
+.ocard__text { font: 400 clamp(13px, .9vw, 16px)/1.45 "Poppins", sans-serif; }
+.ocard--soon { justify-content: center; flex-direction: column; text-align: center; padding: 24px; border-style: dashed; }
+.ocard--soon .ocard__body { align-items: center; }
+@media (max-width: 760px) {
+  html:has(.port--scroll), body:has(.port--scroll) { height: auto; overflow: visible; }
+  .port--scroll { height: auto; min-height: 100svh; }
+  .ocards { grid-template-columns: 1fr; width: 100%; gap: 12px; margin-top: 20px; }
+  .ocard { flex-direction: column; align-items: stretch; gap: 12px; padding: 12px 12px 16px; }
+  .ocard__img { width: 100%; }
+}
+.ocard--soon .gcard__tag { align-self: center; }
