@@ -3,26 +3,33 @@
  * Each page is a bento grid of project cards, laid out from Keshav's 1920px PDFs.
  * Card pictures are cut from those PDFs at 2x; the grid keeps their proportions.
  */
+/* one screen, no page scroll: the frame is as wide as it can be while its full height still fits */
+html:has(.port), body:has(.port) { height: 100%; overflow: hidden; }
 .port {
-  --frame: min(1291px, calc(100% - 48px));
-  --bento-gap: clamp(8px, .6vw, 12px);
-  min-height: 100vh; min-height: 100svh; box-sizing: border-box;
-  padding: clamp(104px, 11.8vw, 160px) 0 clamp(48px, 6vw, 96px);
+  --top: 112px; --bottom: 24px;
+  --bento-gap: .85%;
+  height: 100vh; height: 100svh; box-sizing: border-box; overflow: hidden;
+  padding: var(--top) 0 var(--bottom);
+  display: flex; flex-direction: column; justify-content: center;
   color: var(--h-ink);
 }
 .port--light { background: linear-gradient(180deg, #fae4b2 0%, #f6dfad 45%, #f1d8a1 100%); }
 .port--dark { background: #04364b url("../assets/ports/sea-tile.webp") center top / 1920px auto repeat; color: #fff; }
 @media (min-width: 1921px) { .port--dark { background-size: 100% auto; } }
 
-.port__frame { width: var(--frame); margin: 0 auto; }
+/* --r is each page's width / height, measured from its layout */
+.port__frame { width: min(1291px, calc(100vw - 48px), calc((100svh - var(--top) - var(--bottom)) * var(--r, 1.5))); margin: 0 auto; }
 .port__head { display: block; margin: 0 auto; width: 39.9%; height: auto; }
+.port__head--phone { display: none; }
 .bento--noise .port__head { width: 101.7%; margin-left: -.85%; margin-right: -.85%; }
-.port__note { margin: clamp(24px, 2.6vw, 48px) 0 clamp(16px, 1.2vw, 24px); text-align: center; font: 400 clamp(15px, 1.15vw, 22px)/1.4 var(--f-sans, "Poppins", sans-serif); }
+.port__note { margin: 2.4% 0 1.2%; text-align: center; font: 400 clamp(13px, 1.3cqw, 20px)/1.4 var(--f-sans, "Poppins", sans-serif); }
+.port__frame { container-type: inline-size; }
 
-.bento { display: grid; gap: var(--bento-gap); margin-top: clamp(16px, 2vw, 40px); }
+.bento { display: grid; gap: var(--bento-gap); margin-top: 2.2%; }
 .bento--3 { grid-template-columns: repeat(3, 1fr); }
-.bento--2 { grid-template-columns: 620fr 647fr; gap: clamp(12px, 1.3vw, 25px); }
-.bento__col { display: flex; flex-direction: column; justify-content: flex-end; gap: var(--bento-gap); }
+.bento--2 { grid-template-columns: 620fr 647fr; gap: 1.9%; }
+.bento__col { display: flex; flex-direction: column; justify-content: flex-end; gap: .85cqw; }
+.bento--3 { row-gap: .85cqw; column-gap: .85cqw; }
 
 .card {
   margin: 0; position: relative; border-radius: clamp(14px, 1.15vw, 22px); overflow: hidden;
@@ -36,18 +43,62 @@
 .port .rv { opacity: 0; transform: translate3d(0, 32px, 0); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i, 0) * 80ms); }
 .port.is-in .rv { opacity: 1; transform: none; }
 
-/* phones and small tablets: one card per row */
+/* phones: the header stays on top and the cards become a sideways swipe, each as tall as the screen allows */
 @media (max-width: 760px) {
-  .port { --frame: calc(100% - 32px); }
-  .bento--3, .bento--2 { grid-template-columns: 1fr; gap: 16px; }
-  .bento__col { gap: 16px; display: contents; }
-  .bento--noise .port__head { order: -1; }
-  .port__head, .bento--noise .port__head { width: min(340px, 86%); margin-bottom: 8px; }
-}
-@media (min-width: 761px) and (max-width: 1024px) {
-  .port { --frame: calc(100% - 48px); }
+  .port { --top: 88px; --bottom: 16px; justify-content: flex-start; }
+  .port__frame { width: 100%; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+  .port__head, .port__head--phone { width: min(300px, 76%); flex: none; }
+  .port__head--phone { display: block; }
+  .bento--noise .port__head:not(.port__head--phone) { display: none; }
+  .port__note { margin: 12px 16px 0; font-size: 14px; }
+  .bento, .bento--3, .bento--2 {
+    flex: 1; min-height: 0; margin-top: 16px; display: flex; gap: 12px; align-items: center;
+    overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    padding: 0 16px; scroll-padding-inline: 16px; scrollbar-width: none;
+  }
+  .bento::-webkit-scrollbar { display: none; }
+  .bento__col { display: contents; }
+  .card { flex: none; height: 100%; display: flex; align-items: center; scroll-snap-align: center; border-radius: 0; overflow: visible; }
+  .card img { width: auto; height: auto; max-height: 100%; max-width: calc(100vw - 56px); border-radius: 16px; }
+  .card:hover { transform: none; box-shadow: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .port .rv { opacity: 1; transform: none; transition: none; }
   .card, .card:hover { transition: none; transform: none; }
+}
+
+/* ---------- pages built in HTML (Ion Group, Shore Leave): glass cards like the PDF ones ---------- */
+.port--html .port__frame { width: min(1291px, calc(100vw - 48px)); }
+.port__title { margin: 0; text-align: center; font: var(--h-font); color: var(--h-ink); }
+.port__sub { margin: var(--gap-head) auto 0; max-width: 40em; text-align: center; font: var(--sub-font); color: var(--h-ink); }
+.gcards { list-style: none; margin: var(--gap-content) 0 0; padding: 0; display: grid; gap: 16px; grid-template-columns: repeat(4, 1fr); }
+.gcard {
+  box-sizing: border-box; padding: 24px 24px 32px; border-radius: 20px; text-align: center;
+  background: linear-gradient(180deg, rgba(255, 250, 235, .55), rgba(255, 245, 220, .25));
+  border: 2px solid rgba(255, 255, 255, .55); box-shadow: inset 0 0 24px rgba(255, 255, 255, .25), 0 10px 30px -20px rgba(120, 80, 20, .5);
+  display: flex; flex-direction: column; align-items: center;
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s ease;
+}
+.gcard:hover { transform: translateY(-4px); box-shadow: inset 0 0 24px rgba(255, 255, 255, .25), 0 18px 36px -18px rgba(120, 80, 20, .55); }
+.gcard__pill { margin: 0; padding: 8px 20px; border-radius: 999px; background: #fff6e2; font: 500 clamp(18px, 1.4vw, 26px)/1.2 var(--f-sans, "Poppins", sans-serif); color: #1d1d1b; }
+.gcard__text { margin: 12px 0 0; font: 500 clamp(14px, .95vw, 18px)/1.4 var(--f-sans, "Poppins", sans-serif); color: #1d1d1b; }
+.gcard__img { width: 62%; height: auto; margin: auto 0 0; padding-top: 24px; filter: drop-shadow(0 10px 12px rgba(75, 44, 22, .25)); }
+.gcard__tag { margin: 16px 0 0; padding: 4px 12px; border-radius: 999px; border: 1px solid rgba(75, 44, 22, .35); font: var(--t-label); font-size: 14px; color: var(--h-ink); }
+.gcard--wide { grid-column: 1 / -1; flex-direction: row; gap: 48px; padding: 48px 64px; text-align: left; align-items: center; max-width: 960px; margin: 0 auto; width: 100%; }
+.gcard--wide .gcard__img { width: 34%; margin: 0; padding: 0; flex: none; }
+.gcard--wide .gcard__body { display: flex; flex-direction: column; align-items: flex-start; }
+.gcard--wide .gcard__text { font: var(--t-body); color: var(--h-ink); }
+.gcard--wide .cta { margin-top: 24px; }
+@media (max-width: 760px) {
+  .port--html { justify-content: center; }
+  .port--html .port__frame { width: calc(100vw - 32px); flex: none; display: block; }
+  .gcards { grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .gcard { padding: 16px 12px 20px; border-radius: 16px; }
+  .gcard__pill { padding: 6px 14px; font-size: 16px; }
+  .gcard__text { font-size: 12px; }
+  .gcard__img { width: 70%; padding-top: 12px; }
+  .gcard__tag { font-size: 12px; margin-top: 10px; }
+  .gcard--wide { flex-direction: column; padding: 32px 24px; gap: 16px; text-align: center; }
+  .gcard--wide .gcard__img { width: 56%; }
+  .gcard--wide .gcard__body { align-items: center; }
 }
