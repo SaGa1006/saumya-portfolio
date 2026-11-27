@@ -48,7 +48,6 @@
     hero.style.setProperty("--exit", exit.toFixed(4));
     hero.style.setProperty("--enter", enter.toFixed(4));
     hero.classList.toggle("is-map", enter > 0.85);   // islands answer clicks once they have arrived
-    if (box && scene && scene.offsetWidth) hero.style.setProperty("--fit", (box.offsetWidth / scene.offsetWidth / 0.84).toFixed(4));
   }
   function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
   window.addEventListener("scroll", onScroll, { passive: true });
