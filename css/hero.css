@@ -62,7 +62,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 }
 .hero__copy h1, .hero__copy p { font-size: inherit; line-height: inherit; margin: 0; font-weight: 500; }
 .hero__copy h1 { font-weight: 700; }
-.hero__copy p { max-width: 11.6em; }
+.hero__copy p { max-width: 15em; font-size: max(16px, calc(1em - 8px)) !important; }
 .hero__copy p { font-weight: 400; }
 
 .logos { display: flex; flex-wrap: wrap; gap: clamp(14px, 1.46vw, 28px); margin: clamp(28px, 2.6vw, 50px) 0 0; padding: 0; list-style: none; }
@@ -100,22 +100,21 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
 /* ship group: entry (slides in from the right) > bob (set by sea.js to ride the swell) > layers */
 .ship-exit { inset: 0; z-index: 2; }
-.ship { position: absolute; left: 44.375%; top: 15.463%; width: 46.354%; z-index: 2; transform: translateX(125%); }
+.ship { position: absolute; left: 47.25%; top: 9.7%; width: 40.6%; z-index: 2; transform: translateX(125%); }
 .ship__bob { position: relative; transform-origin: 50% 92%; will-change: transform; }
 .ship__bob img { height: auto; }
 .ship__bob > * { position: absolute; }
 .ship__hull { position: relative !important; width: 100%; }
-.ship__flag, .ship__cloth { left: 58.202%; width: 41.798%; }
-.ship__flag { top: 0; }
-.ship__cloth { top: -2.279%; height: auto; }
+.ship__flag, .ship__cloth { left: 59.14%; width: 39.785%; }
+.ship__flag { top: 5.687%; }
+.ship__cloth { top: 2.989%; height: auto; }
 .scene.has-cloth .ship__flag { visibility: hidden; }
-.ship__pirate { left: 32.472%; top: 30.863%; width: 26.067%; }
-.spyglass-body { left: 30%; top: 39.368%; width: 7.079%; transform-origin: 100% 50%; }
-.spyglass-head { left: 30%; top: 38.032%; width: 3.933%; }
-.spyglass-head img { width: 100%; }
-.spyglass-head .lens { position: absolute; left: 22.857%; top: 9.804%; width: 48.571%; }
+/* spyglass: a strip of draw tube stretches out from under the eyepiece as the eyepiece slides forward */
+.spyglass-body { left: 26.882%; top: 43.049%; width: 2.688%; transform-origin: 100% 50%; }
+.spyglass-head { left: 22.849%; top: 40.758%; width: 6.541%; }
+.spyglass-head img { display: block; width: 100%; }
 .spyglass-head::after { /* star sparkle on the lens */
-  content: ""; position: absolute; left: -85%; top: -45%; width: 230%; aspect-ratio: 1;
+  content: ""; position: absolute; left: -24%; top: -8%; width: 110%; aspect-ratio: 1;
   background: radial-gradient(circle, #fff 0 7%, rgba(255,255,255,.85) 12%, rgba(255,250,220,0) 42%);
   clip-path: polygon(50% 0, 55% 43%, 100% 50%, 55% 57%, 50% 100%, 45% 57%, 0 50%, 45% 43%);
   opacity: 0; transform: scale(.2) rotate(0deg);
@@ -138,12 +137,12 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 /* the draw tube stretches and the rim slides out: she zooms in, looks, then zooms back */
 @keyframes spy-body {
   0%, 10% { transform: scale(1, 1); }
-  24%, 68% { transform: scale(1.85, 1.14); }
+  24%, 68% { transform: scale(2.1, 1); }
   82%, 100% { transform: scale(1, 1); }
 }
 @keyframes spy-head {
   0%, 10% { transform: translate3d(0, 0, 0) scale(1); }
-  24%, 68% { transform: translate3d(-70%, -3%, 0) scale(1.22); }
+  24%, 68% { transform: translate3d(-45%, 0, 0) scale(1.06); }
   82%, 100% { transform: translate3d(0, 0, 0) scale(1); }
 }
 @keyframes spy-lens {
@@ -240,7 +239,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .map__head h2 { margin: 0; font: 600 clamp(24px, 2.3vw, 44px)/1.05 var(--f-serif); color: var(--brown); }
 .mapl__head h2 { margin: 0; font: 600 2.3cqw/1.2 var(--f-serif); color: #4b2c16; }
 .map__head p { margin: 6px 0 0; font: 600 clamp(16px, 1.3vw, 24px)/1.3 var(--f-serif); color: #6c6224; }
-.mapl__head p { margin: 0; font: 400 2.3cqw/1.2 var(--f-serif); color: #4b2c16; }
+.mapl__head p { margin: 0; font: 400 calc(2.3cqw - 8px)/1.2 var(--f-serif); color: #4b2c16; }
 
 /* hint: an anchor taps the first island until someone tries one */
 .map-hint { left: 15.6%; top: 31%; opacity: 0; transition: opacity .5s ease; pointer-events: none; }
@@ -312,7 +311,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   opacity: clamp(0, calc(var(--tools, 0) * 2.5 - 1.2), 1); transform: translate3d(0, calc((1 - var(--tools, 0)) * 60px), 0);
 }
 .toolsl__head h2 { margin: 0; font: 600 2.45cqw/1.2 var(--f-serif); color: #4b2c16; }
-.toolsl__head p { margin: .1em 0 0; font: 400 2.3cqw/1.25 var(--f-serif); color: #4b2c16; }
+.toolsl__head p { margin: .2em 0 0; font: 400 calc(2.3cqw - 8px)/1.3 var(--f-serif); color: #4b2c16; }
 .toolsl__grid {
   left: 44.6%; top: 38.5%; width: 51%; margin: 0; padding: 0; list-style: none;
   display: grid; grid-template-columns: repeat(9, 1fr); grid-template-rows: repeat(2, auto); row-gap: 1.6cqw; column-gap: .4cqw;
