@@ -29,7 +29,7 @@
   --gap-section: 128px;      /* section -> next section */
   --gap-grid: 16px;          /* between cards in a grid */
   --gap-rail: 48px;          /* between cards in a sideways rail */
-  --pad-card: 40px 48px;     /* inside a card */
+  --pad-card: 32px 48px;     /* inside a card */
   --icon: 64px;              /* hero logos */
   --gutter: max(var(--side), calc((100vw - 1520px) / 2));
   --side: 160px;             /* page side margin */
