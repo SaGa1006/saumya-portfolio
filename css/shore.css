@@ -23,12 +23,8 @@
 }
 .wrap { width: calc(100% - 2 * var(--gutter)); margin: 0 auto; }
 
-.shore__head h2, .motive h2 {
-  margin: 0; font: 600 clamp(32px, 3.33vw, 64px)/1.1 var(--f-serif); letter-spacing: -.005em;
-}
-.shore__head p {
-  margin: .35em 0 0; font: 500 clamp(17px, 1.46vw, 28px)/1.35 var(--f-sans);
-}
+.shore__head h2, .motive h2 { margin: 0; font: var(--h-font); color: var(--h-ink); }
+.shore__head p { margin: .35em 0 0; font: var(--sub-font); color: var(--h-ink); }
 
 /* ---------- 4. My Expertise ---------- */
 .xp-grid {
@@ -48,7 +44,7 @@
 
 /* ---------- 5. My Motivation ---------- */
 .motive { margin-top: clamp(72px, 8.5vw, 164px); }
-.motive p { margin: .45em 0 0; max-width: 46em; font: 500 clamp(17px, 1.67vw, 32px)/1.6 var(--f-sans); }
+.motive p { margin: .35em 0 0; max-width: 46em; font: var(--sub-font); color: var(--h-ink); }
 
 /* ---------- Messages received + From my lens ---------- */
 .msgs, .photos { margin-top: clamp(80px, 8.5vw, 164px); }
