@@ -124,6 +124,18 @@
   } catch (e) {
     return; // keep the still painting
   }
+  layers.forEach(function (l) { l.hero = true; });
+
+  // The same moving sea again at the top of the beach (section 4), all five rows in one canvas,
+  // with the sand painted over it. It never drops with the voyage scroll.
+  var shore = document.querySelector(".shore");
+  var shoreCanvas = shore && shore.querySelector(".shore-sea");
+  if (shoreCanvas) {
+    try {
+      var sl = makeLayer(shoreCanvas, 700, 380, frag(0, BANDS.length - 1));
+      if (sl) { sl.hero = false; layers.push(sl); }
+    } catch (e) { /* the beach keeps its still sea */ }
+  }
 
   var scale = 1;
   function resize() {
@@ -140,13 +152,14 @@
     });
   }
 
-  function draw(t) {
+  function draw(t, all) {
     layers.forEach(function (l) {
+      if (!all && !(l.hero ? heroVisible : shoreVisible)) return;
       var gl = l.gl;
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);
       gl.uniform1f(l.uT, t);
-      gl.uniform1f(l.uDrop, (window.SagaVoyage && window.SagaVoyage.exit) || 0);
+      gl.uniform1f(l.uDrop, l.hero ? ((window.SagaVoyage && window.SagaVoyage.exit) || 0) : 0);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     });
   }
@@ -200,14 +213,13 @@
     }
   }
 
-  var running = false, visible = true, start = performance.now(), raf = 0;
+  var running = false, visible = true, heroVisible = true, shoreVisible = false, start = performance.now(), raf = 0;
   function frame(now) {
     raf = 0;
     if (!running) return;
     var t = (now - start) / 1000;
     draw(t);
-    rideShip(t);
-    drawCloth(t);
+    if (heroVisible) { rideShip(t); drawCloth(t); }
     raf = requestAnimationFrame(frame);
   }
   function play() { if (!running && visible && !reduce) { running = true; raf = requestAnimationFrame(frame); } }
@@ -217,19 +229,28 @@
   img.onload = function () {
     layers.forEach(function (l) { upload(l, img); });
     scene.classList.add("has-gl"); // show the canvases first so they have a size
+    if (layers.length > 2) shore.classList.add("has-gl");
     resize();
-    draw(0);
+    draw(0, true);
     if (!reduce) { if (flagImg.complete) setupCloth(); else flagImg.addEventListener("load", setupCloth); }
     play();
   };
   img.src = "assets/hero/sea.webp";
 
-  window.addEventListener("resize", function () { resize(); if (!running) draw(0); });
+  window.addEventListener("resize", function () { resize(); if (!running) draw(0, true); });
   if ("IntersectionObserver" in window) {
     new IntersectionObserver(function (entries) {
-      visible = entries[0].isIntersecting;
+      entries.forEach(function (e) {
+        if (e.target === scene) heroVisible = e.isIntersecting; else shoreVisible = e.isIntersecting;
+      });
+      visible = heroVisible || shoreVisible;
       if (visible) play(); else stop();
     }).observe(scene);
-  }
+    if (layers.length > 2) { shoreVisible = false; new IntersectionObserver(function (entries) {
+      shoreVisible = entries[0].isIntersecting;
+      visible = heroVisible || shoreVisible;
+      if (visible) play(); else stop();
+    }).observe(shoreCanvas); }
+  } else { shoreVisible = true; }
   document.addEventListener("visibilitychange", function () { if (document.hidden) stop(); else play(); });
 })();
