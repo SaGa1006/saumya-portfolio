@@ -30,7 +30,6 @@
   var voyage = document.querySelector(".voyage");
   var hero = document.querySelector(".hero");
   if (!voyage || !hero) return;
-  var box = document.querySelector(".mapl__box"), scene = hero.querySelector(".scene");
   var stacked = window.matchMedia("(max-aspect-ratio: 1/1), (max-width: 760px)");
   function seg(p, a, b) { var v = Math.min(1, Math.max(0, (p - a) / (b - a))); return v * v * (3 - 2 * v); }
   window.SagaVoyage = { exit: 0 };   // the sea stays put: both scenes share it
@@ -39,15 +38,19 @@
   function update() {
     queued = false;
     if (stacked.matches) {
-      hero.style.removeProperty("--exit"); hero.style.removeProperty("--enter"); hero.classList.remove("is-map");
+      hero.style.removeProperty("--exit"); hero.style.removeProperty("--enter"); hero.style.removeProperty("--leave"); hero.style.removeProperty("--tools"); hero.classList.remove("is-map", "is-tools");
       return;
     }
     var total = voyage.offsetHeight - window.innerHeight;
     var p = total > 0 ? Math.min(1, Math.max(0, -voyage.getBoundingClientRect().top / total)) : 0;
-    var exit = seg(p, 0, 0.42), enter = seg(p, 0.22, 0.85);
+    // hero ship sails off, the map arrives, rests, then lifts away as the tools ship sails in
+    var exit = seg(p, 0, 0.28), enter = seg(p, 0.14, 0.55), leave = seg(p, 0.66, 0.8), tools = seg(p, 0.7, 0.95);
     hero.style.setProperty("--exit", exit.toFixed(4));
     hero.style.setProperty("--enter", enter.toFixed(4));
-    hero.classList.toggle("is-map", enter > 0.85);   // islands answer clicks once they have arrived
+    hero.style.setProperty("--leave", leave.toFixed(4));
+    hero.style.setProperty("--tools", tools.toFixed(4));
+    hero.classList.toggle("is-map", enter > 0.85 && leave < 0.05);   // islands answer clicks once they have arrived
+    hero.classList.toggle("is-tools", tools > 0.85);
   }
   function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
   window.addEventListener("scroll", onScroll, { passive: true });

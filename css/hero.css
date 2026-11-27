@@ -161,7 +161,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 /* ---------- Voyage: one pinned screen, two scenes ----------
    Scrolling sails the hero ship away and brings Saumya's treasure map in over the same sky and the
    same flowing sea (parallax). js/hero.js sets --exit and --enter (0 to 1) on .hero. */
-.voyage { display: block; height: 300vh; height: 300svh; }
+.voyage { display: block; height: 460vh; height: 460svh; }
 .hero { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
 .nav { position: fixed; }
 .hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
@@ -221,7 +221,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 /* the map's boat sails in from the horizon, between the back and front rows of waves */
 .mapl__boat {
   transform-origin: 50% 100%; opacity: clamp(0, calc(var(--enter, 0) * 4 - .4), 1);
-  transform: translate3d(0, calc((1 - var(--enter, 0)) * -24%), 0) scale(calc(.32 + var(--enter, 0) * .68));
+  transform: translate3d(calc(var(--leave, 0) * 160%), calc((1 - var(--enter, 0)) * -24%), 0) scale(calc(.32 + var(--enter, 0) * .68));
 }
 .mapl__boat img, .map__boat img { display: block; width: 100%; height: auto; transform-origin: 50% 92%; animation: boat-sail 5.5s ease-in-out infinite; }
 @keyframes boat-sail {
@@ -293,6 +293,42 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 .logos li:nth-child(6) { transition-delay: .6s; }
 
 /* ---------- Narrow and tall screens: text first, scene below ---------- */
+
+/* ---------- Section 3: the tools, arriving over the same sea as the map leaves ---------- */
+.mapl { opacity: calc(1 - var(--leave, 0)); transform: translate3d(0, calc(var(--leave, 0) * -18%), 0); }
+.map-cloud { opacity: calc(var(--enter, 0) - var(--leave, 0) * .6); }
+.toolsl { left: 0; right: 0; top: max(0px, 56.25vw - 100svh); bottom: 0; container-type: size; pointer-events: none; }
+.toolsl__box { position: absolute; left: 50%; bottom: 0; translate: -50% 0; width: min(100cqw, 100cqh * 16 / 9); aspect-ratio: 16 / 9; container-type: inline-size; }
+.toolsl__box > * { position: absolute; }
+.toolsl__ship {
+  left: 5.73%; top: 21.8%; width: 33.6%;
+  transform: translate3d(calc((1 - var(--tools, 0)) * -130%), calc((1 - var(--tools, 0)) * 6%), 0) rotate(calc((1 - var(--tools, 0)) * -4deg));
+  transform-origin: 50% 100%;
+}
+.toolsl__ship img { display: block; width: 100%; height: auto; transform-origin: 50% 90%; animation: boat-sail 6s ease-in-out infinite; }
+.toolsl__head {
+  left: 45.1%; top: 14.6%; width: 46%;
+  opacity: clamp(0, calc(var(--tools, 0) * 2.5 - 1.2), 1); transform: translate3d(0, calc((1 - var(--tools, 0)) * 60px), 0);
+}
+.toolsl__head h2 { margin: 0; font: 600 2.45cqw/1.2 var(--f-serif); color: #4b2c16; }
+.toolsl__head p { margin: .1em 0 0; font: 400 2.3cqw/1.25 var(--f-serif); color: #4b2c16; }
+.toolsl__grid {
+  left: 44.6%; top: 38.5%; width: 51%; margin: 0; padding: 0; list-style: none;
+  display: grid; grid-template-columns: repeat(9, 1fr); grid-template-rows: repeat(2, auto); row-gap: 1.6cqw; column-gap: .4cqw;
+}
+.tool {
+  --t: clamp(0, calc(var(--tools, 0) * 2.6 - 1.4 - var(--i) * .03), 1);
+  position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+  opacity: var(--t); transform: translate3d(0, calc((1 - var(--t)) * 40px), 0);
+}
+.tool img { width: 4.6cqw; height: 4.6cqw; object-fit: contain; transition: transform .3s cubic-bezier(.3, 1.4, .5, 1), filter .3s ease; }
+.tool__name { margin-top: .45cqw; font: 700 max(12px, .9cqw)/1.15 var(--f-serif); color: #4b2c16; }
+.tool__naut { position: absolute; top: calc(100% + 2px); left: 50%; translate: -50% 0; white-space: nowrap; font: 500 max(11px, .75cqw)/1.2 var(--f-serif); color: #7a5a2e; opacity: 0; transition: opacity .25s ease; }
+.hero.is-tools .tool { pointer-events: auto; }
+.tool:hover img { transform: translateY(-6%) scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 226, 140, .9)); }
+.tool:hover .tool__naut { opacity: 1; }
+.tools-s { display: none; }
+
 @media (max-aspect-ratio: 1/1), (max-width: 760px) {
   .hero { display: flex; flex-direction: column; }
   .hero__copy { padding: 128px 24px 0; font-size: clamp(22px, 3.6vw, 34px); }
@@ -304,7 +340,16 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .voyage { height: auto; }
   .hero { position: relative; height: auto; min-height: 100svh; }
   .hero__copy, .sky, .ship-exit { transform: none; opacity: 1; }
-  .mapl, .mapl__boat, .map-cloud { display: none; }
+  .mapl, .mapl__boat, .map-cloud, .toolsl { display: none; }
+  .tools-s { display: block; padding: 56px 20px 64px; background: var(--page); text-align: center; }
+  .tools-s h2 { margin: 0; font: 600 30px/1.15 var(--f-serif); color: #4b2c16; }
+  .tools-s p { margin: 10px auto 0; max-width: 34ch; font: 400 19px/1.35 var(--f-serif); color: #4b2c16; }
+  .tools-s__ship { display: block; width: min(300px, 70%); height: auto; margin: 24px auto; }
+  .tools-s__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 20px 8px; margin: 0; padding: 0; list-style: none; }
+  .tools-s__grid .tool { opacity: 1; transform: none; }
+  .tools-s__grid img { width: 56px; height: 56px; object-fit: contain; }
+  .tools-s__grid .tool__name { font-size: 14px; }
+  .tools-s__grid .tool__naut { display: none; }
   .map { display: block; padding: 48px 0 0; }
   .map__head { padding: 0 24px 16px; }
   .island__tag { display: none; }
@@ -322,7 +367,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 
 @media (prefers-reduced-motion: reduce) {
   /* the voyage still changes with scroll, mostly by fading rather than moving */
-  .hero__copy, .sky, .mapl__rose, .mapl__islands li, .mapl__boat, .mapl__head { transform: none !important; }
+  .hero__copy, .sky, .mapl__rose, .mapl__islands li, .mapl__boat, .mapl__head, .toolsl__head, .tool { transform: none !important; }
   .island, .island img, .mapl__boat img, .map__boat img, .port-card { animation: none !important; }
   .map-hint { display: none; }
   .scene *, .scene *::after { animation: none !important; }
