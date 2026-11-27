@@ -70,7 +70,8 @@
 .rail {
   list-style: none; margin: var(--gap-content) 0 0; padding: 0 var(--gutter) 12px;
   display: flex; gap: var(--gap-rail);
-  overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+  overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+  touch-action: pan-x pan-y;
   scroll-padding-inline: var(--gutter); scrollbar-width: none; cursor: grab;
 }
 .rail::-webkit-scrollbar { display: none; }
