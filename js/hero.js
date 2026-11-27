@@ -56,6 +56,20 @@
     hero.classList.toggle("is-map", enter > 0.85 && leave < 0.05);   // islands answer clicks once they have arrived
     hero.classList.toggle("is-tools", tools > 0.85);
   }
+  // Nav: Work = the map (screen 2), About = the tools (screen 3). On wide screens both live
+  // inside the pinned voyage, so jump to the scroll point where that screen is fully in view.
+  var stops = { "#work": 0.57, "#about": 0.93 };
+  document.querySelectorAll('.nav a[href="#work"], .nav a[href="#about"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (stacked.matches) return;            // phones: the real sections carry these ids
+      e.preventDefault();
+      var total = voyage.offsetHeight - window.innerHeight;
+      var top = voyage.getBoundingClientRect().top + window.pageYOffset + total * stops[a.getAttribute("href")];
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+      history.replaceState(null, "", a.getAttribute("href"));
+    });
+  });
   function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
