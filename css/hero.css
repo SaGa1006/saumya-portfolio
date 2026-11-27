@@ -288,11 +288,15 @@ html.map-explored .map-hint { opacity: 0; }
 .port-card[open] { animation: card-in .35s cubic-bezier(.3, 1.3, .5, 1); }
 @keyframes card-in { from { opacity: 0; transform: translateY(16px) scale(.96) rotate(-1deg); } }
 .port-card__close {
-  position: absolute; right: 24px; top: 24px; width: 40px; height: 40px; border: 0; border-radius: 50%;
-  background: var(--teal); color: var(--cream); font: 400 30px/1 var(--f-serif); cursor: pointer;
+  position: absolute; right: 24px; top: 24px; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .6); color: var(--h-ink); cursor: pointer;
   display: grid; place-items: center; transition: background-color .2s ease, transform .2s ease;
 }
-.port-card__close:hover, .port-card__close:focus-visible { background: #122838; transform: rotate(90deg); }
+.port-card__close svg { width: 20px; height: 20px; display: block; }
+.port-card__close:hover, .port-card__close:focus-visible { background: rgba(255, 255, 255, .85); transform: rotate(90deg); }
+.port-card__cta { margin-top: 24px; }
+.port-card__cta[hidden] { display: none; }
+.port-card__kicker[hidden] { display: none; }
 .port-card__img { width: 56%; height: auto; margin: 0 auto 12px; display: block; filter: drop-shadow(0 6px 8px rgba(75, 44, 22, .25)); }
 .port-card__kicker { margin: 0; font: var(--t-label); font-size: 14px; color: var(--teal); letter-spacing: .04em; text-transform: uppercase; }
 .port-card__title { margin: 8px 0 0; font: var(--t-h3); color: var(--h-ink); }
