@@ -20,6 +20,7 @@
        body    20  card text, quotes, port details
        label   18  nav, buttons, island names, tool names, footer line */
   --h-ink: #4b2c16;
+  --t-nav: 600 clamp(18px, 1.15vw, 22px)/1 "Cormorant", Georgia, serif; /* nav links + CTA */
   /* Spacing: every gap, margin and padding is a multiple of 4px.
      Steps: 4 8 12 16 20 24 32 40 48 64 80 96 128. The semantic tokens below
      step down at 1280px and 760px (overridden further down). */
@@ -60,7 +61,7 @@ img { display: block; max-width: 100%; }
 .nav__brand img { height: 23px; width: auto; }
 .nav__links { display: flex; gap: 24px; margin: 0; padding: 0; list-style: none; }
 .nav__links a {
-  font: var(--t-label); color: var(--teal-soft); text-decoration: none;
+  font: var(--t-nav); color: var(--teal-soft); text-decoration: none;
   text-underline-offset: 5px; text-decoration-thickness: 1px;
   transition: color .2s ease;
 }
@@ -69,7 +70,7 @@ img { display: block; max-width: 100%; }
   justify-self: end;
   display: inline-flex; align-items: center; height: 48px; padding: 0 24px; box-sizing: border-box;
   border-radius: 999px; background: var(--teal); color: var(--cream);
-  font: var(--t-label); text-decoration: none; white-space: nowrap;
+  font: var(--t-nav); text-decoration: none; white-space: nowrap;
   transition: background-color .25s ease, transform .25s ease, box-shadow .25s ease;
 }
 .cta:hover { background: #122838; transform: translateY(-1px); box-shadow: 0 6px 16px -8px rgba(18, 40, 56, .7); }
