@@ -19,6 +19,11 @@
   padding-top: max(110px, 18vw);
 }
 .shore > section, .shore > footer { position: relative; z-index: 1; }
+/* painted sand keeps going below the sand artwork: its bottom strip, mirrored so it tiles */
+.shore::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 124.8vw; bottom: 0;
+  background: url("../assets/about/sand-tile.webp") 0 0 / 100% auto repeat-y;
+}
 /* moving sea (same WebGL water as the voyage), a bottle bobbing in it, and the sand painted over both */
 .shore__water { position: absolute; inset: 0 0 auto; height: 176.9vw; pointer-events: none; }
 .shore-sea, .shore-still { position: absolute; left: 0; top: 0; width: 100%; height: 19.79vw; display: block; }

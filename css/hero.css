@@ -324,7 +324,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 .toolsl__head h2 { margin: 0; font: var(--h-font); color: var(--h-ink); }
 .toolsl__head p { margin: var(--gap-head) 0 0; font: var(--sub-font); color: var(--h-ink); }
 .toolsl__grid {
-  left: 44.6%; top: 38.5%; width: 51%; margin: 0; padding: 0; list-style: none;
+  left: 44.6%; top: 32%; width: 51%; margin: 0; padding: 0; list-style: none;
   display: grid; grid-template-columns: repeat(9, 1fr); grid-template-rows: repeat(2, auto); row-gap: 32px; column-gap: 8px;
 }
 .tool {
@@ -333,6 +333,8 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   opacity: var(--t); transform: translate3d(0, calc((1 - var(--t)) * 40px), 0);
 }
 .tool img { width: 4.6cqw; height: 4.6cqw; object-fit: contain; }
+.tool--wide { grid-column: span 3; }
+.tool--wide .tool__name { white-space: nowrap; }
 .tool__name { margin-top: 8px; font: var(--t-label); color: var(--h-ink); }
 .tools-s { display: none; }
 .mapl__boat, .toolsl__ship { display: none; }
@@ -385,6 +387,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 @media (max-width: 1280px) {
   :root { --gap-content: 32px; --gap-section: 96px; --gap-rail: 32px; --pad-card: 32px; --icon: 64px; --side: 64px; }
   .hero__copy { padding-top: 176px; }
+  .toolsl__grid { row-gap: 16px; }
 }
 @media (max-height: 760px) and (min-width: 761px) { .hero__copy { padding-top: 144px; } }
 @media (max-width: 760px) {
