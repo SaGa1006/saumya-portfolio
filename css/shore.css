@@ -102,10 +102,10 @@
 .foot__cta:hover .foot__arrow, .foot__cta:focus-visible .foot__arrow { transform: translate(.08em, -.08em); }
 .foot__social { list-style: none; margin: 0; padding: 0; display: flex; gap: var(--gap-grid); }
 .foot__social a {
-  display: grid; place-items: center; width: var(--icon); aspect-ratio: 1;
+  display: grid; place-items: center; width: 48px; aspect-ratio: 1;
   border-radius: 8px; background: var(--ink); color: var(--sand);
 }
-.foot__social svg { width: 62%; height: 62%; fill: currentColor; }
+.foot__social svg { width: 60%; height: 60%; fill: currentColor; }
 .foot__bottom {
   display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;
   padding-top: var(--gap-content);
@@ -116,7 +116,7 @@
 .rv { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i, 0) * 90ms); }
 .rv.is-in { opacity: 1; transform: none; }
 
-@media (max-width: 1280px) { .xp { min-height: 240px; } }
+@media (max-width: 1280px) { .xp { min-height: 240px; } .foot__social a { width: 40px; } }
 
 /* ---------- Phone ---------- */
 @media (max-width: 760px) {
