@@ -320,13 +320,9 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
   opacity: var(--t); transform: translate3d(0, calc((1 - var(--t)) * 40px), 0);
 }
-.tool img { width: 4.6cqw; height: 4.6cqw; object-fit: contain; transition: transform .3s cubic-bezier(.3, 1.4, .5, 1), filter .3s ease; }
+.tool img { width: 4.6cqw; height: 4.6cqw; object-fit: contain; }
 .tool__name { margin-top: .45cqw; font: 700 max(12px, .9cqw)/1.15 var(--f-serif); color: #4b2c16; }
-.tool__naut { position: absolute; top: calc(100% + 2px); left: 50%; translate: -50% 0; white-space: nowrap; font: 500 max(11px, .75cqw)/1.2 var(--f-serif); color: #7a5a2e; opacity: 0; transition: opacity .25s ease; }
-.hero.is-tools .tool { pointer-events: auto; }
-.tool:hover img { transform: translateY(-6%) scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 226, 140, .9)); }
-.tool:hover .tool__naut { opacity: 1; }
-.tools-s { display: none; }
+.tool:hover .tools-s { display: none; }
 .mapl__boat, .toolsl__ship { display: none; }
 
 @media (max-aspect-ratio: 1/1), (max-width: 760px) {
@@ -349,8 +345,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .tools-s__grid .tool { opacity: 1; transform: none; }
   .tools-s__grid img { width: 56px; height: 56px; object-fit: contain; }
   .tools-s__grid .tool__name { font-size: 14px; }
-  .tools-s__grid .tool__naut { display: none; }
-  .map { display: block; padding: 48px 0 0; }
+  .tools-s__grid   .map { display: block; padding: 48px 0 0; }
   .map__head { padding: 0 24px 16px; }
   .island__tag { display: none; }
   .map { overflow: hidden; }
