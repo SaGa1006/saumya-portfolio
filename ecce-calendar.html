@@ -34,9 +34,15 @@
 
     <!-- 1. Hero -->
     <header class="ec__hero">
-      <p class="ec__kicker">UxLab, IIT Delhi · Early Childhood Care &amp; Education</p>
+      <div class="ec__herotext">
+      <p class="ec__kicker">IIT Delhi · Early Childhood Care &amp; Education · UX case study</p>
       <h1 class="ec__title">Sadabahar <span class="ec__hi" lang="hi">सदाबहार</span><span class="ec__sub">An evergreen calendar for Anganwadi classrooms</span></h1>
       <p class="ec__lede">Sadabahar means evergreen. It is a wooden pegboard calendar and an activity booklet for Anganwadi centres that work for at least ten years without a reprint. Teachers re-hang it once a month, children set it every morning, and every festival on it comes with a ready, age-right activity.</p>
+      <a class="ec__jump" href="#board">Play with the board<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <figure class="ec__heroimg">
+        <img src="assets/cases/ecce/hero.webp" width="1600" height="1240" alt="The Sadabahar wooden pegboard set to October, with painted festival blocks for Diwali and Dussehra, beside an open activity booklet." fetchpriority="high">
+      </figure>
       <ul class="ec__facts">
         <li><span>Users</span>Anganwadi workers and children aged 3 to 6</li>
         <li><span>Output</span>Physical product, activity booklet, year plan</li>
@@ -44,12 +50,25 @@
         <li><span>Scale</span>2 activities a week, 104 a year, 2025 to 2035</li>
         <li><span>Team</span>Saumya Garg, Avishi Bishnoi</li>
       </ul>
-      <a class="ec__jump" href="#board">Play with the board<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </header>
+
+    <nav class="ec__process" aria-label="Design process">
+      <a href="#empathize"><span>1</span>Empathize</a>
+      <a href="#define"><span>2</span>Define</a>
+      <a href="#ideate"><span>3</span>Ideate</a>
+      <a href="#prototype"><span>4</span>Prototype</a>
+      <a href="#test"><span>5</span>Test</a>
+    </nav>
+
+    <div class="ec__step" id="empathize">
+      <span class="ec__stepno">Step 1 of 5</span>
+      <h2 class="ec__stepname">Empathize</h2>
+      <p class="ec__stepline">Who uses an Anganwadi calendar, what gets in their way, and how young children learn.</p>
+    </div>
 
     <!-- 2. Problem -->
     <section class="ec__sec" aria-labelledby="h-problem">
-      <p class="ec__num">01 · The problem</p>
+      <p class="ec__num">The problem</p>
       <h2 id="h-problem" class="ec__h2">An Anganwadi year is full of days worth celebrating, and none of them plan themselves</h2>
       <div class="ec__cards3">
         <article class="ec__card">
@@ -67,9 +86,43 @@
       </div>
     </section>
 
+    <section class="ec__sec" aria-labelledby="h-people">
+      <p class="ec__num">Personas</p>
+      <h2 id="h-people" class="ec__h2">Two users, one board: the one who plans and the ones who play</h2>
+      <p class="ec__p">Proto-personas drawn from our secondary research on Anganwadi centres and ECCE guidelines. They kept two very different needs in the room.</p>
+      <div class="ec__personas">
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--t" aria-hidden="true">SD</span>
+            <div><h3>Sunita Devi, 41</h3><p>Anganwadi worker, 12 years at a village centre</p></div>
+          </div>
+          <blockquote class="psn__q">"Tell me what to do today, and what to get ready for tomorrow."</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Context</dt><dd>Runs the centre with one helper for about 25 children aged 3 to 6. Also handles meals, growth charts and registers, so planning time is short.</dd></div>
+            <div><dt>Goals</dt><dd>Keep children engaged every day, mark festivals properly, and show the supervisor that activities follow the curriculum.</dd></div>
+            <div><dt>Frustrations</dt><dd>Festival dates she only learns a day before. Paper charts that tear. Running out of fresh activity ideas by mid-year.</dd></div>
+            <div><dt>Needs</dt><dd>A board she can set in minutes, activities in her own language, and a clear signal when tomorrow needs materials.</dd></div>
+          </dl>
+        </article>
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--c" aria-hidden="true">A</span>
+            <div><h3>Aarav, 4, and his circle</h3><p>Children aged 3 to 6 at the centre</p></div>
+          </div>
+          <blockquote class="psn__q">"Main lagaunga!" (I'll put it up!)</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Context</dt><dd>Most can't read yet. They know some numbers, colours and pictures, and learn by touching, moving and repeating. Attention lasts 10 to 15 minutes.</dd></div>
+            <div><dt>Goals</dt><dd>To be the helper, to have a turn, to see something they did stay on the wall.</dd></div>
+            <div><dt>Frustrations</dt><dd>Charts that are only for grown-ups, too high up, or full of words.</dd></div>
+            <div><dt>Needs</dt><dd>Pieces big enough to grab and too big to swallow, colour and picture cues, and a daily job they can do on their own.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
     <!-- 3. Foundations -->
     <section class="ec__sec" aria-labelledby="h-found">
-      <p class="ec__num">02 · Foundations</p>
+      <p class="ec__num">Secondary research</p>
       <h2 id="h-found" class="ec__h2">Every activity maps back to how young children learn</h2>
       <p class="ec__p">We started from the National Curriculum Framework for the Foundational Stage and the ECCE principles, then tagged every activity with the domain it builds and the learning theory behind it.</p>
       <ul class="ec__domains">
@@ -92,10 +145,33 @@
       </div>
     </section>
 
+    <div class="ec__step" id="define">
+      <span class="ec__stepno">Step 2 of 5</span>
+      <h2 class="ec__stepname">Define</h2>
+      <p class="ec__stepline">Turning what we learned into one problem, three questions and the rules the design has to follow.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-define">
+      <p class="ec__num">Problem statement</p>
+      <h2 id="h-define" class="ec__h2">Anganwadi workers need a year of ready, age-right activities that stays correct, and children need a calendar they can run themselves</h2>
+      <ul class="ec__hmw">
+        <li><span>How might we</span>keep festival dates right every year without reprinting anything?</li>
+        <li><span>How might we</span>turn each day into an activity a worker can run with ten minutes of prep?</li>
+        <li><span>How might we</span>let three-year-olds, who can't read yet, set the calendar every morning?</li>
+      </ul>
+      <h3 class="ec__h3">Design goals</h3>
+      <ul class="ec__goals">
+        <li><b>Evergreen</b>Works for ten years with one product and one booklet.</li>
+        <li><b>Readable without reading</b>Numbers, colour and pictures carry the meaning.</li>
+        <li><b>Child-operable</b>Big, safe, tactile pieces that children move every day.</li>
+        <li><b>Zero guesswork</b>Every day says what to do; every holiday says what to prepare.</li>
+      </ul>
+    </section>
+
     <!-- 4. Mapping the year -->
     <section class="ec__sec ec__split" aria-labelledby="h-map">
       <div>
-        <p class="ec__num">03 · Mapping the year</p>
+        <p class="ec__num">Mapping the year</p>
         <h2 id="h-map" class="ec__h2">Eighty-odd days, sorted into five colours</h2>
         <p class="ec__p">We listed every holiday, festival, awareness day and theme week in the year, with how its date is decided, its usual range, a theme, a development goal and a linked theory. Then we laid all twelve months out and colour-coded them, so the type of day is readable before any word is.</p>
         <ul class="ec__legend">
@@ -113,9 +189,27 @@
       </figure>
     </section>
 
+    <!-- 10. Visual language -->
+    <section class="ec__sec ec__split ec__split--even" aria-labelledby="h-vis">
+      <div>
+        <p class="ec__num">Design principles</p>
+        <h2 id="h-vis" class="ec__h2">Clean, minimal, big, and colour that means something</h2>
+        <p class="ec__p">Most of the board's users can't read yet, and many workers read better in their home language than in English. So the board leans on what everyone can read: numbers, colour and pictures.</p>
+      </div>
+      <ul class="ec__keys">
+        <li>Clean</li><li>Minimal</li><li>Big fonts</li><li>Simple, relatable graphics</li><li>Colour for the right association</li>
+      </ul>
+    </section>
+
+    <div class="ec__step" id="ideate">
+      <span class="ec__stepno">Step 3 of 5</span>
+      <h2 class="ec__stepname">Ideate</h2>
+      <p class="ec__stepline">Three ways to hold a year, weighed against the design goals.</p>
+    </div>
+
     <!-- 5. Directions -->
     <section class="ec__sec" aria-labelledby="h-dir">
-      <p class="ec__num">04 · Directions</p>
+      <p class="ec__num">Three directions</p>
       <h2 id="h-dir" class="ec__h2">Three ways to hold a year, and why wood won</h2>
       <div class="ec__cards3 ec__dirs">
         <article class="ec__card">
@@ -136,9 +230,15 @@
       </div>
     </section>
 
+    <div class="ec__step" id="prototype">
+      <span class="ec__stepno">Step 4 of 5</span>
+      <h2 class="ec__stepname">Prototype</h2>
+      <p class="ec__stepline">The board, the booklet, and the system that keeps both right for ten years.</p>
+    </div>
+
     <!-- 6. The board -->
-    <section class="ec__sec ec__boardsec" id="board" aria-labelledby="h-board">
-      <p class="ec__num">05 · The board</p>
+    <section class="ec__sec" id="board" aria-labelledby="h-board">
+      <p class="ec__num">The board</p>
       <h2 id="h-board" class="ec__h2">Try it: pick a month, then a day</h2>
       <p class="ec__p">The board opens on today. Pick any year up to 2035 and any month, and watch the date blocks re-hang under the right weekday while the moving festivals find their new dates. Tap a block to see its activity, and tap the weather and mood discs the way children would each morning.</p>
 
@@ -184,7 +284,7 @@
 
     <!-- 6b. Ten years -->
     <section class="ec__sec" aria-labelledby="h-ten">
-      <p class="ec__num">06 · Built to last</p>
+      <p class="ec__num">Built to last</p>
       <h2 id="h-ten" class="ec__h2">Ten years on one board, without reprinting the booklet</h2>
       <div class="ec__cards3">
         <article class="ec__card">
@@ -208,7 +308,7 @@
 
     <!-- 7. Anatomy -->
     <section class="ec__sec" aria-labelledby="h-kit">
-      <p class="ec__num">07 · What's in the box</p>
+      <p class="ec__num">What's in the box</p>
       <h2 id="h-kit" class="ec__h2">Every piece has one job</h2>
       <ol class="ec__kit">
         <li><b>The pegboard</b>A 7 by 6 grid of pegs under Monday-to-Sunday rails. Forty-two pegs cover every month, whichever weekday it starts on.</li>
@@ -222,7 +322,7 @@
 
     <!-- 8. Booklet -->
     <section class="ec__sec" aria-labelledby="h-book">
-      <p class="ec__num">08 · The booklet</p>
+      <p class="ec__num">The booklet</p>
       <h2 id="h-book" class="ec__h2">A worker shouldn't have to invent 104 activities</h2>
       <p class="ec__p">Two activities a week gives 104 a year. Each one is a single card with the same parts (materials, time, steps, the teacher's concerns, the skills it builds), written for a worker with ten minutes to prepare and a mixed group of three-to-six-year-olds.</p>
 
@@ -268,10 +368,16 @@
       </ul>
     </section>
 
+    <div class="ec__step" id="test">
+      <span class="ec__stepno">Step 5 of 5</span>
+      <h2 class="ec__stepname">Test</h2>
+      <p class="ec__stepline">How the kit is used day to day, and what a pilot has to prove.</p>
+    </div>
+
     <!-- 9. Rhythm -->
     <section class="ec__sec" aria-labelledby="h-use">
-      <p class="ec__num">09 · How it's used</p>
-      <h2 id="h-use" class="ec__h2">Three rhythms, one board</h2>
+      <p class="ec__num">Scenario walkthrough</p>
+      <h2 id="h-use" class="ec__h2">Three rhythms we walk users through</h2>
       <ol class="ec__flow">
         <li><span>Once a month</span><b>The teacher re-hangs</b>The teacher opens the month's chapter, looks up this year's festival dates on the back page, hangs day 1 under its weekday and swaps in the festival blocks. About five minutes.</li>
         <li><span>Every morning</span><b>Children set the day</b>In circle time a child moves the marker to today and turns the season, weather, moon and mood discs. Counting, naming and talking, before anything else starts.</li>
@@ -279,27 +385,27 @@
       </ol>
     </section>
 
-    <!-- 10. Visual language -->
-    <section class="ec__sec ec__split ec__split--even" aria-labelledby="h-vis">
-      <div>
-        <p class="ec__num">10 · Visual language</p>
-        <h2 id="h-vis" class="ec__h2">Clean, minimal, big, and colour that means something</h2>
-        <p class="ec__p">Most of the board's users can't read yet, and many workers read better in their home language than in English. So the board leans on what everyone can read: numbers, colour and pictures.</p>
+    <section class="ec__sec" aria-labelledby="h-test">
+      <p class="ec__num">Test plan</p>
+      <h2 id="h-test" class="ec__h2">What a pilot in a centre has to prove</h2>
+      <p class="ec__p">The concept hasn't been tested in a centre yet. This is the pilot we planned: one board and one booklet chapter in a centre for a month, with these tasks and targets.</p>
+      <div class="ec__table">
+        <table>
+          <thead><tr><th scope="col">Task</th><th scope="col">Who</th><th scope="col">Success looks like</th></tr></thead>
+          <tbody>
+            <tr><td>Re-hang the board for a new month using the booklet</td><td>Worker</td><td>Done in under 5 minutes, with no mistakes, by the second month</td></tr>
+            <tr><td>Find today's activity and its materials</td><td>Worker</td><td>Under 1 minute, without help</td></tr>
+            <tr><td>Prepare for a holiday from the leaf mark</td><td>Worker</td><td>No festival in the month missed or prepared late</td></tr>
+            <tr><td>Move the today marker and set the weather and mood discs</td><td>Children</td><td>Children do it themselves by the third week</td></tr>
+            <tr><td>Name the month, the weekday and the colour of a festival block</td><td>Children</td><td>Most children can, by the end of the month</td></tr>
+          </tbody>
+        </table>
       </div>
-      <ul class="ec__keys">
-        <li>Clean</li><li>Minimal</li><li>Big fonts</li><li>Simple, relatable graphics</li><li>Colour for the right association</li>
-      </ul>
-    </section>
-
-    <!-- 11. Next -->
-    <section class="ec__sec ec__next" aria-labelledby="h-next">
-      <p class="ec__num">11 · What's next</p>
-      <h2 id="h-next" class="ec__h2">Taking it into a centre</h2>
+      <h3 class="ec__h3">Then</h3>
       <ul class="ec__nextlist">
-        <li>Pilot the board and one booklet chapter with Anganwadi workers, and time the monthly re-hang.</li>
-        <li>Each year, check the moving festival dates against the local panchang and the moon sighting, since a festival can shift by a day from region to region.</li>
-        <li>Translate the booklet into regional languages, keeping the colour and picture system the same.</li>
         <li>Test block sizes and finishes with children for grip, safety and non-toxic paint.</li>
+        <li>Translate the booklet into regional languages, keeping the colour and picture system the same.</li>
+        <li>Each year, check the moving festival dates against the local panchang and the moon sighting, since a festival can shift by a day from region to region.</li>
       </ul>
     </section>
   </main>
