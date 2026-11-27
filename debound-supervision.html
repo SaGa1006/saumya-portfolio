@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Construction Supervision for PMCs · Saumya Garg</title>
+  <meta name="description" content="A construction supervision web and mobile app for project management consultants: inspections, RFIs and non-compliances in one loop between site and office. A UX case study by Saumya Garg at Debound.">
+  <meta name="theme-color" content="#fae4b2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/port.css">
+  <link rel="stylesheet" href="css/ecce.css">
+  <link rel="stylesheet" href="css/debound.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="/#work" aria-current="page">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#my-lens">My Lens</a></li>
+        <li><a href="off-the-map.html">Off the Map</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+  </header>
+
+  <main class="ec dc case">
+    <div class="case__bar">
+      <a class="case__back" href="debound.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Debound</a>
+      <p class="case__title">Construction Supervision</p>
+    </div>
+    <article class="ec__sheet">
+
+    <header class="ec__hero">
+      <div class="ec__herotext">
+        <p class="ec__kicker">Debound · B2B SaaS for construction PMCs · UX case study</p>
+        <h1 class="ec__title">Construction Supervision<span class="ec__sub">One loop between the site and the office</span></h1>
+        <p class="ec__lede">A project management consultant (PMC) is paid to make sure public works are built on time, within cost and at quality. Their proof lives in inspections, RFIs and non-compliance reports that today travel by phone, email and paper. I designed the field app and web console that bring all of it into one traceable loop, tied to the bill of quantities so that every approval also counts as progress.</p>
+        <a class="ec__jump" href="#empathize">Read the case study<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <figure class="ec__heroimg">
+        <img src="assets/cases/debound/sv-pmcapp.webp" width="2000" height="1465" alt="Wireframes of the PMC field app: a home screen with KPI cards, To do, Pending and Done tabs and a list of RFIs, an RFI detail with Navigate to site and Start inspection, a checklist with Take picture, and a New spot inspection menu." fetchpriority="high">
+      </figure>
+      <ul class="ec__facts">
+        <li><span>Users</span>PMC field engineers, PMC office teams, contractors</li>
+        <li><span>Platforms</span>Field phone app, contractor web and phone, PMC web console</li>
+        <li><span>Domain</span>Government water supply, sewage treatment and drainage works</li>
+        <li><span>My role</span>UX design intern: research, flows, information architecture, wireframes</li>
+        <li><span>Company</span>Debound, building software for a PMC firm</li>
+      </ul>
+    </header>
+
+    <nav class="ec__process" aria-label="Design process">
+      <a href="#empathize"><span>1</span>Empathize</a>
+      <a href="#define"><span>2</span>Define</a>
+      <a href="#ideate"><span>3</span>Ideate</a>
+      <a href="#prototype"><span>4</span>Prototype</a>
+      <a href="#test"><span>5</span>Test</a>
+    </nav>
+
+    <!-- ================= 1. EMPATHIZE ================= -->
+    <div class="ec__step" id="empathize">
+      <span class="ec__stepno">Step 1 of 5</span>
+      <h2 class="ec__stepname">Empathize</h2>
+      <p class="ec__stepline">Learning a domain I had never worked in: who pays whom, who checks whom, and where the paper trail breaks.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-eco">
+      <p class="ec__num">The ecosystem</p>
+      <h2 id="h-eco" class="ec__h2">Three parties, one public project, and the PMC in the middle</h2>
+      <p class="ec__p">A government agency funds the work, a contractor builds it, and the PMC is hired to watch over the contractor on the agency's behalf. Before drawing a single screen I sketched this triangle to understand whose tool this was, and whose trust it had to earn.</p>
+      <ul class="dc__eco">
+        <li><b>Agency</b>The client authority. Releases payments when the PMC certifies that a stage is done. Wants visibility, not more reports.</li>
+        <li class="dc__arrow" aria-hidden="true">→</li>
+        <li class="is-us"><b>PMC</b>Our user. Inspects quality against drawings and the contract, verifies running bills, raises non-compliances. Measured on time, cost and quality.</li>
+        <li class="dc__arrow" aria-hidden="true">→</li>
+        <li><b>Contractor</b>Builds the works. Requests inspections (RFIs) before moving to the next stage, fixes non-compliances, raises bills.</li>
+      </ul>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-rfp">
+      <p class="ec__num">Secondary research: contracts and RFPs</p>
+      <h2 id="h-rfp" class="ec__h2">Reading the contracts told us what the software actually has to prove</h2>
+      <p class="ec__p">We studied the terms of reference and RFPs for the PMC's water and power programmes. They spell out the PMC's job line by line, and every line is a feature waiting to be designed.</p>
+      <div class="ec__cards3">
+        <article class="ec__card">
+          <h3>Before construction</h3>
+          <p>Review the project report, study the site, build the schedule in MSP or Primavera, check structural and hydraulic designs, and approve drawings (our second product, <a href="debound-drawing-review.html">Drawing Review</a>).</p>
+        </article>
+        <article class="ec__card">
+          <h3>During construction</h3>
+          <p>Inspect quality against drawings, witness lab tests, verify the source of material, raise non-compliances with punitive action, and verify contractors' running bills within seven days.</p>
+        </article>
+        <article class="ec__card">
+          <h3>After construction</h3>
+          <p>Collect geo-referenced as-built drawings, write SOPs and maintenance manuals, inspect every two weeks during the defect liability period, and approve the final bill.</p>
+        </article>
+      </div>
+      <h3 class="ec__h3">What the client said success looks like</h3>
+      <ul class="dc__pains dc__pains--good">
+        <li>Real-time physical and financial progress against the schedule</li>
+        <li>Real-time material inventory across all sites</li>
+        <li>Non-compliance reporting that feeds a vendor quality score</li>
+        <li>Bills verified within 7 days, only on unique, verified items</li>
+        <li>Adherence to the construction supervision SOPs</li>
+        <li>Turnaround times kept during the defect liability period</li>
+      </ul>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-life">
+      <p class="ec__num">Mapping the project lifecycle</p>
+      <h2 id="h-life" class="ec__h2">From tender to defect liability, on one board</h2>
+      <p class="ec__p">We mapped a public works project end to end: tendering, drawing review, construction supervision, billing and finance, handover and the defect liability period. For each phase we noted what happens, who approves it, and the dashboard outcome it should produce. Construction supervision turned out to be the busiest phase by far, and the one where most money changes hands.</p>
+      <figure class="dc__wide">
+        <a href="assets/cases/debound/sv-lifecycle-lg.webp" target="_blank" rel="noopener"><img src="assets/cases/debound/sv-lifecycle.webp" width="2000" height="881" alt="The lifecycle map from the FigJam board: tendering, drawing review, construction supervision split into BOQ and milestone modes, billing and finance, hand over and the defect liability period, with yellow dashboard outcome notes and red open questions." loading="lazy" decoding="async"></a>
+        <figcaption>The whole project on one board. Yellow notes are dashboard outcomes, red notes are open questions we took back to the client. <a class="dc__zoom" href="assets/cases/debound/sv-lifecycle-lg.webp" target="_blank" rel="noopener">Open full size</a></figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-bench">
+      <p class="ec__num">Competitive benchmark</p>
+      <h2 id="h-bench" class="ec__h2">What Procore gets right, and why it doesn't fit an Indian PMC</h2>
+      <p class="ec__p">Procore is the reference product for construction management. We went through its RFIs, observations, drawings and analytics to borrow good patterns and spot the gaps.</p>
+      <figure class="dc__wide">
+        <img src="assets/cases/debound/sv-benchmark.webp" width="2000" height="960" alt="Four Procore screens: a drawing takeoff tool, the list of Procore tools such as RFIs, Drawings, Submittals and Site Diary, an observation insights dashboard, and an RFI detail page." loading="lazy" decoding="async">
+        <figcaption>Procore's takeoffs, tool catalogue, observation insights and RFI detail.</figcaption>
+      </figure>
+      <div class="ec__cards3">
+        <article class="ec__card">
+          <h3>Borrow</h3>
+          <p>An RFI is a record with an owner, a due date and a "ball in court". Analytics that show who is late and why. A clear separation of tools by job.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Gap</h3>
+          <p>It's built for a general contractor. Our user is the consultant checking the contractor, and Indian public contracts pay by BOQ items and milestones, not by tasks.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Gap</h3>
+          <p>Dozens of tools is a lot for a field engineer on a phone in the sun. The RFI tool already used on one of the client's programmes had a bigger flaw: its RFIs weren't linked to the BOQ, so they couldn't show the real progress billing needs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-people">
+      <p class="ec__num">Personas <span class="dc__tag">proto-personas, from the roles on our board</span></p>
+      <h2 id="h-people" class="ec__h2">Three people, three devices, one record</h2>
+      <p class="ec__p">The roles and jobs below come from the role and device split on our research board. The quotes are illustrative.</p>
+      <div class="ec__personas ec__personas--3">
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--s" aria-hidden="true">FE</span>
+            <div><h3>The field engineer</h3><p>PMC, on site, phone first</p></div>
+          </div>
+          <blockquote class="psn__q">"Tell me which inspections are due today, and let me finish them standing at the pit."</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Does</dt><dd>RFI and spot inspections, re-verifies closed non-compliances, witnesses lab tests, HSE checks.</dd></div>
+            <div><dt>Needs</dt><dd>Drawings for reference on site, checklists, photos, works offline-tolerant, high contrast and big touch targets.</dd></div>
+          </dl>
+        </article>
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--o" aria-hidden="true">PM</span>
+            <div><h3>The PMC office lead</h3><p>Head office, web console</p></div>
+          </div>
+          <blockquote class="psn__q">"I need to see every site from here, and know who is holding things up."</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Does</dt><dd>Assigns RFIs to engineers, tracks status, configures the BOQ, milestones and schedule, reports to the agency.</dd></div>
+            <div><dt>Needs</dt><dd>Progress against schedule, pending approvals, open non-compliances, accountability per person.</dd></div>
+          </dl>
+        </article>
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--k" aria-hidden="true">CE</span>
+            <div><h3>The contractor's engineer</h3><p>Contractor, web and phone</p></div>
+          </div>
+          <blockquote class="psn__q">"I can't pour the next slab until this inspection is approved."</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Does</dt><dd>Raises RFIs one at a time or in bulk, resolves non-compliances, submits bills.</dd></div>
+            <div><dt>Needs</dt><dd>Fast RFI raising, a clear status, and to know exactly what to fix.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 2. DEFINE ================= -->
+    <div class="ec__step" id="define">
+      <span class="ec__stepno">Step 2 of 5</span>
+      <h2 class="ec__stepname">Define</h2>
+      <p class="ec__stepline">Narrowing a whole industry down to one loop the product has to get right.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-define">
+      <p class="ec__num">Problem statement</p>
+      <h2 id="h-define" class="ec__h2">PMCs certify progress and quality from scattered calls, emails and paper, so nobody can see real progress, and bills take longer to verify than the contract allows</h2>
+      <ul class="ec__hmw">
+        <li><span>How might we</span>link every inspection to the BOQ item or milestone it proves, so approvals add up to progress and billing?</li>
+        <li><span>How might we</span>let a field engineer finish an inspection on site, with checklist, photos and location, in minutes?</li>
+        <li><span>How might we</span>close the loop on non-compliances so nothing is approved until the fix is verified?</li>
+      </ul>
+      <h3 class="ec__h3">Key insights</h3>
+      <div class="ec__cards3">
+        <article class="ec__card">
+          <h3>Projects aren't all paid the same way</h3>
+          <p>Some contracts pay per BOQ item, others per milestone (a share of the contract price, pro-rata or on completion). Same supervision, different maths, so the tool has to be configured per project.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Each stage has its own check</h3>
+          <p>Material inspection, site receipt, execution, joint measurement and commissioning each need a different form, and some need an RFI from the contractor, a spot inspection by the PMC, or both.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Non-compliance is a loop, not a status</h3>
+          <p>When an inspection fails, the contractor fixes it and the same RFI reopens for re-verification. If the loop breaks, defects slip into the bill.</p>
+        </article>
+      </div>
+      <h3 class="ec__h3">Design goals</h3>
+      <ul class="ec__goals">
+        <li><b>Linked</b>Every RFI points at a BOQ item or milestone, so progress is computed, not reported.</li>
+        <li><b>Role-shaped</b>Each role sees only its jobs, on the device it actually uses.</li>
+        <li><b>Field-first</b>High contrast, big touch areas, photos and geo-fencing on the phone.</li>
+        <li><b>Configurable</b>BOQ, milestones, stages and forms set up per project, from templates.</li>
+      </ul>
+    </section>
+
+    <!-- ================= 3. IDEATE ================= -->
+    <div class="ec__step" id="ideate">
+      <span class="ec__stepno">Step 3 of 5</span>
+      <h2 class="ec__stepname">Ideate</h2>
+      <p class="ec__stepline">Modelling the work before designing the screens: stages, roles, the BOQ, and two dashboard layouts.</p>
+    </div>
+
+    <section class="ec__sec ec__split" aria-labelledby="h-stages">
+      <div>
+        <p class="ec__num">The construction stages</p>
+        <h2 id="h-stages" class="ec__h2">Every BOQ item moves through the same five checks</h2>
+        <p class="ec__p">We broke supervision into the stages an item passes through on site. Lab test witnessing and health, safety and environment checks float alongside, not in sequence. Joint measurement certification is where quantities get signed, and the as-built drawing comes out at the end.</p>
+        <ul class="dc__chips" aria-label="Stages in order">
+          <li>Material inspection call</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Site receipt</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Execution</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Joint measurement</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Commissioning</li>
+        </ul>
+        <ul class="dc__chips" aria-label="Checks that run alongside">
+          <li class="is-side">Lab test witnessing</li><li class="is-side">Health, safety and environment</li><li class="is-side">Asset mapping</li>
+        </ul>
+        <p class="ec__p">Then we split the jobs by role and device: the contractor raises RFIs and resolves non-compliances from phone or web (bulk only on web); the field engineer inspects on the phone; the PMC office assigns, tracks and configures on the web.</p>
+      </div>
+      <figure class="ec__fig">
+        <img src="assets/cases/debound/sv-stages.webp" width="2000" height="1241" alt="The stage flow from the board, from material inspection call to commissioning, with sticky notes splitting features by contractor phone, contractor web, field engineer phone and PMC web." loading="lazy" decoding="async">
+        <figcaption>Stages on the left, jobs per role and device on the right.</figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-boq">
+      <p class="ec__num">Configuring the BOQ</p>
+      <h2 id="h-boq" class="ec__h2">A bill of quantities can have thousands of rows. How much of it should a PMC set up?</h2>
+      <p class="ec__p">The BOQ is the contract's list of items, quantities and rates. Supervision has to hang off it, but asking a PMC to configure every bolt would stall onboarding. We compared three approaches.</p>
+      <div class="ec__cards3 ec__dirs">
+        <article class="ec__card">
+          <p class="ec__tagline">A</p>
+          <h3>Only major items</h3>
+          <p>Fast to set up and focused on what drives cost, but misses smaller items that later turn out to matter. Good for early estimates.</p>
+        </article>
+        <article class="ec__card is-picked">
+          <p class="ec__tagline">B · Chosen</p>
+          <h3>Major items, minor items tagged</h3>
+          <p>Track the major items, and link minor ones to them with an approximate quantity per unit (pipes carry their bedding, for example). Accurate enough for billing without the setup cost. Templates per scheme preload both.</p>
+        </article>
+        <article class="ec__card">
+          <p class="ec__tagline">C</p>
+          <h3>Every item</h3>
+          <p>Complete and transparent, but slow to configure and hard to keep up to date. Only worth it on small, tightly budgeted contracts.</p>
+        </article>
+      </div>
+      <figure class="dc__wide">
+        <img src="assets/cases/debound/sv-boq.webp" width="2000" height="967" alt="The BOQ comparison on the board: pros, cons and practical use cases for each approach, with the chosen approach highlighted in green and notes on templates and an example road project." loading="lazy" decoding="async">
+        <figcaption>The comparison as it was argued on the board. Milestone-mode projects got their own model: pro-rata or on completion, with optional checkpoints (a wall billed in two halves, for example).</figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-dash">
+      <p class="ec__num">Two dashboard directions</p>
+      <h2 id="h-dash" class="ec__h2">Organise the PMC console by module, or by work?</h2>
+      <div class="ec__cards3 ec__dirs">
+        <article class="ec__card is-picked">
+          <p class="ec__tagline">Approach 1 · Chosen</p>
+          <h3>Modules first</h3>
+          <p>Cards for inspection calls, site receipts, HSE and lab tests, each showing its RFIs and pending approvals. Open one to get tabs for RFIs, pending approvals, open non-compliances and approved inspections, with a "Request spot inspection" action that opens an assign-engineer pop-up.</p>
+        </article>
+        <article class="ec__card">
+          <p class="ec__tagline">Approach 2</p>
+          <h3>Works first</h3>
+          <p>A table of works with contractor, status and district, and the construction steps as a side menu. Closer to how the office thinks about sites, but it buries the question the office asks most: what is waiting on us?</p>
+        </article>
+        <article class="ec__card">
+          <h3>Why 1 won</h3>
+          <p>The office lead's job is clearing the queue. Leading with counts of pending work per module answers "what needs me now", and the works filter is still one tap away in the list.</p>
+        </article>
+      </div>
+      <figure class="dc__wide">
+        <a href="assets/cases/debound/sv-pmcweb-lg.webp" target="_blank" rel="noopener"><img src="assets/cases/debound/sv-pmcweb.webp" width="2000" height="1076" alt="Wireframes of the two PMC web approaches side by side. Approach 1, ticked, has module cards and a tabbed RFI list. Approach 2 has a works table and a construction-steps side menu." loading="lazy" decoding="async"></a>
+        <figcaption>Approach 1 (ticked) and Approach 2. <a class="dc__zoom" href="assets/cases/debound/sv-pmcweb-lg.webp" target="_blank" rel="noopener">Open full size</a></figcaption>
+      </figure>
+    </section>
+
+    <!-- ================= 4. PROTOTYPE ================= -->
+    <div class="ec__step" id="prototype">
+      <span class="ec__stepno">Step 4 of 5</span>
+      <h2 class="ec__stepname">Prototype</h2>
+      <p class="ec__stepline">Wireframes for the two sides of the loop: the field engineer's phone and the contractor's web app.</p>
+    </div>
+
+    <section class="ec__sec ec__split" aria-labelledby="h-field">
+      <div>
+        <p class="ec__num">Field app</p>
+        <h2 id="h-field" class="ec__h2">An inspection, start to finish, on one hand</h2>
+        <ol class="ec__flow">
+          <li><span>Home</span><b>Today's queue</b>A greeting, two KPI cards (RFIs and lab tests done), To do, Pending and Done tabs, and filters by work, stage and type. Each card shows the item, the work and when it's due.</li>
+          <li><span>RFI</span><b>See what the contractor filled</b>The contractor's form, then Navigate to site and Start inspection. Start only unlocks inside the site's geo-fence, if the project turns that on.</li>
+          <li><span>Inspect</span><b>Checklist and photos</b>The PMC's own form and checklist for that stage, step by step, ending with Take picture.</li>
+          <li><span>Spot check</span><b>Inspect without an RFI</b>A floating action opens a new spot inspection, listing only the stages that allow one and that this engineer can access.</li>
+        </ol>
+        <p class="ec__p">Reference documents (drawings, the contract, contractor contacts) and a profile with project switch, language, font size and dark mode sit in the bottom bar.</p>
+      </div>
+      <figure class="ec__fig">
+        <img src="assets/cases/debound/sv-pmcapp.webp" width="2000" height="1465" alt="Field app wireframes with notes: high contrast UI and bigger touch area, relevant KPI cards, filters, RFI form filled by the contractor, geo-fence note, checklist filled by the field engineer, and stages that allow spot inspection." loading="lazy" decoding="async">
+        <figcaption>Field app wireframes. The green note on the left set the tone: high contrast UI, bigger touch area.</figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec ec__split" aria-labelledby="h-contr">
+      <div>
+        <p class="ec__num">Contractor app</p>
+        <h2 id="h-contr" class="ec__h2">Raise one RFI, or a hundred</h2>
+        <p class="ec__p">Contractors raise RFIs in batches at the end of a pour or a pipeline stretch. The web app keeps the same tabs as the PMC side (RFIs, open non-compliances, approved inspections) and adds Raise RFI for one, and Download template plus Upload Excel for many.</p>
+        <h3 class="ec__h3">The non-compliance loop</h3>
+        <ul class="dc__chips" aria-label="Non-compliance loop">
+          <li>RFI raised</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Inspected</li><li class="dc__to" aria-hidden="true">→</li>
+          <li class="is-bad">Non-compliance</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Contractor fixes</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Same RFI reopens</li><li class="dc__to" aria-hidden="true">→</li>
+          <li class="is-good">Approved</li>
+        </ul>
+        <p class="ec__p">Reopening the same RFI, instead of creating a new one, keeps one history per item, which is what an auditor and a bill verifier need.</p>
+      </div>
+      <figure class="ec__fig">
+        <img src="assets/cases/debound/sv-contractor.webp" width="1800" height="1881" alt="Contractor web wireframes: a construction supervision home with inspection call and site receipt cards, and an RFI list with tabs and Download template, Upload Excel and Raise RFI buttons. An orange arrow notes that after resolving a non-compliance the same RFI is opened again." loading="lazy" decoding="async">
+        <figcaption>Contractor web wireframes, with the reopen loop drawn in orange.</figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-config">
+      <p class="ec__num">Admin and configuration</p>
+      <h2 id="h-config" class="ec__h2">The part nobody sees, and everything depends on</h2>
+      <div class="ec__cards3">
+        <article class="ec__card">
+          <h3>Per-stage forms</h3>
+          <p>For each stage: does it take an RFI, a spot inspection or both, and which form and checklist each uses. Standard checklist templates (excavation, for example) are shared across projects.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Schedule import</h3>
+          <p>Schedules live in MSP or Primavera. Rather than rebuild them, the console imports an Excel export, with a short video on how to export it.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Location hierarchy</h3>
+          <p>Every project has its own: package, circle, division, sub-division, block for power; state, zone, district, urban body for water. The model keeps the levels configurable.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 5. TEST ================= -->
+    <div class="ec__step" id="test">
+      <span class="ec__stepno">Step 5 of 5</span>
+      <h2 class="ec__stepname">Test</h2>
+      <p class="ec__stepline">Checking the model with the people who run the sites, and the targets a pilot has to hit.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-val">
+      <p class="ec__num">How we validated</p>
+      <h2 id="h-val" class="ec__h2">Every board went back to the PMC before it became a screen</h2>
+      <p class="ec__p">Every red note on the board was a question we took back to the PMC's project coordinators: which project types each business unit runs, how they monitor them today, and how payment terms differ. The working conclusions shaped the model: material procurement has to be tracked before erection (nothing can be erected without it), BOQ and milestone projects can share one product if procurement is tracked in both and only payment terms differ, and an RFI is only useful if it is linked to what it proves.</p>
+      <h3 class="ec__h3">Pilot plan <span class="dc__tag">targets, from the client's stated outcomes</span></h3>
+      <div class="ec__table">
+        <table>
+          <thead><tr><th scope="col">Task</th><th scope="col">Who</th><th scope="col">Success looks like</th></tr></thead>
+          <tbody>
+            <tr><td>Find today's due inspections and complete one with checklist and photo</td><td>Field engineer</td><td>Done on site, without calling the office</td></tr>
+            <tr><td>Raise 20 RFIs for a stretch of pipeline</td><td>Contractor</td><td>One Excel upload, no retyping</td></tr>
+            <tr><td>Assign a spot inspection to an engineer</td><td>PMC office</td><td>From the module card in two steps</td></tr>
+            <tr><td>Close a non-compliance after the fix</td><td>Field engineer</td><td>Same RFI reopened and re-verified, history intact</td></tr>
+            <tr><td>Verify a running bill</td><td>PMC office</td><td>Within the 7 days the contract allows, on verified items only</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="ec__h3">What I learned</h3>
+      <ul class="ec__nextlist">
+        <li>In B2B products the data model is the design. Getting BOQ, milestones and stages right decided which screens could exist.</li>
+        <li>Reading the contract is user research. The RFP told us the PMC's real deliverables better than any interview question could.</li>
+        <li>Design for the worst device first. A field phone in bright sunlight set the rules for contrast and touch size everywhere.</li>
+      </ul>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>

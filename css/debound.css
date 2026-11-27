@@ -1,0 +1,54 @@
+/* ---------- Debound case studies (debound-supervision.html, debound-drawing-review.html) ----------
+ * Built on the Sadabahar case-study frame (css/ecce.css: .ec, .ec__sheet, .ec__sec ...).
+ * Only the extra pieces these two studies need live here.
+ */
+.dc { --dc-site: #3d7ea6; --dc-office: #b4532a; --dc-contr: #2f8a4a; }
+
+/* full-width board exports; the link opens the high-res image */
+.dc__wide { margin: var(--gap-content) 0 0; }
+.dc__wide a { display: block; border-radius: 12px; outline-offset: 4px; }
+.dc__wide img { display: block; width: 100%; height: auto; border-radius: 12px; background: #fff; box-shadow: 0 24px 48px -24px rgba(75, 44, 22, .5); }
+.dc__wide figcaption, .dc__fig figcaption { margin-top: 12px; font: var(--t-label); font-size: 14px; color: #8a5a2b; }
+.dc__zoom { display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; color: var(--h-ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+/* three personas in a row */
+.ec__personas--3 { grid-template-columns: repeat(3, 1fr); }
+.psn__av--s { background: var(--dc-site); }
+.psn__av--o { background: var(--dc-office); }
+.psn__av--k { background: var(--dc-contr); }
+
+/* who is in the room: agency, PMC, contractor */
+.dc__eco { list-style: none; margin: var(--gap-content) 0 0; padding: 0; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 16px; }
+.dc__eco li { padding: 24px; border-radius: 16px; background: #fffaef; box-shadow: 0 16px 32px -24px rgba(75, 44, 22, .5); font: 400 15px/1.5 "Poppins", sans-serif; }
+.dc__eco li b { display: block; margin-bottom: 8px; font: var(--t-h3); font-size: clamp(22px, 1.6vw, 28px); color: var(--h-ink); }
+.dc__eco li.is-us { outline: 3px solid var(--dc-office); }
+.dc__eco .dc__arrow { display: grid; place-items: center; padding: 0; background: none; box-shadow: none; font: 600 28px/1 "Poppins", sans-serif; color: #b08a5a; }
+
+/* role x device matrix and status chips */
+.dc__chips { list-style: none; margin: 24px 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.dc__chips li { padding: 8px 16px; border-radius: 999px; background: #fffaef; border: 1.5px solid rgba(75, 44, 22, .3); font: 500 15px/1.2 "Poppins", sans-serif; color: var(--h-ink); }
+.dc__chips li.dc__to { padding: 0; border: 0; background: none; color: #b08a5a; }
+.dc__chips li.is-side { border-style: dashed; }
+.dc__chips li.is-good { background: #d8f1dc; border-color: #2f8a4a; }
+.dc__chips li.is-bad { background: #fbdcd5; border-color: #c4553a; }
+
+/* "inferred" label, so nobody mistakes a proto-persona or a target for a finding */
+.dc__tag { display: inline-block; margin-left: 8px; padding: 2px 10px; border-radius: 999px; background: rgba(75, 44, 22, .08); font: 500 12px/1.6 "Poppins", sans-serif; letter-spacing: .02em; color: #8a5a2b; vertical-align: middle; }
+
+/* pain point list with a red dot */
+.dc__pains { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; }
+.dc__pains li { position: relative; padding-left: 24px; font: var(--t-body); font-size: clamp(15px, 1.05vw, 18px); }
+.dc__pains li::before { content: ""; position: absolute; left: 0; top: .55em; width: 10px; height: 10px; border-radius: 50%; background: #c4553a; }
+.dc__pains--good li::before { background: #2f8a4a; }
+
+@media (max-width: 1080px) {
+  .ec__personas--3 { grid-template-columns: 1fr; }
+  .dc__eco { grid-template-columns: 1fr; }
+  .dc__eco .dc__arrow { transform: rotate(90deg); }
+}
+@media (max-width: 760px) {
+  .dc__pains { grid-template-columns: 1fr; }
+}
+.dc .ec__heroimg img { border-radius: 12px; background: #fff; filter: none; box-shadow: 0 30px 50px -28px rgba(75, 44, 22, .55); }
+.dc .ec__split .ec__flow { grid-template-columns: 1fr 1fr; }
+@media (max-width: 760px) { .dc .ec__split .ec__flow { grid-template-columns: 1fr; } }
