@@ -1,7 +1,7 @@
 /*
  * Living sea for the hero.
  *
- * The painted sea layer (assets/hero/sea.webp, a seamless 1527 px tile) is drawn with WebGL
+ * The painted sea layer (assets/hero/sea.webp, a seamless 1912 px tile) is drawn with WebGL
  * and pushed around by a few overlapping swells, so the brush strokes roll instead of sliding.
  * Swells grow taller toward the viewer, crests catch a little light, troughs darken, foam
  * shimmers and a slow teal/blue wash drifts across, all from Saumya's own colours.
@@ -22,7 +22,7 @@
   var bob = scene.querySelector(".ship__bob");
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  var SEA_TOP = 754, SEA_H = 326, TILE_W = 1527;
+  var SEA_TOP = 754, SEA_H = 306, TILE_W = 1912;
 
   // Rows of waves, back to front: where the painted crest sits, how fast the row rolls toward
   // the stern (px/s) and how tall its swell is. Far rows are slow and low, near rows fast and tall.
