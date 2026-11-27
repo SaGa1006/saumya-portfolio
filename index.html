@@ -65,38 +65,42 @@
         <canvas class="sea-gl sea-gl--back" aria-hidden="true"></canvas>
         <div class="mapl">
           <div class="mapl__box">
-            <img class="mapl__decor" src="assets/map/decor.webp" width="1671" height="640" alt="" loading="lazy" style="left:0;top:-3.614%;width:100%">
+            <svg class="mapl__route" viewBox="0 0 1920 830" preserveAspectRatio="none" aria-hidden="true">
+              <defs><mask id="route-reveal" maskUnits="userSpaceOnUse" x="0" y="0" width="1920" height="830"><path class="mapl__route-mask" d="M240 610 C275 568 370 434 450 360 C530 286 595 198 720 165 C845 132 1083 138 1200 165 C1317 192 1335 258 1420 330 C1505 402 1662 555 1710 600" pathLength="1"/></mask></defs>
+              <path class="mapl__route-line" d="M240 610 C275 568 370 434 450 360 C530 286 595 198 720 165 C845 132 1083 138 1200 165 C1317 192 1335 258 1420 330 C1505 402 1662 555 1710 600" mask="url(#route-reveal)"/>
+            </svg>
+            <img class="mapl__rose" src="assets/map/rose.webp" width="400" height="428" alt="" loading="lazy">
             <ul class="mapl__islands" aria-label="Ports on the voyage">
-              <li><button class="island island--ruins" type="button" style="left:1.735%;top:66.711%;width:16.397%" data-kicker="Port 1" data-title="DOD · DTU" data-text="Where the voyage began." data-img="assets/map/island-ruins.webp" aria-haspopup="dialog">
-                <img src="assets/map/island-ruins.webp" width="274" height="215" alt="" loading="lazy">
-                <span class="island__tag">DOD · DTU</span>
-                <span class="sr-only">Port 1: DOD · DTU</span>
-              </button></li>
-              <li><button class="island island--bridge" type="button" style="left:15.081%;top:47.884%;width:17.893%" data-kicker="Port 2" data-title="Debound" data-text="Story coming soon." data-img="assets/map/island-bridge.webp" aria-haspopup="dialog">
-                <img src="assets/map/island-bridge.webp" width="299" height="229" alt="" loading="lazy">
-                <span class="island__tag">Debound</span>
-                <span class="sr-only">Port 2: Debound</span>
-              </button></li>
-              <li><button class="island island--compass" type="button" style="left:21.364%;top:6.215%;width:19.449%" data-kicker="Port 3" data-title="Noise" data-text="Story coming soon." data-img="assets/map/island-compass.webp" aria-haspopup="dialog">
-                <img src="assets/map/island-compass.webp" width="325" height="271" alt="" loading="lazy">
-                <span class="island__tag">Noise</span>
-                <span class="sr-only">Port 3: Noise</span>
-              </button></li>
-              <li><button class="island island--scope" type="button" style="left:59.665%;top:13.275%;width:17.654%" data-kicker="Port 4" data-title="BharatPe" data-text="Story coming soon." data-img="assets/map/island-scope.webp" aria-haspopup="dialog">
-                <img src="assets/map/island-scope.webp" width="295" height="255" alt="" loading="lazy">
-                <span class="island__tag">BharatPe</span>
-                <span class="sr-only">Port 4: BharatPe</span>
-              </button></li>
-              <li><button class="island island--chest" type="button" style="left:78.276%;top:3.170%;width:17.654%" data-kicker="Port 5" data-title="Ion Group" data-text="Story coming soon." data-img="assets/map/island-chest.webp" aria-haspopup="dialog">
-                <img src="assets/map/island-chest.webp" width="295" height="234" alt="" loading="lazy">
-                <span class="island__tag">Ion Group</span>
-                <span class="sr-only">Port 5: Ion Group</span>
-              </button></li>
-              <li><button class="island island--x" type="button" style="left:80.910%;top:41.654%;width:17.774%" data-kicker="The next port" data-title="What’s Next?" data-text="X marks the next adventure. If you have a voyage in mind, let’s talk." data-img="assets/map/island-x.webp" aria-haspopup="dialog">
-                <img src="assets/map/island-x.webp" width="297" height="263" alt="" loading="lazy">
-                <span class="island__tag">What’s Next?</span>
-                <span class="sr-only">The next port: What’s Next?</span>
-              </button></li>
+                <li><button class="island island--ruins" type="button" style="left:4.167%;top:57.711%;width:16.667%" data-kicker="Port 1" data-title="DOD · DTU" data-text="Where the voyage began." data-img="assets/map/island-ruins.webp" aria-haspopup="dialog">
+                  <img src="assets/map/island-ruins.webp" alt="" loading="lazy">
+                  <span class="island__tag" aria-hidden="true">DOD · DTU</span>
+                  <span class="sr-only">Port 1: DOD · DTU</span>
+                </button></li>
+                <li><button class="island island--bridge" type="button" style="left:15.104%;top:29.187%;width:16.667%" data-kicker="Port 2" data-title="Debound" data-text="Story coming soon." data-img="assets/map/island-bridge.webp" aria-haspopup="dialog">
+                  <img src="assets/map/island-bridge.webp" alt="" loading="lazy">
+                  <span class="island__tag" aria-hidden="true">Debound</span>
+                  <span class="sr-only">Port 2: Debound</span>
+                </button></li>
+                <li><button class="island island--compass" type="button" style="left:29.167%;top:3.916%;width:16.667%" data-kicker="Port 3" data-title="Noise" data-text="Story coming soon." data-img="assets/map/island-compass.webp" aria-haspopup="dialog">
+                  <img src="assets/map/island-compass.webp" alt="" loading="lazy">
+                  <span class="island__tag" aria-hidden="true">Noise</span>
+                  <span class="sr-only">Port 3: Noise</span>
+                </button></li>
+                <li><button class="island island--scope" type="button" style="left:54.688%;top:3.078%;width:15.625%" data-kicker="Port 4" data-title="BharatPe" data-text="Story coming soon." data-img="assets/map/island-scope.webp" aria-haspopup="dialog">
+                  <img src="assets/map/island-scope.webp" alt="" loading="lazy">
+                  <span class="island__tag" aria-hidden="true">BharatPe</span>
+                  <span class="sr-only">Port 4: BharatPe</span>
+                </button></li>
+                <li><button class="island island--chest" type="button" style="left:66.146%;top:24.228%;width:15.625%" data-kicker="Port 5" data-title="Ion Group" data-text="Story coming soon." data-img="assets/map/island-chest.webp" aria-haspopup="dialog">
+                  <img src="assets/map/island-chest.webp" alt="" loading="lazy">
+                  <span class="island__tag" aria-hidden="true">Ion Group</span>
+                  <span class="sr-only">Port 5: Ion Group</span>
+                </button></li>
+                <li><button class="island island--x" type="button" style="left:81.250%;top:55.911%;width:15.625%" data-kicker="The next port" data-title="What’s Next?" data-text="X marks the next adventure. If you have a voyage in mind, let’s talk." data-img="assets/map/island-x.webp" aria-haspopup="dialog">
+                  <img src="assets/map/island-x.webp" alt="" loading="lazy">
+                  <span class="island__tag" aria-hidden="true">What’s Next?</span>
+                  <span class="sr-only">The next port: What’s Next?</span>
+                </button></li>
             </ul>
             <div class="mapl__head">
               <h2 id="map-title">The voyage so far</h2>
@@ -125,7 +129,7 @@
           </div>
         </div>
         </div>
-        <div class="mapl__boat" style="left:35.787%;top:19.199%;width:28.007%" aria-hidden="true"><img src="assets/map/boat.webp" width="468" height="753" alt="" loading="lazy"></div>
+        <div class="mapl__boat" style="left:35.787%;top:19.199%;width:28.007%" aria-hidden="true"><img src="assets/map/boat2.webp" width="662" height="1040" alt="" loading="lazy"></div>
         <canvas class="sea-gl sea-gl--front" aria-hidden="true"></canvas>
       </div>
 
