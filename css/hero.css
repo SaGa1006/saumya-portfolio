@@ -207,12 +207,12 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 /* islands rise into place one after another, each at its own speed */
 .mapl__islands { inset: 0; margin: 0; padding: 0; list-style: none; }
 .mapl__islands li {
-  --t: clamp(0, calc(var(--enter, 0) * 1.7 - var(--i) * .12), 1);
+  --i: 0; --t: clamp(0, calc(var(--enter, 0) * 1.75 - var(--i) * .12), 1);
   position: absolute; inset: 0; pointer-events: none;
   opacity: var(--t); transform: translate3d(0, calc((1 - var(--t)) * (14% + var(--i) * 3%)), 0);
 }
 .mapl__islands li:nth-child(2) { --i: 1; } .mapl__islands li:nth-child(3) { --i: 2; } .mapl__islands li:nth-child(4) { --i: 3; }
-.mapl__islands li:nth-child(5) { --i: 4; } .mapl__islands li:nth-child(6) { --i: 5; } .mapl__islands li:nth-child(1) { --i: 0; }
+.mapl__islands li:nth-child(5) { --i: 4; } .mapl__islands li:nth-child(6) { --i: 5; } .mapl__islands li:nth-child(7) { --i: 6; } .mapl__islands li:nth-child(1) { --i: 0; }
 .hero.is-map .island { pointer-events: auto; }
 
 .island {
