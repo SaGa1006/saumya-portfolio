@@ -126,3 +126,6 @@ a.card:hover .card__go, a.card:focus-visible .card__go { opacity: 1; transform: 
 .port:has(.port__back) { --top: 148px; }
 .port--dark .port__back { background: rgba(255, 255, 255, .85); }
 @media (max-width: 760px) { .port__back { top: 84px; } .port:has(.port__back) { --top: 128px; } }
+.case__media { position: relative; }
+.case__media > img { display: block; width: 100%; height: auto; }
+.case__media > video { position: absolute; object-fit: cover; }
