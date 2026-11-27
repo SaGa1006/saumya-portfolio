@@ -50,14 +50,52 @@
         </ul>
       </div>
 
-      <div class="scene" role="img" aria-label="Illustration: a young pirate on a wooden ship, looking through a spyglass as the ship sails over painted waves">
+      <div class="scene">
+        <p class="sr-only">Illustration: a young pirate on a wooden ship, looking through a spyglass as the ship sails over painted waves.</p>
         <div class="sky">
         <div class="cloud-track cloud-track--1"><img src="assets/hero/cloud-1.webp" width="345" height="177" alt=""></div>
         <div class="cloud-track cloud-track--2"><img src="assets/hero/cloud-2.webp" width="355" height="154" alt=""></div>
         <div class="cloud-track cloud-track--3"><img src="assets/hero/cloud-3.webp" width="235" height="155" alt=""></div>
+        <div class="cloud-track map-cloud map-cloud--1"><img src="assets/map/cloud-c1.webp" width="331" height="107" alt="" loading="lazy" style="left:36.864%;top:1.585%;width:19.808%"></div>
+        <div class="cloud-track map-cloud map-cloud--2"><img src="assets/map/cloud-c2.webp" width="297" height="99" alt="" loading="lazy" style="left:66.667%;top:58.823%;width:17.774%"></div>
+        <div class="cloud-track map-cloud map-cloud--3"><img src="assets/map/cloud-c3.webp" width="240" height="90" alt="" loading="lazy" style="left:22.621%;top:60.099%;width:14.363%"></div>
+        <div class="cloud-track map-cloud map-cloud--4"><img src="assets/map/cloud-c4.webp" width="195" height="89" alt="" loading="lazy" style="left:71.694%;top:31.267%;width:11.670%"></div>
         </div>
         <div class="sea-still"></div>
         <canvas class="sea-gl sea-gl--back" aria-hidden="true"></canvas>
+        <img class="mapl__decor" src="assets/map/decor.webp" width="1671" height="640" alt="" loading="lazy" style="left:0;top:-2.778%;width:100%">
+        <ul class="mapl__islands" aria-label="Ports on the voyage">
+          <li><button class="island island--ruins" type="button" style="left:1.735%;top:51.269%;width:16.397%" data-kicker="Port 1" data-title="DOD · DTU" data-text="Where the voyage began." data-img="assets/map/island-ruins.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-ruins.webp" width="274" height="215" alt="" loading="lazy">
+            <span class="island__tag">DOD · DTU</span>
+            <span class="sr-only">Port 1: DOD · DTU</span>
+          </button></li>
+          <li><button class="island island--bridge" type="button" style="left:15.081%;top:36.800%;width:17.893%" data-kicker="Port 2" data-title="Debound" data-text="Story coming soon." data-img="assets/map/island-bridge.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-bridge.webp" width="299" height="229" alt="" loading="lazy">
+            <span class="island__tag">Debound</span>
+            <span class="sr-only">Port 2: Debound</span>
+          </button></li>
+          <li><button class="island island--compass" type="button" style="left:21.364%;top:4.776%;width:19.449%" data-kicker="Port 3" data-title="Noise" data-text="Story coming soon." data-img="assets/map/island-compass.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-compass.webp" width="325" height="271" alt="" loading="lazy">
+            <span class="island__tag">Noise</span>
+            <span class="sr-only">Port 3: Noise</span>
+          </button></li>
+          <li><button class="island island--scope" type="button" style="left:59.665%;top:10.202%;width:17.654%" data-kicker="Port 4" data-title="BharatPe" data-text="Story coming soon." data-img="assets/map/island-scope.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-scope.webp" width="295" height="255" alt="" loading="lazy">
+            <span class="island__tag">BharatPe</span>
+            <span class="sr-only">Port 4: BharatPe</span>
+          </button></li>
+          <li><button class="island island--chest" type="button" style="left:78.276%;top:2.436%;width:17.654%" data-kicker="Port 5" data-title="Ion Group" data-text="Story coming soon." data-img="assets/map/island-chest.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-chest.webp" width="295" height="234" alt="" loading="lazy">
+            <span class="island__tag">Ion Group</span>
+            <span class="sr-only">Port 5: Ion Group</span>
+          </button></li>
+          <li><button class="island island--x" type="button" style="left:80.910%;top:32.012%;width:17.774%" data-kicker="The next port" data-title="What’s Next?" data-text="X marks the next adventure. If you have a voyage in mind, let’s talk." data-img="assets/map/island-x.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-x.webp" width="297" height="263" alt="" loading="lazy">
+            <span class="island__tag">What’s Next?</span>
+            <span class="sr-only">The next port: What’s Next?</span>
+          </button></li>
+        </ul>
         <div class="ship-exit">
         <div class="ship">
           <div class="ship__turn">
@@ -74,72 +112,77 @@
           </div>
         </div>
         </div>
+        <div class="mapl__boat" style="left:35.787%;top:19.199%;width:28.007%" aria-hidden="true"><img src="assets/map/boat.webp" width="468" height="753" alt="" loading="lazy"></div>
         <canvas class="sea-gl sea-gl--front" aria-hidden="true"></canvas>
-      </div>
-
-    </section>
-    <section class="map" id="voyage" aria-labelledby="map-title">
-      <div class="map__scene">
-        <img class="map__plate" src="assets/map/plate.webp" width="1671" height="941" alt="" loading="lazy">
-        <div class="map__sky" aria-hidden="true">
-          <div class="cloud-track map-cloud map-cloud--1"><img src="assets/map/cloud-c1.webp" width="331" height="107" alt="" style="left:36.864%;top:4.357%;width:19.808%"></div>
-          <div class="cloud-track map-cloud map-cloud--2"><img src="assets/map/cloud-c2.webp" width="297" height="99" alt="" style="left:66.667%;top:61.530%;width:17.774%"></div>
-          <div class="cloud-track map-cloud map-cloud--3"><img src="assets/map/cloud-c3.webp" width="240" height="90" alt="" style="left:22.621%;top:62.806%;width:14.363%"></div>
-          <div class="cloud-track map-cloud map-cloud--4"><img src="assets/map/cloud-c4.webp" width="195" height="89" alt="" style="left:71.694%;top:34.006%;width:11.670%"></div>
-        </div>
-        <ul class="map__islands" aria-label="Ports on the voyage">
-          <li><button class="island island--ruins" type="button" style="left:1.735%;top:53.985%;width:16.397%" data-kicker="Port 1" data-title="DOD" data-line="Where the voyage began." data-text="The first port: where I found design and started making things." data-img="assets/map/island-ruins.webp" aria-haspopup="dialog">
-            <img src="assets/map/island-ruins.webp" width="274" height="215" alt="">
-            <span class="island__tag">DOD</span>
-            <span class="visually-hidden">Port 1: DOD</span>
-          </button></li>
-          <li><button class="island island--bridge" type="button" style="left:15.081%;top:39.532%;width:17.893%" data-kicker="Port 2" data-title="Learn tools, growing" data-line="Building the bridge to the craft." data-text="Learning the tools, sketching every day and growing into the work." data-img="assets/map/island-bridge.webp" aria-haspopup="dialog">
-            <img src="assets/map/island-bridge.webp" width="299" height="229" alt="">
-            <span class="island__tag">Learn tools, growing</span>
-            <span class="visually-hidden">Port 2: Learn tools, growing</span>
-          </button></li>
-          <li><button class="island island--compass" type="button" style="left:21.364%;top:7.545%;width:19.449%" data-kicker="Port 3" data-title="Ezinore · DTU IIF" data-line="Finding my bearings." data-text="Early projects that pointed me toward product and UX design." data-img="assets/map/island-compass.webp" aria-haspopup="dialog">
-            <img src="assets/map/island-compass.webp" width="325" height="271" alt="">
-            <span class="island__tag">Ezinore · DTU IIF</span>
-            <span class="visually-hidden">Port 3: Ezinore · DTU IIF</span>
-          </button></li>
-          <li><button class="island island--scope" type="button" style="left:59.665%;top:12.965%;width:17.654%" data-kicker="Port 4" data-title="Stride · Debound · Noise" data-line="Looking further." data-text="Shipping real products with teams and learning to see what users need." data-img="assets/map/island-scope.webp" aria-haspopup="dialog">
-            <img src="assets/map/island-scope.webp" width="295" height="255" alt="">
-            <span class="island__tag">Stride · Debound · Noise</span>
-            <span class="visually-hidden">Port 4: Stride · Debound · Noise</span>
-          </button></li>
-          <li><button class="island island--chest" type="button" style="left:78.276%;top:5.207%;width:17.654%" data-kicker="Port 5" data-title="IIT Delhi · BharatPe" data-line="The treasure so far." data-text="Research and fintech at scale: the work I am proudest of." data-img="assets/map/island-chest.webp" aria-haspopup="dialog">
-            <img src="assets/map/island-chest.webp" width="295" height="234" alt="">
-            <span class="island__tag">IIT Delhi · BharatPe</span>
-            <span class="visually-hidden">Port 5: IIT Delhi · BharatPe</span>
-          </button></li>
-          <li><button class="island island--x" type="button" style="left:80.910%;top:34.750%;width:17.774%" data-kicker="Next port" data-title="Finding new" data-line="X marks the next adventure." data-text="I am looking for my next team. If you have a voyage in mind, let’s talk." data-img="assets/map/island-x.webp" aria-haspopup="dialog">
-            <img src="assets/map/island-x.webp" width="297" height="263" alt="">
-            <span class="island__tag">Finding new</span>
-            <span class="visually-hidden">Next port: Finding new</span>
-          </button></li>
-        </ul>
-        <div class="map__boat" style="left:35.787%;top:15.940%;width:28.007%" aria-hidden="true"><img src="assets/map/boat.webp" width="468" height="753" alt="" loading="lazy"></div>
-        <div class="map__hint" aria-hidden="true">
-          <span class="map__ring"></span>
-          <svg class="map__cursor" viewBox="0 0 40 48" width="40" height="48"><path d="M8 2 L8 34 L16 27 L22 42 L28 39 L22 25 L33 25 Z" fill="#fffaef" stroke="#4b2c16" stroke-width="2.6" stroke-linejoin="round"/></svg>
-          <span class="map__hint-text">Tap an island</span>
-        </div>
-      </div>
-        <div class="map__head">
+        <div class="mapl__head">
           <h2 id="map-title">The voyage so far</h2>
           <p>Every port that shaped how I design.</p>
         </div>
-      <dialog class="port-card" aria-labelledby="port-card-title">
-        <form method="dialog"><button class="port-card__close" aria-label="Close">×</button></form>
-        <img class="port-card__img" src="" alt="" width="300" height="230">
-        <p class="port-card__kicker"></p>
-        <h3 class="port-card__title" id="port-card-title"></h3>
-        <p class="port-card__line"></p>
-        <p class="port-card__text"></p>
-      </dialog>
+        <div class="map-hint mapl__hint" aria-hidden="true">
+          <span class="map-hint__ring"></span>
+          <img class="map-hint__anchor" src="assets/map/anchor.webp" width="160" height="186" alt="">
+          <span class="map-hint__text">Tap an island</span>
+        </div>
+      </div>
+
+    </section>
+    <section class="map" aria-labelledby="map-title-s">
+      <div class="map__head">
+        <h2 id="map-title-s">The voyage so far</h2>
+        <p>Every port that shaped how I design.</p>
+      </div>
+      <div class="map__scene">
+        <img class="map__plate" src="assets/map/plate.webp" width="1671" height="941" alt="" loading="lazy">
+        <div class="map__sky" aria-hidden="true">
+        <div class="cloud-track map-cloud map-cloud--1"><img src="assets/map/cloud-c1.webp" width="331" height="107" alt="" loading="lazy" style="left:36.864%;top:4.357%;width:19.808%"></div>
+        <div class="cloud-track map-cloud map-cloud--2"><img src="assets/map/cloud-c2.webp" width="297" height="99" alt="" loading="lazy" style="left:66.667%;top:61.530%;width:17.774%"></div>
+        <div class="cloud-track map-cloud map-cloud--3"><img src="assets/map/cloud-c3.webp" width="240" height="90" alt="" loading="lazy" style="left:22.621%;top:62.806%;width:14.363%"></div>
+        <div class="cloud-track map-cloud map-cloud--4"><img src="assets/map/cloud-c4.webp" width="195" height="89" alt="" loading="lazy" style="left:71.694%;top:34.006%;width:11.670%"></div>
+        </div>
+        <ul class="map__islands" aria-label="Ports on the voyage">
+          <li><button class="island island--ruins" type="button" style="left:1.735%;top:53.985%;width:16.397%" data-kicker="Port 1" data-title="DOD · DTU" data-text="Where the voyage began." data-img="assets/map/island-ruins.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-ruins.webp" width="274" height="215" alt="" loading="lazy">
+            <span class="island__tag">DOD · DTU</span>
+            <span class="sr-only">Port 1: DOD · DTU</span>
+          </button></li>
+          <li><button class="island island--bridge" type="button" style="left:15.081%;top:39.532%;width:17.893%" data-kicker="Port 2" data-title="Debound" data-text="Story coming soon." data-img="assets/map/island-bridge.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-bridge.webp" width="299" height="229" alt="" loading="lazy">
+            <span class="island__tag">Debound</span>
+            <span class="sr-only">Port 2: Debound</span>
+          </button></li>
+          <li><button class="island island--compass" type="button" style="left:21.364%;top:7.545%;width:19.449%" data-kicker="Port 3" data-title="Noise" data-text="Story coming soon." data-img="assets/map/island-compass.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-compass.webp" width="325" height="271" alt="" loading="lazy">
+            <span class="island__tag">Noise</span>
+            <span class="sr-only">Port 3: Noise</span>
+          </button></li>
+          <li><button class="island island--scope" type="button" style="left:59.665%;top:12.965%;width:17.654%" data-kicker="Port 4" data-title="BharatPe" data-text="Story coming soon." data-img="assets/map/island-scope.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-scope.webp" width="295" height="255" alt="" loading="lazy">
+            <span class="island__tag">BharatPe</span>
+            <span class="sr-only">Port 4: BharatPe</span>
+          </button></li>
+          <li><button class="island island--chest" type="button" style="left:78.276%;top:5.207%;width:17.654%" data-kicker="Port 5" data-title="Ion Group" data-text="Story coming soon." data-img="assets/map/island-chest.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-chest.webp" width="295" height="234" alt="" loading="lazy">
+            <span class="island__tag">Ion Group</span>
+            <span class="sr-only">Port 5: Ion Group</span>
+          </button></li>
+          <li><button class="island island--x" type="button" style="left:80.910%;top:34.750%;width:17.774%" data-kicker="The next port" data-title="What’s Next?" data-text="X marks the next adventure. If you have a voyage in mind, let’s talk." data-img="assets/map/island-x.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-x.webp" width="297" height="263" alt="" loading="lazy">
+            <span class="island__tag">What’s Next?</span>
+            <span class="sr-only">The next port: What’s Next?</span>
+          </button></li>
+        </ul>
+        <div class="map__boat" style="left:35.787%;top:15.940%;width:28.007%" aria-hidden="true"><img src="assets/map/boat.webp" width="468" height="753" alt="" loading="lazy"></div>
+      </div>
     </section>
   </main>
+    <dialog class="port-card" aria-labelledby="port-card-title">
+      <form method="dialog"><button class="port-card__close" aria-label="Close">×</button></form>
+      <img class="port-card__img" src="" alt="" width="300" height="230">
+      <p class="port-card__kicker"></p>
+      <h3 class="port-card__title" id="port-card-title"></h3>
+      <p class="port-card__text"></p>
+    </dialog>
+
 
   <noscript><style>.sun-loader{display:none}html.is-loading body{overflow:auto}html.is-loading .nav{opacity:1;transform:translateX(-50%)}html.is-loading .hero__copy>*,html.is-loading .logos li{opacity:1;transform:none}.ship{transform:none}</style></noscript>
   <script src="js/loader.js"></script>
