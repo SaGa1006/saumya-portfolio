@@ -168,21 +168,8 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
 .sky { transform: translate3d(0, calc(var(--exit, 0) * 7%), 0); }
 
-/* the ship and SaGa as a live 3D scene (js/ship3d.js); the painted layers stay as the fallback
-   when WebGL or modules are unavailable. The boat turns toward the viewer as it glides to the centre. */
+/* Saumya's painted boat glides to the centre as you scroll (translate set by js/hero.js) */
 .ship__turn { transform-origin: 50% 88%; transform: scale(calc(1 - var(--exit, 0) * .08)); }
-.ship__3d { left: -7.154%; top: -20.712%; width: 134.128%; aspect-ratio: 1; display: none; pointer-events: none; }
-.scene.has-ship3d .ship__3d { display: block; }
-.scene.has-ship3d .ship__hull { visibility: hidden; }
-.scene.has-ship3d :is(.ship__flag, .ship__cloth, .ship__pirate, .spyglass-body, .spyglass-head) { display: none; }
-.ship__glint { display: none; }
-.scene.has-ship3d .ship__glint { /* star sparkle on the telescope lens, placed by js/ship3d.js */
-  display: block; position: absolute; width: 4.2%; aspect-ratio: 1; margin: -2.1% 0 0 -2.1%; left: -9%; top: 0;
-  background: radial-gradient(circle, #fff 0 7%, rgba(255,255,255,.85) 12%, rgba(255,250,220,0) 42%);
-  clip-path: polygon(50% 0, 55% 43%, 100% 50%, 55% 57%, 50% 100%, 45% 57%, 0 50%, 45% 43%);
-  opacity: 0; transform: scale(.2);
-}
-.hero.is-sailing .ship__glint { animation: glint 7s ease-out 4s infinite; }
 
 .journey { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
 .route {

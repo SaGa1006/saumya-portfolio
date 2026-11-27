@@ -23,7 +23,7 @@
 
 /*
  * Voyage: while the hero is pinned, scroll progress drives three 0-1 values on .hero
- *   --exit  the hero copy lifts away while the 3D boat turns toward the viewer and glides to the centre
+ *   --exit  the hero copy lifts away while the painted boat glides to the centre
  *   --rise  the journey heading appears
  *   --tools the tool stack tiles arrive one by one
  * and draws the route across the map, lighting each port as the line reaches it.
@@ -60,7 +60,6 @@
       ["--exit", "--rise", "--tools"].forEach(function (k) { hero.style.removeProperty(k); });
       window.SagaVoyage.exit = 0;
       if (shipExit) shipExit.style.transform = "";
-      if (window.SagaShip3D) window.SagaShip3D.turn(0);
       return;
     }
     var total = voyage.offsetHeight - window.innerHeight;
@@ -80,8 +79,6 @@
       var dy = 55 * k;                                        // how far the rows at the hull drop
       shipExit.style.transform = "translate3d(" + (dx * exit).toFixed(1) + "px," + (dy * exit).toFixed(1) + "px,0)";
     }
-    // turn the 3D boat bow-on and bring SaGa up to the bow (js/ship3d.js)
-    if (window.SagaShip3D) window.SagaShip3D.turn(exit);
   }
   function onScroll() { if (!queued) { queued = true; requestAnimationFrame(update); } }
   window.addEventListener("scroll", onScroll, { passive: true });
