@@ -85,8 +85,10 @@
   border-radius: 8px; background: url("../assets/about/parchment.webp") center / 100% 100% no-repeat;
   display: flex; flex-direction: column;
 }
+.rail > li.note { aspect-ratio: auto; min-height: clamp(260px, 20.8vw, 400px); }
 .note__avatar { width: clamp(52px, 4.17vw, 80px); height: auto; aspect-ratio: 1; border-radius: 50%; background: #fff; object-fit: cover; }
 .note__name { margin: 16px 0 4px; font: var(--t-h3); }
+.note__role { margin: 0 0 12px; font: var(--t-label); opacity: .75; }
 .note__text { margin: 0; font: var(--t-body); font-family: var(--f-note); }
 
 .lens__item { border-radius: 8px; overflow: hidden; background: #e8cf98; }
