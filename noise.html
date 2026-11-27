@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Noise · Saumya Garg</title>
+  <meta name="description" content="Saumya Garg at Noise: product design, December 2024 to March 2025.">
+  <meta name="theme-color" content="#04364b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/port.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="/#work" aria-current="page">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#my-lens">My Lens</a></li>
+        <li><a href="off-the-map.html">Off the Map</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+  </header>
+
+  <main class="port port--dark" style="--r:1.4275">
+    <div class="port__frame">
+      <h1 class="sr-only">Noise</h1>
+      <img class="port__head port__head--phone rv" aria-hidden="true" src="assets/ports/noise-head.webp" width="860" height="270" alt="">
+      <div class="bento bento--3 bento--noise">
+        <div class="bento__col">
+          <figure class="card rv" style="--i:1"><img src="assets/ports/noise-c1.webp" width="846" height="1020" alt="Watch UI revamp: Noise smartwatch. Optimizing watch UI with best features and usability." loading="eager" decoding="async"></figure>
+          <figure class="card rv" style="--i:3"><img src="assets/ports/noise-c2.webp" width="846" height="710" alt="Noise AI coach: developing user journeys of multiple AI coaches." loading="lazy" decoding="async"></figure>
+        </div>
+        <div class="bento__col">
+        <img class="port__head rv" style="margin-bottom:auto" src="assets/ports/noise-head.webp" width="860" height="270" alt="Noise. December 2024 to March 2025, Product Design.">
+          <figure class="card rv" style="--i:2"><img src="assets/ports/noise-c3.webp" width="846" height="1416" alt="Female health tracker, personal assistant: effective menstrual health tracking with CiCi." loading="eager" decoding="async"></figure>
+        </div>
+        <div class="bento__col">
+          <figure class="card rv" style="--i:2"><img src="assets/ports/noise-c4.webp" width="846" height="1750" alt="App icon design for the Noise Audio app, designed for Noise Masterbuds in partnership with Bose." loading="eager" decoding="async"></figure>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    // let the cards rise in once the page has painted
+    requestAnimationFrame(function () {{ requestAnimationFrame(function () {{ document.querySelector(".port").classList.add("is-in"); }}); }});
+  </script>
+</body>
+</html>

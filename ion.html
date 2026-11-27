@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ion Group · Saumya Garg</title>
+  <meta name="description" content="Saumya Garg at Ion Group.">
+  <meta name="theme-color" content="#fae4b2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/port.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="/#work" aria-current="page">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#my-lens">My Lens</a></li>
+        <li><a href="off-the-map.html">Off the Map</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+  </header>
+
+  <main class="port port--light port--html">
+    <div class="port__frame">
+      <h1 class="port__title rv">Ion Group</h1>
+      <ul class="gcards">
+        <li class="gcard gcard--wide rv" style="--i:1">
+          <img class="gcard__img" src="assets/map/island-scope.webp" alt="" width="600" height="560">
+          <div class="gcard__body">
+            <p class="gcard__pill">The next chapter</p>
+            <p class="gcard__text">This port's story is still being written. Ask me about my work at Ion Group and I'll walk you through it.</p>
+            <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </main>
+  <script>
+    // let the cards rise in once the page has painted
+    requestAnimationFrame(function () {{ requestAnimationFrame(function () {{ document.querySelector(".port").classList.add("is-in"); }}); }});
+  </script>
+</body>
+</html>

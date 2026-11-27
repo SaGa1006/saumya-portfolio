@@ -1,0 +1,137 @@
+/*
+ * Sections 4-6 and footer: the beach below the voyage.
+ * Sizes follow the 1920px design and scale down with the viewport.
+ */
+:root {
+  --sand: #fdd58e;
+  --ink: #4b2c16;
+  --f-sans: "Poppins", system-ui, sans-serif;
+  --f-note: "Playfair Display", Georgia, serif;
+}
+
+.shore {
+  position: relative; z-index: 1; overflow: hidden;
+  color: var(--ink);
+  /* the painted sea edge has a see-through top, so sand fill starts below it;
+     the shore is pulled up so its sea hides the straight bottom of the voyage sea */
+  margin-top: -13vw;
+  background: linear-gradient(var(--sand), var(--sand)) 0 30vw / 100% 100% no-repeat;
+  padding-top: max(110px, 18vw);
+}
+.shore > section, .shore > footer { position: relative; z-index: 1; }
+/* painted sand keeps going below the sand artwork: its bottom strip, mirrored so it tiles */
+.shore::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 124.8vw; bottom: 0;
+  background: url("../assets/about/sand-tile.webp") 0 0 / 100% auto repeat-y;
+}
+/* moving sea (same WebGL water as the voyage), a bottle bobbing in it, and the sand painted over both */
+.shore__water { position: absolute; inset: 0 0 auto; height: 176.9vw; pointer-events: none; }
+.shore-sea, .shore-still { position: absolute; left: 0; top: 0; width: 100%; height: 19.79vw; display: block; }
+.shore-still { top: 2.8vw; height: 16vw; background: url("../assets/hero/sea.webp") 0 0 / 99.583% 100% repeat-x; }
+.shore.has-gl .shore-still { display: none; }
+.shore:not(.has-gl) .shore-sea { display: none; }
+.shore__sand { position: absolute; left: 0; top: 0; width: 100%; height: auto; }
+.shore__bottle {
+  position: absolute; left: 72.25%; top: 2.35vw; width: 8.05vw; height: auto;
+  transform-origin: 50% 80%; animation: bottle-bob 5.2s ease-in-out infinite;
+}
+@keyframes bottle-bob {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-3deg); }
+  30% { transform: translate3d(-.25vw, -.55vw, 0) rotate(2.5deg); }
+  60% { transform: translate3d(.2vw, .15vw, 0) rotate(-1deg); }
+}
+.wrap { width: calc(100% - 2 * var(--gutter)); margin: 0 auto; }
+
+.shore__head h2, .motive h2 { margin: 0; font: var(--h-font); color: var(--h-ink); }
+.shore__head p { margin: var(--gap-head) 0 0; font: var(--sub-font); color: var(--h-ink); }
+
+/* ---------- 4. My Expertise ---------- */
+.xp-grid {
+  list-style: none; margin: var(--gap-content) 0 0; padding: 0;
+  display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--gap-grid);
+}
+.xp { grid-column: span 2; }
+/* six cards: two rows of three */
+.xp {
+  min-height: 232px; box-sizing: border-box;
+  display: flex; flex-direction: column; justify-content: flex-start;
+  padding: var(--pad-card);
+  background: url("../assets/about/parchment.webp") center / 100% 100% no-repeat;
+}
+.xp__title { margin: 0 0 12px; font: var(--t-h3); }
+.xp__text { margin: 0; max-width: 26em; font: var(--t-body); }
+
+/* ---------- 5. My Motivation ---------- */
+.motive { margin-top: var(--gap-section); }
+.motive p { margin: var(--gap-head) 0 0; max-width: 46em; font: var(--sub-font); color: var(--h-ink); }
+
+/* ---------- Messages received + From my lens ---------- */
+.msgs, .photos { margin-top: var(--gap-section); }
+.rail {
+  list-style: none; margin: var(--gap-content) 0 0; padding: 0 var(--gutter) 12px;
+  display: flex; gap: var(--gap-rail);
+  overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scroll-snap-type: x mandatory;
+  touch-action: pan-x pan-y;
+  scroll-padding-inline: var(--gutter); scrollbar-width: none; cursor: grab;
+}
+.rail::-webkit-scrollbar { display: none; }
+.rail.is-dragging { cursor: grabbing; scroll-snap-type: none; }
+.rail.is-dragging * { user-select: none; }
+.rail:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; }
+.rail > li { flex: none; scroll-snap-align: start; width: clamp(260px, 31.25vw, 600px); aspect-ratio: 3 / 2; }
+
+.note {
+  box-sizing: border-box; padding: var(--pad-card);
+  border-radius: 8px; background: url("../assets/about/parchment.webp") center / 100% 100% no-repeat;
+  display: flex; flex-direction: column;
+}
+.rail > li.note { aspect-ratio: auto; min-height: clamp(260px, 20.8vw, 400px); }
+.note__avatar { width: clamp(52px, 4.17vw, 80px); height: auto; aspect-ratio: 1; border-radius: 50%; background: #fff; object-fit: cover; }
+.note__name { margin: 16px 0 4px; font: var(--t-h3); }
+.note__role { margin: 0 0 12px; font: var(--t-label); opacity: .75; }
+.note__text { margin: 0; font: var(--t-body); font-family: var(--f-note); }
+
+.lens__item { border-radius: 8px; overflow: hidden; background: #e8cf98; }
+.lens__item img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Footer ---------- */
+.foot { margin-top: var(--gap-section); padding-bottom: 32px; }
+.foot__top { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding-bottom: 24px; border-bottom: 2px solid var(--ink); }
+.foot__cta {
+  display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none;
+  font: var(--h-font);
+}
+.foot__arrow { width: .95em; height: .95em; transition: transform .3s ease; }
+.foot__cta:hover .foot__arrow, .foot__cta:focus-visible .foot__arrow { transform: translate(.08em, -.08em); }
+.foot__social { list-style: none; margin: 0; padding: 0; display: flex; gap: 12px; }
+.foot__social a {
+  display: grid; place-items: center; width: 48px; aspect-ratio: 1;
+  border-radius: 8px; background: var(--ink); color: var(--sand);
+}
+.foot__social svg { width: 60%; height: 60%; fill: currentColor; }
+.foot__bottom {
+  display: flex; justify-content: space-between; gap: 12px 24px; flex-wrap: wrap;
+  padding-top: 24px;
+}
+.foot__bottom p { margin: 0; font: var(--t-label); }
+
+/* ---------- Reveal: rise in from below, as in the voyage ---------- */
+.rv { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity .8s ease, transform .8s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i, 0) * 90ms); }
+.rv.is-in { opacity: 1; transform: none; }
+
+@media (max-width: 1280px) { .xp { min-height: 192px; } .foot__social a { width: 40px; } }
+
+/* ---------- Phone ---------- */
+@media (max-width: 760px) {
+  .xp-grid { grid-template-columns: 1fr; }
+  .xp, .xp:nth-child(n+4) { grid-column: auto; min-height: 0; }
+  .rail > li { width: 82vw; }
+  .note { aspect-ratio: auto; min-height: 240px; }
+  .foot__top { flex-direction: column; align-items: flex-start; }
+  .foot__bottom { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shore__bottle { animation: none; }
+  .rv { opacity: 1; transform: none; transition: none; }
+}

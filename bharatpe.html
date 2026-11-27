@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BharatPe · Saumya Garg</title>
+  <meta name="description" content="Saumya Garg at BharatPe: product design intern, July 2025 to now.">
+  <meta name="theme-color" content="#fae4b2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/port.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="/#work" aria-current="page">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#my-lens">My Lens</a></li>
+        <li><a href="off-the-map.html">Off the Map</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+  </header>
+
+  <main class="port port--light" style="--r:1.5527">
+    <div class="port__frame">
+      <h1 class="sr-only">BharatPe</h1>
+      <img class="port__head rv" src="assets/ports/bharatpe-head.webp" width="1030" height="290" alt="BharatPe. July 2025 to ongoing, Product Design Intern.">
+      <div class="bento bento--3">
+        <figure class="card rv" style="--i:1"><img src="assets/ports/bharatpe-c1.webp" width="846" height="1316" alt="Merchant Lending: pre and post loan disbursal." loading="eager" decoding="async"></figure>
+        <figure class="card rv" style="--i:2"><img src="assets/ports/bharatpe-c2.webp" width="846" height="1316" alt="POS Service Flow: merchant to FSA flow." loading="eager" decoding="async"></figure>
+        <figure class="card rv" style="--i:3"><img src="assets/ports/bharatpe-c3.webp" width="846" height="1316" alt="BharatPe Prachaar: upcoming soon." loading="lazy" decoding="async"></figure>
+      </div>
+    </div>
+  </main>
+  <script>
+    // let the cards rise in once the page has painted
+    requestAnimationFrame(function () {{ requestAnimationFrame(function () {{ document.querySelector(".port").classList.add("is-in"); }}); }});
+  </script>
+</body>
+</html>
