@@ -165,7 +165,8 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .hero { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
 .nav { position: fixed; }
 .hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
-.ship-exit { transform: translate3d(calc(var(--exit, 0) * -92%), 0, 0); }
+/* one ship for the whole voyage: on the right, then the centre (smaller, among the islands), then the left */
+.ship-exit { transform-origin: 67.55% 91.7%; transform: translate3d(var(--ship-x, 0%), 0, 0) scale(var(--ship-s, 1)); will-change: transform; }
 .ship__turn { transform-origin: 50% 88%; transform: none; }
 
 .sr-only, .visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
@@ -186,7 +187,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 /* the dotted route, compass rose and sea creatures */
 .mapl__route { left: 0; top: 0; width: 100%; height: 100%; overflow: visible; }
 .mapl__route-mask { fill: none; stroke: #fff; stroke-width: 90; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: calc(1 - clamp(0, calc(var(--enter, 0) * 1.6 - .55), 1)); }
-.mapl__rose { height: auto; opacity: clamp(0, calc(var(--enter, 0) * 2 - 1), 1); transform: rotate(calc((1 - var(--enter, 0)) * -60deg)); }
+.mapl__rose { height: auto; opacity: clamp(0, calc(var(--enter, 0) * 2 - 1), 1); transform: translate3d(0, calc((1 - var(--enter, 0)) * 60px), 0); }
 
 /* islands rise into place one after another, each at its own speed */
 .mapl__islands { inset: 0; margin: 0; padding: 0; list-style: none; }
@@ -328,6 +329,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 .tool:hover img { transform: translateY(-6%) scale(1.1); filter: drop-shadow(0 0 8px rgba(255, 226, 140, .9)); }
 .tool:hover .tool__naut { opacity: 1; }
 .tools-s { display: none; }
+.mapl__boat, .toolsl__ship { display: none; }
 
 @media (max-aspect-ratio: 1/1), (max-width: 760px) {
   .hero { display: flex; flex-direction: column; }

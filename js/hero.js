@@ -38,7 +38,7 @@
   function update() {
     queued = false;
     if (stacked.matches) {
-      hero.style.removeProperty("--exit"); hero.style.removeProperty("--enter"); hero.style.removeProperty("--leave"); hero.style.removeProperty("--tools"); hero.classList.remove("is-map", "is-tools");
+      hero.style.removeProperty("--exit"); hero.style.removeProperty("--enter"); hero.style.removeProperty("--leave"); hero.style.removeProperty("--tools"); hero.style.removeProperty("--ship-x"); hero.style.removeProperty("--ship-s"); hero.classList.remove("is-map", "is-tools");
       return;
     }
     var total = voyage.offsetHeight - window.innerHeight;
@@ -49,6 +49,10 @@
     hero.style.setProperty("--enter", enter.toFixed(4));
     hero.style.setProperty("--leave", leave.toFixed(4));
     hero.style.setProperty("--tools", tools.toFixed(4));
+    // the same ship sails right -> centre -> left; text and islands only ever rise in and lift out
+    var toCentre = seg(p, 0.06, 0.4), toLeft = seg(p, 0.62, 0.86);
+    hero.style.setProperty("--ship-x", (-17.55 * toCentre - 27.45 * toLeft).toFixed(3) + "%");
+    hero.style.setProperty("--ship-s", (1 - 0.5 * toCentre + 0.25 * toLeft).toFixed(4));
     hero.classList.toggle("is-map", enter > 0.85 && leave < 0.05);   // islands answer clicks once they have arrived
     hero.classList.toggle("is-tools", tools > 0.85);
   }
