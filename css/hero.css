@@ -29,7 +29,7 @@
   --gap-grid: 16px;          /* between cards in a grid */
   --gap-rail: 48px;          /* between cards in a sideways rail */
   --pad-card: 40px 48px;     /* inside a card */
-  --icon: 80px;              /* logos and social buttons */
+  --icon: 64px;              /* hero logos */
   --gutter: max(var(--side), calc((100vw - 1520px) / 2));
   --side: 160px;             /* page side margin */
   --t-display: 700 clamp(44px, 3.75vw, 72px)/1.05 "Cormorant", serif;
@@ -332,8 +332,12 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
   opacity: var(--t); transform: translate3d(0, calc((1 - var(--t)) * 40px), 0);
 }
-.tool img { width: 4.6cqw; height: 4.6cqw; object-fit: contain; }
-.tool--wide { grid-column: span 3; }
+.tool { --img: 4.6cqw; --cg: 8px; }
+.tool img { width: var(--img); height: var(--img); object-fit: contain; }
+/* the last tool spans 3 columns so its name fits on one line; its icon stays
+   centred in the first column and the name starts at the icon's left edge */
+.tool--wide { grid-column: span 3; align-items: flex-start; text-align: left; }
+.tool--wide > * { margin-left: calc(((100% - 2 * var(--cg)) / 3 - var(--img)) / 2); }
 .tool--wide .tool__name { white-space: nowrap; }
 .tool__name { margin-top: 8px; font: var(--t-label); color: var(--h-ink); }
 .tools-s { display: none; }
@@ -357,7 +361,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .tools-s__ship { display: block; width: min(300px, 70%); height: auto; margin: 24px auto; }
   .tools-s__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 20px 8px; margin: 0; padding: 0; list-style: none; }
   .tools-s__grid .tool { opacity: 1; transform: none; }
-  .tools-s__grid img { width: 56px; height: 56px; object-fit: contain; }
+  .tools-s__grid .tool { --img: 56px; }
   .map { display: block; padding: 48px 0 0; background: var(--page) url("../assets/hero/parchment-bg.webp") center / cover no-repeat; }
   .map__head { padding: 0 24px 16px; }
   .island__tag { display: none; }
@@ -385,11 +389,11 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 /* spacing steps down with the screen; values stay on the 4px grid */
 @media (min-width: 1600px) { :root { --side: 200px; } }
 @media (max-width: 1280px) {
-  :root { --gap-content: 32px; --gap-section: 96px; --gap-rail: 32px; --pad-card: 32px; --icon: 64px; --side: 64px; }
+  :root { --gap-content: 32px; --gap-section: 96px; --gap-rail: 32px; --pad-card: 32px; --icon: 56px; --side: 64px; }
   .hero__copy { padding-top: 176px; }
   .toolsl__grid { row-gap: 16px; }
 }
 @media (max-height: 760px) and (min-width: 761px) { .hero__copy { padding-top: 144px; } }
 @media (max-width: 760px) {
-  :root { --gap-content: 24px; --gap-section: 64px; --gap-grid: 12px; --gap-rail: 16px; --pad-card: 24px; --icon: 48px; --side: 24px; }
+  :root { --gap-content: 24px; --gap-section: 64px; --gap-grid: 12px; --gap-rail: 16px; --pad-card: 24px; --icon: 40px; --side: 24px; }
 }
