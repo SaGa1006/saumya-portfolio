@@ -1,0 +1,53 @@
+/*
+ * Port pages: what opens when an island on the map is clicked.
+ * Each page is a bento grid of project cards, laid out from Keshav's 1920px PDFs.
+ * Card pictures are cut from those PDFs at 2x; the grid keeps their proportions.
+ */
+.port {
+  --frame: min(1291px, calc(100% - 48px));
+  --bento-gap: clamp(8px, .6vw, 12px);
+  min-height: 100vh; min-height: 100svh; box-sizing: border-box;
+  padding: clamp(104px, 11.8vw, 160px) 0 clamp(48px, 6vw, 96px);
+  color: var(--h-ink);
+}
+.port--light { background: linear-gradient(180deg, #fae4b2 0%, #f6dfad 45%, #f1d8a1 100%); }
+.port--dark { background: #04364b url("../assets/ports/sea-tile.webp") center top / 1920px auto repeat; color: #fff; }
+@media (min-width: 1921px) { .port--dark { background-size: 100% auto; } }
+
+.port__frame { width: var(--frame); margin: 0 auto; }
+.port__head { display: block; margin: 0 auto; width: 39.9%; height: auto; }
+.bento--noise .port__head { width: 101.7%; margin-left: -.85%; margin-right: -.85%; }
+.port__note { margin: clamp(24px, 2.6vw, 48px) 0 clamp(16px, 1.2vw, 24px); text-align: center; font: 400 clamp(15px, 1.15vw, 22px)/1.4 var(--f-sans, "Poppins", sans-serif); }
+
+.bento { display: grid; gap: var(--bento-gap); margin-top: clamp(16px, 2vw, 40px); }
+.bento--3 { grid-template-columns: repeat(3, 1fr); }
+.bento--2 { grid-template-columns: 620fr 647fr; gap: clamp(12px, 1.3vw, 25px); }
+.bento__col { display: flex; flex-direction: column; justify-content: flex-end; gap: var(--bento-gap); }
+
+.card {
+  margin: 0; position: relative; border-radius: clamp(14px, 1.15vw, 22px); overflow: hidden;
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1), box-shadow .35s ease;
+}
+.card img { display: block; width: 100%; height: auto; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 18px 36px -18px rgba(18, 40, 56, .45); }
+.port--dark .card:hover { box-shadow: 0 18px 36px -14px rgba(0, 0, 0, .55); }
+
+/* rise in, as on the homepage */
+.port .rv { opacity: 0; transform: translate3d(0, 32px, 0); transition: opacity .7s ease, transform .7s cubic-bezier(.2, .7, .2, 1); transition-delay: calc(var(--i, 0) * 80ms); }
+.port.is-in .rv { opacity: 1; transform: none; }
+
+/* phones and small tablets: one card per row */
+@media (max-width: 760px) {
+  .port { --frame: calc(100% - 32px); }
+  .bento--3, .bento--2 { grid-template-columns: 1fr; gap: 16px; }
+  .bento__col { gap: 16px; display: contents; }
+  .bento--noise .port__head { order: -1; }
+  .port__head, .bento--noise .port__head { width: min(340px, 86%); margin-bottom: 8px; }
+}
+@media (min-width: 761px) and (max-width: 1024px) {
+  .port { --frame: calc(100% - 48px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .port .rv { opacity: 1; transform: none; transition: none; }
+  .card, .card:hover { transition: none; transform: none; }
+}

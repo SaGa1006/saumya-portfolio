@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DOD · DTU · Saumya Garg</title>
+  <meta name="description" content="Saumya Garg at the Department of Design, DTU: six student projects.">
+  <meta name="theme-color" content="#fae4b2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/port.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="/#work" aria-current="page">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#my-lens">My Lens</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+  </header>
+
+  <main class="port port--light">
+    <div class="port__frame">
+      <h1 class="sr-only">DOD · DTU projects</h1>
+      <div class="bento bento--3">
+        <figure class="card rv" style="--i:0"><img src="assets/ports/dtu-c1.webp" width="846" height="874" alt="Neev: early childhood development in semi-urban cities." loading="eager" decoding="async"></figure>
+        <figure class="card rv" style="--i:1"><img src="assets/ports/dtu-c2.webp" width="846" height="874" alt="Anyat: empowering empty nesters, with a crochet starter kit and app." loading="eager" decoding="async"></figure>
+        <figure class="card rv" style="--i:2"><img src="assets/ports/dtu-c3.webp" width="846" height="874" alt="ChalSaath: access made easy." loading="eager" decoding="async"></figure>
+        <figure class="card rv" style="--i:3"><img src="assets/ports/dtu-c4.webp" width="846" height="870" alt="Leaflane: plant co-parenting app." loading="lazy" decoding="async"></figure>
+        <figure class="card rv" style="--i:4"><img src="assets/ports/dtu-c5.webp" width="846" height="870" alt="Anekta: cultural traveling platform." loading="lazy" decoding="async"></figure>
+        <figure class="card rv" style="--i:5"><img src="assets/ports/dtu-c6.webp" width="846" height="870" alt="Ezinore: renewable energy management." loading="lazy" decoding="async"></figure>
+      </div>
+    </div>
+  </main>
+  <script>
+    // let the cards rise in once the page has painted
+    requestAnimationFrame(function () {{ requestAnimationFrame(function () {{ document.querySelector(".port").classList.add("is-in"); }}); }});
+  </script>
+</body>
+</html>

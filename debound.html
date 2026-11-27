@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Debound · Saumya Garg</title>
+  <meta name="description" content="Saumya Garg at Debound: UX design intern, May to October 2023.">
+  <meta name="theme-color" content="#04364b">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500&display=swap">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/port.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="/#work" aria-current="page">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#my-lens">My Lens</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+  </header>
+
+  <main class="port port--dark">
+    <div class="port__frame">
+      <h1 class="sr-only">Debound</h1>
+      <img class="port__head rv" src="assets/ports/debound-head.webp" width="910" height="280" alt="Debound. May 2023 to October 2023, UX Design Intern.">
+      <p class="port__note rv" style="--i:1">Due to NDA, I’m not allowed to share the details, but I can share my experience and overview.</p>
+      <div class="bento bento--2">
+        <figure class="card rv" style="--i:2"><img src="assets/ports/debound-c1.webp" width="1240" height="874" alt="Construction PMC: construction supervision tool." loading="eager" decoding="async"></figure>
+        <figure class="card rv" style="--i:3"><img src="assets/ports/debound-c2.webp" width="1294" height="874" alt="Construction PMC: drawing review and management tool." loading="lazy" decoding="async"></figure>
+      </div>
+    </div>
+  </main>
+  <script>
+    // let the cards rise in once the page has painted
+    requestAnimationFrame(function () {{ requestAnimationFrame(function () {{ document.querySelector(".port").classList.add("is-in"); }}); }});
+  </script>
+</body>
+</html>

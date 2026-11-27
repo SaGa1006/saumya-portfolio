@@ -20,6 +20,8 @@
     btn.addEventListener("focus", explored);
     btn.addEventListener("click", function () {
       explored();
+      // ports with their own page open it; the rest show the scroll card
+      if (btn.dataset.href) { window.location.href = btn.dataset.href; return; }
       opener = btn;
       fields.img.src = btn.dataset.img;
       fields.kicker.textContent = btn.dataset.kicker || "";
