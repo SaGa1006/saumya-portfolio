@@ -123,7 +123,6 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .hero.is-sailing .ship { animation: sail-in 4.2s cubic-bezier(.16, .68, .24, 1) forwards; }
 .hero.is-sailing .spyglass-body { animation: spy-body 7s cubic-bezier(.45, 0, .25, 1) 4s infinite; }
 .hero.is-sailing .spyglass-head { animation: spy-head 7s cubic-bezier(.45, 0, .25, 1) 4s infinite; }
-.hero.is-sailing .spyglass-head .lens { animation: spy-lens 7s ease-in-out 4s infinite; }
 .hero.is-sailing .spyglass-head::after { animation: glint 7s ease-out 4s infinite; }
 
 .scene.is-paused *, .scene.is-paused *::after { animation-play-state: paused !important; }
