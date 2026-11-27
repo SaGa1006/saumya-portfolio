@@ -6,10 +6,10 @@
 :root {
   --page: #fffaef;
   --paper: #fffaef; /* loader background matches the hero page */
-  --pill: #fff2d9;
+  --pill: #f3dcaa;          /* light yellowish brown, from the parchment */
   --brown: #4b2c16;
-  --teal: #163b3d;
-  --teal-soft: #2b5550;
+  --teal: #1b3e55;          /* deep navy of the flag and sea */
+  --teal-soft: #234d6a;
   --cream: #fffaef;
   /* Type scale, used everywhere (sizes at 1920px, shrinking with the screen):
      serif Cormorant for titles, sans Poppins for everything you read or click.
@@ -54,7 +54,7 @@ img { display: block; max-width: 100%; }
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 0 8px 0 32px; border-radius: 999px;
   background: var(--pill);
-  box-shadow: 0 0 28px 6px rgba(255, 236, 200, .75);
+  box-shadow: 0 0 28px 6px rgba(243, 220, 170, .6), inset 0 0 0 1px rgba(150, 100, 40, .18);
 }
 .nav__brand { justify-self: start; display: block; line-height: 0; border-radius: 6px; }
 .nav__brand img { height: 23px; width: auto; }
@@ -64,7 +64,7 @@ img { display: block; max-width: 100%; }
   text-underline-offset: 5px; text-decoration-thickness: 1px;
   transition: color .2s ease;
 }
-.nav__links a:hover, .nav__links a[aria-current="page"] { color: #121212; text-decoration-line: underline; }
+.nav__links a:hover, .nav__links a[aria-current="page"] { color: #122838; text-decoration-line: underline; }
 .cta {
   justify-self: end;
   display: inline-flex; align-items: center; height: 48px; padding: 0 24px; box-sizing: border-box;
@@ -72,7 +72,7 @@ img { display: block; max-width: 100%; }
   font: var(--t-label); text-decoration: none; white-space: nowrap;
   transition: background-color .25s ease, transform .25s ease, box-shadow .25s ease;
 }
-.cta:hover { background: #0e2b2d; transform: translateY(-1px); box-shadow: 0 6px 16px -8px rgba(22, 59, 61, .7); }
+.cta:hover { background: #122838; transform: translateY(-1px); box-shadow: 0 6px 16px -8px rgba(18, 40, 56, .7); }
 .cta:active { transform: none; }
 a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .cta:focus-visible { outline-color: #c89a3c; }
