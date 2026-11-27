@@ -120,10 +120,4 @@ html:has(.port), body:has(.port) { height: 100%; overflow: hidden; }
 a.card:hover .card__go, a.card:focus-visible .card__go { opacity: 1; transform: none; }
 @media (hover: none) { .card__go { opacity: 1; transform: none; } }
 
-/* back to the map, like the case study pages */
-.port__frame { position: relative; }
-.port__back { position: absolute; z-index: 2; left: 0; bottom: calc(100% + 14px); }
-.port:has(.port__back) { --top: 148px; }
-.port--dark .port__back { background: rgba(255, 255, 255, .85); }
-@media (max-width: 760px) { .port:has(.port__back) { --top: 136px; } .port__back { bottom: auto; top: -52px; left: 16px; } .port--html .port__back { left: 0; } }
 .port--html .port__frame:has(.gcard--wide) { max-width: 960px; }
