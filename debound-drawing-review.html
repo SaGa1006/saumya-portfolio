@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drawing Review for PMCs · Saumya Garg</title>
+  <meta name="description" content="A drawing review tool for project management consultants: contractor submissions, a configurable multi-level review, and non-compliance letters, replacing email chains. A UX case study by Saumya Garg at Debound.">
+  <meta name="theme-color" content="#fae4b2">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@400;500;600;700&family=Poppins:wght@400;500;600&display=swap">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/port.css">
+  <link rel="stylesheet" href="css/ecce.css">
+  <link rel="stylesheet" href="css/debound.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="nav__brand" href="/" aria-label="Uxban.SaGa, home"><img src="assets/hero/wordmark.webp" width="294" height="45" alt=""></a>
+    <nav aria-label="Main">
+      <ul class="nav__links">
+        <li><a href="/#work" aria-current="page">Work</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#my-lens">My Lens</a></li>
+        <li><a href="off-the-map.html">Off the Map</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://calendly.com/saumyagarg804/30min" target="_blank" rel="noopener noreferrer">Get in Touch<span class="sr-only">: book a 30 minute call (opens in a new tab)</span></a>
+  </header>
+
+  <main class="ec dc case">
+    <div class="case__bar">
+      <a class="case__back" href="debound.html"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Debound</a>
+      <p class="case__title">Drawing Review</p>
+    </div>
+    <article class="ec__sheet">
+
+    <header class="ec__hero">
+      <div class="ec__herotext">
+        <p class="ec__kicker">Debound · B2B SaaS for construction PMCs · UX case study</p>
+        <h1 class="ec__title">Drawing Review<span class="ec__sub">From email chains to one tracked review</span></h1>
+        <p class="ec__lede">Before a pipe is laid, its drawings and design calculations have to be approved. At the PMC we worked with, that meant contractors emailing heavy files, reviewers passing them up a chain by hand, and corrections going back as numbered letters. Nobody could say which drawing was where. I designed the tool that turns this into one submission, one configurable review flow and one record per drawing.</p>
+        <a class="ec__jump" href="#empathize">Read the case study<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+      <figure class="ec__heroimg">
+        <img src="assets/cases/debound/dr-review.webp" width="1600" height="1674" alt="The review hierarchy flow: the contractor sends a drawing to the team leader, who approves or rejects; approvals go down to the design head and sub-design head, and every review goes one level up for cross-verification before it is accepted or sent back for correction." fetchpriority="high">
+      </figure>
+      <ul class="ec__facts">
+        <li><span>Users</span>Contractors, document controllers, PMC team leaders and design reviewers</li>
+        <li><span>Platform</span>Web app, linked to the firm's document and ERP systems</li>
+        <li><span>Domain</span>Water supply, sewage treatment and drainage packages</li>
+        <li><span>My role</span>UX design intern: process mapping, flows, information architecture</li>
+        <li><span>Company</span>Debound, building software for a PMC firm</li>
+      </ul>
+    </header>
+
+    <nav class="ec__process" aria-label="Design process">
+      <a href="#empathize"><span>1</span>Empathize</a>
+      <a href="#define"><span>2</span>Define</a>
+      <a href="#ideate"><span>3</span>Ideate</a>
+      <a href="#prototype"><span>4</span>Prototype</a>
+      <a href="#test"><span>5</span>Test</a>
+    </nav>
+
+    <!-- ================= 1. EMPATHIZE ================= -->
+    <div class="ec__step" id="empathize">
+      <span class="ec__stepno">Step 1 of 5</span>
+      <h2 class="ec__stepname">Empathize</h2>
+      <p class="ec__stepline">Mapping how drawings were really reviewed, and listening to the people stuck in the middle of it.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-current">
+      <p class="ec__num">Current process</p>
+      <h2 id="h-current" class="ec__h2">Three steps on paper, a loop in reality</h2>
+      <p class="ec__p">We sat with the PMC team and mapped the review exactly as it ran. On paper it's three steps. In practice step 2 repeats for every revision, and each round trip runs through email and a manual letter-numbering process.</p>
+      <ol class="ec__flow">
+        <li><span>Step 1</span><b>Receive</b>The contractor emails drawings and design calculations to the PMC. Drawings come in six types (QAP, basic engineering package, general arrangement, structural, mechanical and technical) as PDF, .std or AutoCAD files, with calculations in PDF and Excel.</li>
+        <li><span>Step 2</span><b>Review</b>Reviewers open each file and cross-check the design calculations value by value, then list every correction in a letter and an Excel sheet. A general arrangement drawing can't be approved before its basic engineering package.</li>
+        <li><span>Step 3</span><b>Respond</b>Corrections go to the contractor as a letter, copied to the client. The letter is first logged on the firm's document system to get a letter number, signed, then emailed. Approved drawings go to the client the same way.</li>
+      </ol>
+      <figure class="dc__wide">
+        <a href="assets/cases/debound/dr-current-lg.webp" target="_blank" rel="noopener"><img src="assets/cases/debound/dr-current.webp" width="2000" height="1072" alt="The current-process userflow from the board: three purple step cards, yellow sub-steps, a green loop for repeated revisions, blue notes with our interview questions and the drawing metadata, and two red cards listing problems at each step." loading="lazy" decoding="async"></a>
+        <figcaption>The current process as we mapped it. Red cards are the problems at each step. <a class="dc__zoom" href="assets/cases/debound/dr-current-lg.webp" target="_blank" rel="noopener">Open full size</a></figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-pains">
+      <p class="ec__num">Contextual inquiry</p>
+      <h2 id="h-pains" class="ec__h2">What reviewers told us hurts</h2>
+      <p class="ec__p">We asked the team what their biggest problems were and which risks they wanted to track. Their answers, as noted on the board:</p>
+      <div class="ec__cards3">
+        <article class="ec__card">
+          <h3>Coordination</h3>
+          <p>Head office and site teams talk through email. Reviews stall between people, and there's no record of which documents a contractor has submitted.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Manpower</h3>
+          <p>Too few reviewers, deployed late. Thousands of calculations per drawing get checked by hand, value by value, across multiple revisions.</p>
+        </article>
+        <article class="ec__card">
+          <h3>Tracking</h3>
+          <p>The two risks they wanted to see: delays, and who is responsible for them. Neither was visible anywhere.</p>
+        </article>
+      </div>
+      <h3 class="ec__h3">Problems with the files themselves</h3>
+      <ul class="dc__pains">
+        <li>.std files don't open without the desktop software</li>
+        <li>Technical drawings are hard to check online</li>
+        <li>Layout drawings have tiny structures, and exports are low resolution</li>
+        <li>Zooming and scrolling across a sheet is painful</li>
+        <li>Checking needs several windows open side by side</li>
+        <li>The calculations behind a drawing aren't visible in the file</li>
+      </ul>
+    </section>
+
+    <section class="ec__sec ec__split" aria-labelledby="h-audit">
+      <div>
+        <p class="ec__num">Audit of the in-house tool</p>
+        <h2 id="h-audit" class="ec__h2">There was a tool. It wasn't helping.</h2>
+        <p class="ec__p">The firm had started an in-house drawing review tool. We mapped its information architecture: onboarding by email and OTP, a side navigation, and a drawing review page with a filter section and a documents checklist. Walking through it surfaced five problems, marked red on the map.</p>
+        <ul class="dc__pains">
+          <li>No description field for a drawing</li>
+          <li>Only PDF, Word and Excel uploads</li>
+          <li>Unclear error messages</li>
+          <li>A wrong upload can't be removed</li>
+          <li>Slow to upload and show on the dashboard</li>
+        </ul>
+        <p class="ec__p">It also showed how review responsibility moves: assigned down from team leader to project coordinator, design head and sub-head, with comments travelling back up the same chain.</p>
+      </div>
+      <figure class="ec__fig">
+        <img src="assets/cases/debound/dr-ia.webp" width="1800" height="2000" alt="The information architecture of the in-house tool: onboarding with email and OTP, side navigation, drawing review with section 1 filters and section 2 documents checklist and upload, with five red problem tags. Above, the assignment chain and the comment chain between team leader, project coordinator, design head and sub-head." loading="lazy" decoding="async">
+        <figcaption>The in-house tool's structure, with its problems in red.</figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-people">
+      <p class="ec__num">Personas <span class="dc__tag">proto-personas, from the roles we mapped</span></p>
+      <h2 id="h-people" class="ec__h2">Who touches a drawing</h2>
+      <div class="ec__personas ec__personas--3">
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--k" aria-hidden="true">CS</span>
+            <div><h3>The contractor's submitter</h3><p>Contractor's design office</p></div>
+          </div>
+          <blockquote class="psn__q">"Did they get my revision? Who has it now?"</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Does</dt><dd>Submits drawings and calculations, answers observations, resubmits revisions.</dd></div>
+            <div><dt>Needs</dt><dd>One place to submit heavy files, a live status, and the exact list of what to fix.</dd></div>
+          </dl>
+        </article>
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--o" aria-hidden="true">TL</span>
+            <div><h3>The team leader</h3><p>PMC, owns the package</p></div>
+          </div>
+          <blockquote class="psn__q">"I'm accountable for every drawing in this package, and I can't see half of them."</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Does</dt><dd>Checks a submission against the contract, assigns it, sets turnaround times, makes the final recommendation.</dd></div>
+            <div><dt>Needs</dt><dd>A document control index, who has what, what's late, letters without the admin.</dd></div>
+          </dl>
+        </article>
+        <article class="psn">
+          <div class="psn__head">
+            <span class="psn__av psn__av--s" aria-hidden="true">DR</span>
+            <div><h3>The design reviewer</h3><p>PMC design head or sub-head</p></div>
+          </div>
+          <blockquote class="psn__q">"Give me the drawing, the calculations and the checklist in one place."</blockquote>
+          <dl class="psn__dl">
+            <div><dt>Does</dt><dd>Reviews against a checklist per drawing type, comments, approves or rejects, verifies the level below.</dd></div>
+            <div><dt>Needs</dt><dd>Files that open, a checklist, previous revisions, and a clear queue.</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 2. DEFINE ================= -->
+    <div class="ec__step" id="define">
+      <span class="ec__stepno">Step 2 of 5</span>
+      <h2 class="ec__stepname">Define</h2>
+      <p class="ec__stepline">One problem, and the questions we had to answer before designing anything.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-define">
+      <p class="ec__num">Problem statement</p>
+      <h2 id="h-define" class="ec__h2">PMC teams review contractors' drawings over email with no index, no status and no owner, so revisions loop for weeks and nobody can tell who is causing the delay</h2>
+      <ul class="ec__hmw">
+        <li><span>How might we</span>give every drawing one record, from first submission through every revision to approval?</li>
+        <li><span>How might we</span>let each project define its own review chain, without us hard-coding it?</li>
+        <li><span>How might we</span>turn corrections into letters automatically, numbered and filed?</li>
+      </ul>
+      <h3 class="ec__h3">Questions we settled with the team</h3>
+      <div class="ec__table">
+        <table>
+          <thead><tr><th scope="col">We asked</th><th scope="col">They said</th><th scope="col">So the design</th></tr></thead>
+          <tbody>
+            <tr><td>Do you have a document control index (DCI)?</td><td>Not yet, but one can be made</td><td>Works with or without a DCI; creates entries if missing</td></tr>
+            <tr><td>Do you track revisions of the same document?</td><td>Yes</td><td>Revisions stack on one drawing record</td></tr>
+            <tr><td>Do you rate or categorise submissions?</td><td>No convention right now</td><td>Checklists per drawing type, no rating in v1</td></tr>
+            <tr><td>What does a checklist cover?</td><td>All attachments, contractual obligations, technical aspects</td><td>Checklist sections in that order</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="ec__h3">Design goals</h3>
+      <ul class="ec__goals">
+        <li><b>One record</b>A drawing number holds every submission, revision, review and letter.</li>
+        <li><b>Configurable flow</b>Each project sets its steps, reviewers, approvals and turnaround times.</li>
+        <li><b>Visible status</b>Everyone sees where a drawing is, with whom, and for how long.</li>
+        <li><b>No admin</b>Letters, numbers and filing happen as a side effect of a decision.</li>
+      </ul>
+    </section>
+
+    <!-- ================= 3. IDEATE ================= -->
+    <div class="ec__step" id="ideate">
+      <span class="ec__stepno">Step 3 of 5</span>
+      <h2 class="ec__stepname">Ideate</h2>
+      <p class="ec__stepline">Designing the review chain itself, before the screens that sit on it.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-chain">
+      <p class="ec__num">The review chain</p>
+      <h2 id="h-chain" class="ec__h2">Every decision goes one level up to be cross-verified</h2>
+      <p class="ec__p">We drew the chain as it should work. The contractor sends to the team leader. A rejection goes straight back to the contractor. An approval moves down to the design head and sub-head, and whatever a reviewer decides, the level above cross-verifies it before it counts. That kept the accountability the firm already had, and made it visible.</p>
+      <h3 class="ec__h3">Routing by package and drawing type</h3>
+      <p class="ec__p">On a real programme we mapped who reviews what: each package (water supply, sewage treatment, drainage) splits into basic engineering, general arrangement, structural, hydraulic, electrical and mechanical drawings, each with its own reviewer, its own prerequisite ("pre-requisite document clearance is critical") and its own verifier. A document controller creates the entry and picks the drawing type, and the type decides the flow.</p>
+      <h3 class="ec__h3">Approval types a step can have</h3>
+      <ul class="dc__chips">
+        <li>One specific person</li><li>One person, decided later</li><li>Several compulsory approvals</li><li>Any n people out of a list</li>
+      </ul>
+      <p class="ec__p">Each step also gets a turnaround time and a checklist. The team leader sets these once per project in an admin panel, then saves the flow.</p>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-auth">
+      <p class="ec__num">Onboarding</p>
+      <h2 id="h-auth" class="ec__h2">Two kinds of users, one front door</h2>
+      <p class="ec__p">Staff sign in with their company email and a password they change on first login. Anyone else, mostly contractors, gets a one-time password. Everyone links a Microsoft account, because heavy drawing files travel as OneDrive links rather than uploads. A short walkthrough follows, then the flow splits: contractors land on their submissions, PMC teams on their review queue.</p>
+      <ul class="dc__chips" aria-label="Sign-in flow">
+        <li>Enter email</li><li class="dc__to" aria-hidden="true">→</li>
+        <li>Company domain? Password : OTP</li><li class="dc__to" aria-hidden="true">→</li>
+        <li>Link Microsoft account</li><li class="dc__to" aria-hidden="true">→</li>
+        <li>Walkthrough</li><li class="dc__to" aria-hidden="true">→</li>
+        <li class="is-good">Contractor or PMC home</li>
+      </ul>
+    </section>
+
+    <!-- ================= 4. PROTOTYPE ================= -->
+    <div class="ec__step" id="prototype">
+      <span class="ec__stepno">Step 4 of 5</span>
+      <h2 class="ec__stepname">Prototype</h2>
+      <p class="ec__stepline">Screen flows for each side, and the state logic the engineers built from.</p>
+    </div>
+
+    <section class="ec__sec ec__split" aria-labelledby="h-contr">
+      <div>
+        <p class="ec__num">Contractor flow</p>
+        <h2 id="h-contr" class="ec__h2">Submit once, then just watch the status</h2>
+        <ol class="ec__flow">
+          <li><span>Home</span><b>Three tabs and a dashboard</b>Completed reviews, pending approval and non-compliances received, over an analytics section with progress in graphs and numbers.</li>
+          <li><span>Table</span><b>Everything about a drawing in one row</b>Name, revision, description, attachments, submitted on, approval status, non-compliance, time in cycle, and a View action.</li>
+          <li><span>Create</span><b>A two-part form</b>Part one: contractor, package, batch number, structure, drawing title and number, document type, revision. Part two: the checklist of required documents, each uploaded or linked from OneDrive with a description.</li>
+          <li><span>Revise</span><b>Fix from the non-compliance</b>Amend, resubmit, and the revision number goes up on the same record. It goes to the team leader and is filed in the ERP automatically.</li>
+        </ol>
+      </div>
+      <figure class="ec__fig">
+        <img src="assets/cases/debound/dr-contr.webp" width="1600" height="1810" alt="The contractor flow: home screen with tabs, analytics dashboard, tabular data with drawing fields, and the create-new form with input and upload sections, error handling, and submission to the team leader." loading="lazy" decoding="async">
+        <figcaption>The contractor's flow, from home to resubmission.</figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec" aria-labelledby="h-pmc">
+      <p class="ec__num">PMC flow</p>
+      <h2 id="h-pmc" class="ec__h2">The team leader's day: check, assign, decide</h2>
+      <p class="ec__p">The PMC home has the document index, controlled by the team leader, and an admin panel. A submission is first checked against the contract and its checklist. Errors go straight back to the contractor. Good submissions are assigned to a design head with a turnaround time and approval type, which emails them automatically. The design head cross-checks with the checklist and either passes it down to a sub-head or sends it back with comments, and the report travels back up to the team leader, who sends the decision out. The letter is registered and numbered in the firm's systems before it leaves.</p>
+      <figure class="dc__wide">
+        <a href="assets/cases/debound/dr-pmc-lg.webp" target="_blank" rel="noopener"><img src="assets/cases/debound/dr-pmc.webp" width="2000" height="1318" alt="The PMC flow on the board: home screen, document index and admin panel for the team leader, assignment to design head and sub-head with checklists and comments, errors sent back, and documents sent to the client." loading="lazy" decoding="async"></a>
+        <figcaption>The PMC team's flow. <a class="dc__zoom" href="assets/cases/debound/dr-pmc-lg.webp" target="_blank" rel="noopener">Open full size</a></figcaption>
+      </figure>
+    </section>
+
+    <section class="ec__sec ec__split" aria-labelledby="h-logic">
+      <div>
+        <p class="ec__num">Designing with engineering</p>
+        <h2 id="h-logic" class="ec__h2">Every button is a state change</h2>
+        <p class="ec__p">To hand over cleanly, we wrote the flow as the state logic the backend would run: a submission creates a stage 1 review copied from the workflow config; a decision either waits for verification or completes; the last stage completes the drawing in the index; anything else creates the next stage's review.</p>
+        <h3 class="ec__h3">A drawing's statuses</h3>
+        <ul class="dc__chips" aria-label="Statuses">
+          <li>Pending</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Submitted</li><li class="dc__to" aria-hidden="true">→</li>
+          <li>Verification pending</li><li class="dc__to" aria-hidden="true">→</li>
+          <li class="is-good">Complete</li>
+        </ul>
+        <ul class="dc__chips" aria-label="Other outcomes">
+          <li class="is-bad">Pending NCR</li><li class="is-side">Archived (old revision)</li><li class="is-side">Cancelled by contractor</li>
+        </ul>
+        <p class="ec__p">Raising a non-compliance and recommending a drawing both run the same automation: draft the letter, get its number, file it in the ERP and email it. That automates the most manual step of the old process.</p>
+      </div>
+      <figure class="ec__fig">
+        <img src="assets/cases/debound/dr-logic.webp" width="2000" height="1571" alt="The software flow: blue cards for drawing submission, review submission and verification, purple decision diamonds for verification required, review accepted and last stage, and status updates for the review, the submission and the document control index." loading="lazy" decoding="async">
+        <figcaption>The review logic, written as decisions and status changes.</figcaption>
+      </figure>
+    </section>
+
+    <!-- ================= 5. TEST ================= -->
+    <div class="ec__step" id="test">
+      <span class="ec__stepno">Step 5 of 5</span>
+      <h2 class="ec__stepname">Test</h2>
+      <p class="ec__stepline">What we checked with the team, and what the tool has to prove on a live package.</p>
+    </div>
+
+    <section class="ec__sec" aria-labelledby="h-test">
+      <p class="ec__num">Validation</p>
+      <h2 id="h-test" class="ec__h2">Walking the team through their own process, redrawn</h2>
+      <p class="ec__p">We took the current-process map, the review chain and the routing table back to the team to check them against real packages. The routing exercise was the stress test of the model: every drawing type on one live programme had to fit into the same parts (steps, reviewers, a prerequisite and a verifier), or the configurable flow would need exceptions.</p>
+      <h3 class="ec__h3">Pilot plan <span class="dc__tag">targets, not results</span></h3>
+      <div class="ec__table">
+        <table>
+          <thead><tr><th scope="col">Task</th><th scope="col">Who</th><th scope="col">Success looks like</th></tr></thead>
+          <tbody>
+            <tr><td>Submit a drawing with calculations and a large file</td><td>Contractor</td><td>One form, no email, OneDrive link accepted</td></tr>
+            <tr><td>Find where a submitted drawing is and who has it</td><td>Contractor, team leader</td><td>Visible in the table without asking anyone</td></tr>
+            <tr><td>Set up the review flow for a new package</td><td>Team leader</td><td>Steps, reviewers, approval type and turnaround saved once</td></tr>
+            <tr><td>Reject with observations and send the letter</td><td>Reviewer</td><td>Letter numbered, filed and emailed with no manual steps</td></tr>
+            <tr><td>Resubmit a revision</td><td>Contractor</td><td>Same record, revision number up, old one archived</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="ec__h3">What I learned</h3>
+      <ul class="ec__nextlist">
+        <li>Map the process people actually run, not the one in the manual. The loop in step 2 was the whole problem.</li>
+        <li>Configurability is a UX problem too. The admin panel that sets up a flow needs as much care as the flow.</li>
+        <li>Writing the state logic with engineers caught edge cases (cancelled submissions, archived revisions) the screens alone would have missed.</li>
+      </ul>
+      <p class="ec__p">Next: <a href="debound-supervision.html">Construction Supervision</a>, the product that takes over once drawings are approved.</p>
+    </section>
+
+    </article>
+  </main>
+</body>
+</html>
