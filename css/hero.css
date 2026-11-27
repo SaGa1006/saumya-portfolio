@@ -66,10 +66,10 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
   padding: clamp(130px, 21.3vh, 230px) 0 0 clamp(24px, 8.96vw, 172px);
   font-size: clamp(26px, 2.08vw, 40px); line-height: 1.32;
 }
-.hero__copy h1, .hero__copy p { font-size: inherit; line-height: inherit; margin: 0; font-weight: 500; }
-.hero__copy h1 { font-weight: 700; }
-.hero__copy p { max-width: 15em; font-size: max(16px, calc(1em - 8px)) !important; }
-.hero__copy p { font-weight: 400; }
+.hero__copy h1, .hero__copy p { margin: 0; }
+/* hero title sits above the section headings; intro uses the same plain font as other sections */
+.hero__copy h1 { font: 700 clamp(44px, 3.75vw, 72px)/1.05 var(--f-serif); color: var(--h-ink); }
+.hero__copy p { max-width: 21em; margin-top: .6em; font: var(--sub-font); color: var(--h-ink); }
 
 .logos { display: flex; flex-wrap: wrap; gap: clamp(14px, 1.46vw, 28px); margin: clamp(28px, 2.6vw, 50px) 0 0; padding: 0; list-style: none; }
 .logos img { width: clamp(52px, 4.17vw, 80px); height: auto; aspect-ratio: 1; border-radius: 50%; }
