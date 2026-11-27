@@ -284,7 +284,7 @@ html.map-explored .map-hint { opacity: 0; }
 /* the port card that opens from an island */
 /* port card: an unrolled scroll from the map; text sits on the sheet, clear of the rollers */
 .port-card {
-  width: min(720px, calc(100vw - 32px)); aspect-ratio: 1480 / 833; box-sizing: border-box; padding: 7% 15% 7.5%; border: 0; border-radius: 0;
+  --w: min(720px, calc(100vw - 32px)); width: var(--w); aspect-ratio: 1480 / 833; box-sizing: border-box; padding: calc(var(--w) * .08) calc(var(--w) * .14); border: 0; border-radius: 0;
   flex-direction: column; align-items: center; justify-content: center;
   background: url("../assets/map/scroll.webp") center / 100% 100% no-repeat; color: var(--h-ink); text-align: center;
   filter: drop-shadow(0 20px 32px rgba(18, 40, 56, .35)); overflow: visible;
@@ -300,15 +300,21 @@ html.map-explored .map-hint { opacity: 0; }
 .port-card__close svg { width: 20px; height: 20px; display: block; }
 .port-card__close:hover, .port-card__close:focus-visible { background: rgba(255, 255, 255, .85); transform: rotate(90deg); }
 .port-card__cta { margin-top: 16px; }
-.port-card[open] { display: flex; }
+.port-card[open] { display: grid; }
+/* two columns: island on the left, words and button on the right */
+.port-card { grid-template-columns: 46% 1fr; column-gap: 32px; align-content: center; align-items: center; text-align: left; }
+.port-card > form { display: contents; }
+.port-card > :not(form):not(.port-card__img) { grid-column: 2; }
+.port-card__cta { justify-self: start; }
+.port-card__img { grid-column: 1; grid-row: 1 / span 4; }
 .port-card:not([open]) { display: none; }
-@media (max-width: 760px) { .port-card { padding: 12% 15%; aspect-ratio: auto; } .port-card__close { width: 32px; height: 32px; top: 9%; right: 16%; } }
 .port-card__cta[hidden] { display: none; }
 .port-card__kicker[hidden] { display: none; }
-.port-card__img { width: 34%; height: auto; margin: 0 auto 8px; display: block; filter: drop-shadow(0 6px 8px rgba(75, 44, 22, .25)); }
+.port-card__img { width: 100%; height: auto; margin: 0; display: block; filter: drop-shadow(0 6px 8px rgba(75, 44, 22, .25)); }
 .port-card__kicker { margin: 0; font: var(--t-label); font-size: 14px; color: var(--teal); letter-spacing: .04em; text-transform: uppercase; }
 .port-card__title { margin: 0 0 8px; font: var(--t-h3); color: var(--h-ink); }
 .port-card__text { margin: 0; font: var(--t-body); color: var(--h-ink); }
+@media (max-width: 760px) { .port-card { padding: calc(var(--w) * .12) calc(var(--w) * .15); aspect-ratio: auto; grid-template-columns: 1fr; text-align: center; justify-items: center; } .port-card > :not(form):not(.port-card__img) { grid-column: 1; justify-self: center; } .port-card__img { grid-row: auto; width: 45%; margin-bottom: 8px; } .port-card__close { width: 32px; height: 32px; top: 9%; right: 16%; } }
 
 /* ---------- Intro after the sun loader ---------- */
 .nav, .hero__copy > *, .logos li { transition: opacity .8s ease, transform .8s ease; }
