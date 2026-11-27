@@ -306,7 +306,9 @@ html.map-explored .map-hint { opacity: 0; }
 .port-card > form { display: contents; }
 .port-card > :not(form):not(.port-card__img) { grid-column: 2; }
 .port-card__cta { justify-self: start; }
-.port-card__img { grid-column: 1; grid-row: 1 / span 4; }
+.port-card { grid-template-rows: 1fr repeat(3, auto) 1fr; }
+.port-card__img { grid-column: 1; grid-row: 1 / -1; }
+.port-card__title { grid-row: 2; } .port-card__text { grid-row: 3; } .port-card__cta { grid-row: 4; }
 .port-card:not([open]) { display: none; }
 .port-card__cta[hidden] { display: none; }
 .port-card__kicker[hidden] { display: none; }
@@ -314,7 +316,7 @@ html.map-explored .map-hint { opacity: 0; }
 .port-card__kicker { margin: 0; font: var(--t-label); font-size: 14px; color: var(--teal); letter-spacing: .04em; text-transform: uppercase; }
 .port-card__title { margin: 0 0 8px; font: var(--t-h3); color: var(--h-ink); }
 .port-card__text { margin: 0; font: var(--t-body); color: var(--h-ink); }
-@media (max-width: 760px) { .port-card { padding: calc(var(--w) * .12) calc(var(--w) * .15); aspect-ratio: auto; grid-template-columns: 1fr; text-align: center; justify-items: center; } .port-card > :not(form):not(.port-card__img) { grid-column: 1; justify-self: center; } .port-card__img { grid-row: auto; width: 45%; margin-bottom: 8px; } .port-card__close { width: 32px; height: 32px; top: 9%; right: 16%; } }
+@media (max-width: 760px) { .port-card { padding: calc(var(--w) * .12) calc(var(--w) * .15); aspect-ratio: auto; grid-template-columns: 1fr; text-align: center; justify-items: center; } .port-card > :not(form):not(.port-card__img) { grid-column: 1; justify-self: center; } .port-card { grid-template-rows: none; } .port-card__img, .port-card__title, .port-card__text, .port-card__cta { grid-row: auto; } .port-card__img { width: 45%; margin-bottom: 8px; } .port-card__close { width: 32px; height: 32px; top: 9%; right: 16%; } }
 
 /* ---------- Intro after the sun loader ---------- */
 .nav, .hero__copy > *, .logos li { transition: opacity .8s ease, transform .8s ease; }
