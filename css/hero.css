@@ -158,51 +158,98 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
   54%, 100% { opacity: 0; transform: scale(.3) rotate(140deg); }
 }
 
-/* ---------- Voyage: the hero stays pinned while scrolling sails into the journey ----------
-   js/hero.js sets --exit (hero leaves), --rise (back-view ship and map arrive),
-   --tools (tool stack) on .hero, each 0 to 1 with scroll. */
-.voyage { display: block; height: 380vh; height: 380svh; }
+/* ---------- Voyage: the hero stays pinned while the treasure map slides up over it ----------
+   js/hero.js sets --exit on .hero and --enter on .map (0 to 1) from how far the map has risen. */
+.voyage { display: block; }
 .hero { position: sticky; top: 0; height: 100vh; height: 100svh; min-height: 0; }
 .nav { position: fixed; }
-
 .hero__copy { transform: translate3d(0, calc(var(--exit, 0) * -38vh), 0); opacity: calc(1 - var(--exit, 0) * 1.6); will-change: transform, opacity; }
 .sky { transform: translate3d(0, calc(var(--exit, 0) * 7%), 0); }
 
-/* Saumya's painted boat glides to the centre as you scroll (translate set by js/hero.js) */
-.ship__turn { transform-origin: 50% 88%; transform: scale(calc(1 - var(--exit, 0) * .08)); }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-.journey { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
-.route {
-  position: absolute; left: 50%; top: 96px;
-  width: min(94vw, calc((72svh - 96px) * 16 / 9)); height: auto;
-  transform: translateX(-50%); overflow: visible;
+/* the map: Saumya's treasure-map illustration as layers (plate, clouds, islands, boat) on a 1671x941 artboard */
+.map {
+  position: relative; z-index: 5; height: 100vh; height: 100svh; overflow: hidden;
+  background: var(--page) url(../assets/map/sea-strip.webp) left bottom / auto 21.9vh repeat-x;
+  box-shadow: 0 -24px 48px rgba(75, 44, 22, .10);
 }
-.route__reveal { fill: none; stroke: #fff; stroke-width: 14; stroke-linecap: round; }
-.route__line { fill: none; stroke: #9d8f3f; stroke-width: 4; stroke-dasharray: 2 13; stroke-linecap: round; }
-.port { opacity: 0; transform: scale(.6); transform-box: fill-box; transform-origin: center; transition: opacity .45s ease, transform .55s cubic-bezier(.3, 1.5, .5, 1); }
-.port.is-on { opacity: 1; transform: none; }
-.port text { font: italic 500 40px var(--f-serif); fill: #6c6224; }
-.route__dot { fill: var(--page); stroke: #9d8f3f; stroke-width: 3.5; }
-.route__x { stroke: #b03a2e; stroke-width: 7; stroke-linecap: round; }
-.ports { list-style: none; margin: 0; padding: 0; }
-.ports { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } /* read by screen readers; shown as a timeline on phones */
+.map__scene {
+  position: absolute; left: 50%; bottom: 0; translate: -50% 0;
+  width: min(100vw, 100svh * 1671 / 941); aspect-ratio: 1671 / 941;
+}
+@supports not (width: 1svh) { .map__scene { width: min(100vw, 100vh * 1671 / 941); } }
+.map__plate { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map__sky { position: absolute; inset: 0; transform: translate3d(0, calc((1 - var(--enter, 1)) * 14vh), 0); }
+.map-cloud img { position: absolute; height: auto; }
+.map-cloud--1 { animation-duration: 90s; animation-delay: -45s; }
+.map-cloud--2 { animation-duration: 120s; animation-delay: -60s; }
+.map-cloud--3 { animation-duration: 105s; animation-delay: -52.5s; }
+.map-cloud--4 { animation-duration: 140s; animation-delay: -70s; }
+.map__islands { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; transform: translate3d(0, calc((1 - var(--enter, 1)) * 8vh), 0); }
+.island {
+  position: absolute; padding: 0; border: 0; background: none; cursor: pointer;
+  animation: island-float 6s ease-in-out infinite; -webkit-tap-highlight-color: transparent;
+}
+.island--bridge { animation-delay: -1s; } .island--compass { animation-delay: -2.2s; } .island--scope { animation-delay: -3.1s; }
+.island--chest { animation-delay: -4.4s; } .island--x { animation-delay: -5.2s; }
+.island img { display: block; width: 100%; height: auto; transition: transform .35s cubic-bezier(.3, 1.4, .5, 1), filter .35s ease; }
+.island:hover img, .island:focus-visible img { transform: translateY(-4%) scale(1.06); filter: drop-shadow(0 0 10px rgba(255, 226, 140, .95)) brightness(1.05); }
+.island:focus-visible { outline: none; }
+.island__tag {
+  position: absolute; left: 50%; bottom: -6%; translate: -50% 0; white-space: nowrap; pointer-events: none;
+  padding: .2em .8em; border-radius: 99px; background: var(--paper, #fffaef); color: var(--brown);
+  font: italic 500 clamp(14px, 1.15vw, 20px)/1.3 var(--f-serif); box-shadow: 0 4px 14px rgba(75, 44, 22, .18);
+  opacity: 0; transform: translateY(6px); transition: opacity .25s ease, transform .25s ease;
+}
+.island:hover .island__tag, .island:focus-visible .island__tag { opacity: 1; transform: none; }
+@keyframes island-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.6%); } }
 
-.journey__head, .tools { position: absolute; right: clamp(24px, 6vw, 120px); width: min(400px, 32vw); }
-.journey__head { top: 36vh; opacity: clamp(0, calc(var(--rise, 0) * 2 - 1), 1); transform: translate3d(0, calc((1 - var(--rise, 0)) * 20px), 0); }
-.journey__head h2 { margin: 0; font: 600 clamp(28px, 2.4vw, 44px)/1.1 var(--f-serif); color: var(--brown); }
-.journey__head p { margin: 6px 0 0; font: italic 400 clamp(18px, 1.4vw, 24px)/1.3 var(--f-serif); color: #6c6224; }
-.tools { top: calc(36vh + 120px); }
-.tools h3 { margin: 0 0 12px; font: italic 500 clamp(22px, 1.7vw, 30px)/1 var(--f-serif); color: #6c6224; opacity: clamp(0, calc(var(--tools, 0) * 3), 1); }
-.tools ul { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 0; padding: 0; list-style: none; }
-.tools li {
-  --t: clamp(0, calc(var(--tools, 0) * 10 - var(--i)), 1);
-  aspect-ratio: 1; display: grid; place-items: center; text-align: center; padding: 4px;
-  border: 1.5px solid #c9bd7a; border-radius: 14px; background: rgba(255, 242, 217, .9);
-  font: 500 clamp(13px, .95vw, 16px)/1.15 var(--f-serif); color: var(--brown);
-  opacity: var(--t); transform: translate3d(0, calc((1 - var(--t)) * 14px), 0) scale(calc(.9 + var(--t) * .1));
+.map__boat { position: absolute; transform: translate3d(0, calc((1 - var(--enter, 1)) * 30vh), 0); pointer-events: none; }
+.map__boat img { display: block; width: 100%; height: auto; transform-origin: 50% 92%; animation: boat-sail 5.5s ease-in-out infinite; }
+@keyframes boat-sail {
+  0%, 100% { transform: translateY(0) rotate(-1.1deg); }
+  25% { transform: translateY(-1.1%) rotate(.2deg); }
+  50% { transform: translateY(-.3%) rotate(1.1deg); }
+  75% { transform: translateY(-1.3%) rotate(-.2deg); }
 }
-.tools li:nth-child(1) { --i: 0; } .tools li:nth-child(2) { --i: 1; } .tools li:nth-child(3) { --i: 2; } .tools li:nth-child(4) { --i: 3; }
-.tools li:nth-child(5) { --i: 4; } .tools li:nth-child(6) { --i: 5; } .tools li:nth-child(7) { --i: 6; } .tools li:nth-child(8) { --i: 7; }
+
+/* hint: a cursor taps the first island until someone tries one */
+.map__hint { position: absolute; left: 10.5%; top: 66%; pointer-events: none; transition: opacity .5s ease; }
+.map.is-explored .map__hint { opacity: 0; }
+.map__cursor { position: absolute; left: 0; top: 0; width: clamp(26px, 2.2vw, 40px); height: auto; filter: drop-shadow(0 3px 4px rgba(75, 44, 22, .3)); animation: hint-tap 2.6s ease-in-out infinite; }
+.map__ring { position: absolute; left: -14px; top: -14px; width: 30px; height: 30px; border-radius: 50%; border: 2.5px solid #fff2d9; opacity: 0; animation: hint-ring 2.6s ease-out infinite; }
+.map__hint-text { position: absolute; left: clamp(30px, 2.6vw, 46px); top: clamp(30px, 2.6vw, 46px); white-space: nowrap; font: italic 600 clamp(15px, 1.2vw, 21px)/1 var(--f-serif); color: var(--brown); background: rgba(255, 250, 239, .85); padding: .25em .6em; border-radius: 99px; }
+@keyframes hint-tap {
+  0% { transform: translate(60px, 50px); opacity: 0; }
+  20% { transform: translate(0, 0); opacity: 1; }
+  32% { transform: translate(0, 0) scale(.86); }
+  40%, 80% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(60px, 50px); opacity: 0; }
+}
+@keyframes hint-ring { 0%, 30% { opacity: 0; transform: scale(.4); } 34% { opacity: 1; } 60%, 100% { opacity: 0; transform: scale(1.8); } }
+
+.map__head { position: absolute; left: 3%; bottom: 4.5%; opacity: clamp(0, calc(var(--enter, 1) * 2.2 - 1.2), 1); }
+.map__head h2 { margin: 0; font: 600 clamp(26px, 2.5vw, 46px)/1.05 var(--f-serif); color: #fff6e2; text-shadow: 0 2px 10px rgba(6, 34, 52, .55); }
+.map__head p { margin: 4px 0 0; font: italic 500 clamp(16px, 1.35vw, 24px)/1.3 var(--f-serif); color: #fff1d4; text-shadow: 0 2px 8px rgba(6, 34, 52, .6); }
+
+.map.is-paused *, .map.is-paused *::after { animation-play-state: paused !important; }
+
+/* the port card that opens from an island */
+.port-card {
+  width: min(420px, calc(100vw - 32px)); padding: 26px 28px 28px; border: 0; border-radius: 22px;
+  background: var(--page); color: var(--brown); box-shadow: 0 24px 60px rgba(30, 20, 10, .3); text-align: center;
+}
+.port-card::backdrop { background: rgba(23, 47, 52, .35); backdrop-filter: blur(2px); }
+.port-card[open] { animation: card-in .35s cubic-bezier(.3, 1.3, .5, 1); }
+@keyframes card-in { from { opacity: 0; transform: translateY(16px) scale(.96); } }
+.port-card__close { position: absolute; right: 14px; top: 10px; width: 40px; height: 40px; border: 0; border-radius: 50%; background: none; color: var(--brown); font: 400 30px/1 var(--f-serif); cursor: pointer; }
+.port-card__close:hover, .port-card__close:focus-visible { background: var(--pill); }
+.port-card__img { width: 62%; height: auto; margin: 0 auto 6px; display: block; }
+.port-card__kicker { margin: 0; font: italic 500 18px/1 var(--f-serif); color: #8a7b3a; }
+.port-card__title { margin: 6px 0 4px; font: 600 32px/1.1 var(--f-serif); }
+.port-card__line { margin: 0 0 10px; font: italic 500 20px/1.3 var(--f-serif); color: #6c6224; }
+.port-card__text { margin: 0; font: 400 19px/1.45 var(--f-serif); }
 
 /* ---------- Intro after the sun loader ---------- */
 .nav, .hero__copy > *, .logos li { transition: opacity .8s ease, transform .8s ease; }
@@ -224,22 +271,18 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
     position: relative; right: auto; bottom: auto; flex: none;
     margin-top: auto; width: 150vw; margin-left: -51vw;
   }
-  /* no pinned voyage on phones: the journey follows as a normal section */
-  .voyage { height: auto; }
+  /* no pinned voyage on phones: the map follows as a normal section */
   .hero { position: relative; height: auto; min-height: 100svh; }
   .hero__copy, .sky, .ship-exit { transform: none; opacity: 1; }
-  .route { display: none; }
-  .ship-exit { transform: none !important; }
-  .ship__turn { transform: none; }
-  .journey { position: relative; inset: auto; padding: 48px 24px 64px; pointer-events: auto; background: var(--page); }
-  .journey__head, .tools { position: static; width: auto; opacity: 1; transform: none; }
-  .tools { margin-top: 36px; }
-  .tools h3 { opacity: 1; }
-  .tools li { --t: 1; }
-  .ports { position: relative; width: auto; height: auto; overflow: visible; clip: auto; margin-top: 28px; border-left: 2px dashed #b5a85a; padding-left: 22px; }
-  .ports li { position: relative; padding: 10px 0; font: italic 500 22px/1.2 var(--f-serif); color: #6c6224; }
-  .ports li::before { content: ""; position: absolute; left: -31px; top: 15px; width: 12px; height: 12px; border-radius: 50%; background: var(--page); border: 3px solid #9d8f3f; }
-  .ports li:last-child::before { content: "✕"; border: 0; background: none; color: #b03a2e; font: 700 18px/1 sans-serif; left: -32px; top: 12px; width: auto; height: auto; }
+  .map { height: auto; background: var(--page); box-shadow: none; }
+  .map__scene { position: relative; left: auto; translate: none; width: 100%; margin-top: 24px; }
+  .map__sky, .map__islands, .map__boat { transform: none; }
+  .map__head { position: static; order: -1; padding: 48px 24px 0; opacity: 1; }
+  .map__head h2, .map__head p { color: var(--brown); text-shadow: none; }
+  .map__head p { color: #6c6224; }
+  .map { display: flex; flex-direction: column; }
+  .map__hint-text { display: none; }
+  .island__tag { display: none; }
 }
 @media (max-width: 760px) {
   .nav { grid-template-columns: 1fr auto; padding-left: 20px; height: 58px; top: 16px; }
@@ -253,8 +296,9 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 
 @media (prefers-reduced-motion: reduce) {
   /* the voyage still changes with scroll, mostly by fading rather than moving */
-  .hero__copy, .sky, .journey__head, .tools li { transform: none !important; }
-  .port { transition: none; transform: none; }
+  .hero__copy, .sky, .map__sky, .map__islands, .map__boat { transform: none !important; }
+  .map *, .port-card { animation: none !important; }
+  .map__hint { display: none; }
   .scene *, .scene *::after { animation: none !important; }
   .ship, .hero.is-sailing .ship { transform: none; }
   .nav, .hero__copy > *, .logos li { transition: none; }

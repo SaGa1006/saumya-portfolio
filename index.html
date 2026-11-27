@@ -77,49 +77,67 @@
         <canvas class="sea-gl sea-gl--front" aria-hidden="true"></canvas>
       </div>
 
-      <section class="journey" aria-labelledby="journey-title">
-        <div class="journey__head">
-          <h2 id="journey-title">The voyage so far</h2>
+    </section>
+    <section class="map" id="voyage" aria-labelledby="map-title">
+      <div class="map__scene">
+        <img class="map__plate" src="assets/map/plate.webp" width="1671" height="941" alt="" loading="lazy">
+        <div class="map__sky" aria-hidden="true">
+          <div class="cloud-track map-cloud map-cloud--1"><img src="assets/map/cloud-c1.webp" width="331" height="107" alt="" style="left:36.864%;top:4.357%;width:19.808%"></div>
+          <div class="cloud-track map-cloud map-cloud--2"><img src="assets/map/cloud-c2.webp" width="297" height="99" alt="" style="left:66.667%;top:61.530%;width:17.774%"></div>
+          <div class="cloud-track map-cloud map-cloud--3"><img src="assets/map/cloud-c3.webp" width="240" height="90" alt="" style="left:22.621%;top:62.806%;width:14.363%"></div>
+          <div class="cloud-track map-cloud map-cloud--4"><img src="assets/map/cloud-c4.webp" width="195" height="89" alt="" style="left:71.694%;top:34.006%;width:11.670%"></div>
+        </div>
+        <ul class="map__islands" aria-label="Ports on the voyage">
+          <li><button class="island island--ruins" type="button" style="left:1.735%;top:53.985%;width:16.397%" data-kicker="Port 1" data-title="DOD" data-line="Where the voyage began." data-text="The first port: where I found design and started making things." data-img="assets/map/island-ruins.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-ruins.webp" width="274" height="215" alt="">
+            <span class="island__tag">DOD</span>
+            <span class="visually-hidden">Port 1: DOD</span>
+          </button></li>
+          <li><button class="island island--bridge" type="button" style="left:15.081%;top:39.532%;width:17.893%" data-kicker="Port 2" data-title="Learn tools, growing" data-line="Building the bridge to the craft." data-text="Learning the tools, sketching every day and growing into the work." data-img="assets/map/island-bridge.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-bridge.webp" width="299" height="229" alt="">
+            <span class="island__tag">Learn tools, growing</span>
+            <span class="visually-hidden">Port 2: Learn tools, growing</span>
+          </button></li>
+          <li><button class="island island--compass" type="button" style="left:21.364%;top:7.545%;width:19.449%" data-kicker="Port 3" data-title="Ezinore · DTU IIF" data-line="Finding my bearings." data-text="Early projects that pointed me toward product and UX design." data-img="assets/map/island-compass.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-compass.webp" width="325" height="271" alt="">
+            <span class="island__tag">Ezinore · DTU IIF</span>
+            <span class="visually-hidden">Port 3: Ezinore · DTU IIF</span>
+          </button></li>
+          <li><button class="island island--scope" type="button" style="left:59.665%;top:12.965%;width:17.654%" data-kicker="Port 4" data-title="Stride · Debound · Noise" data-line="Looking further." data-text="Shipping real products with teams and learning to see what users need." data-img="assets/map/island-scope.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-scope.webp" width="295" height="255" alt="">
+            <span class="island__tag">Stride · Debound · Noise</span>
+            <span class="visually-hidden">Port 4: Stride · Debound · Noise</span>
+          </button></li>
+          <li><button class="island island--chest" type="button" style="left:78.276%;top:5.207%;width:17.654%" data-kicker="Port 5" data-title="IIT Delhi · BharatPe" data-line="The treasure so far." data-text="Research and fintech at scale: the work I am proudest of." data-img="assets/map/island-chest.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-chest.webp" width="295" height="234" alt="">
+            <span class="island__tag">IIT Delhi · BharatPe</span>
+            <span class="visually-hidden">Port 5: IIT Delhi · BharatPe</span>
+          </button></li>
+          <li><button class="island island--x" type="button" style="left:80.910%;top:34.750%;width:17.774%" data-kicker="Next port" data-title="Finding new" data-line="X marks the next adventure." data-text="I am looking for my next team. If you have a voyage in mind, let’s talk." data-img="assets/map/island-x.webp" aria-haspopup="dialog">
+            <img src="assets/map/island-x.webp" width="297" height="263" alt="">
+            <span class="island__tag">Finding new</span>
+            <span class="visually-hidden">Next port: Finding new</span>
+          </button></li>
+        </ul>
+        <div class="map__boat" style="left:35.787%;top:15.940%;width:28.007%" aria-hidden="true"><img src="assets/map/boat.webp" width="468" height="753" alt="" loading="lazy"></div>
+        <div class="map__hint" aria-hidden="true">
+          <span class="map__ring"></span>
+          <svg class="map__cursor" viewBox="0 0 40 48" width="40" height="48"><path d="M8 2 L8 34 L16 27 L22 42 L28 39 L22 25 L33 25 Z" fill="#fffaef" stroke="#4b2c16" stroke-width="2.6" stroke-linejoin="round"/></svg>
+          <span class="map__hint-text">Tap an island</span>
+        </div>
+      </div>
+        <div class="map__head">
+          <h2 id="map-title">The voyage so far</h2>
           <p>Every port that shaped how I design.</p>
         </div>
-        <svg class="route" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <defs><mask id="route-reveal"><path class="route__reveal" d="M120,800 C155,777 308,715 330,660 C352,605 277,530 250,470 C223,410 142,349 170,300 C198,251 328,209 420,175 C512,141 622,114 720,95 C818,76 933,48 1010,60 C1087,72 1108,165 1180,170 C1252,175 1397,103 1440,90"/></mask></defs>
-          <path class="route__line" mask="url(#route-reveal)" d="M120,800 C155,777 308,715 330,660 C352,605 277,530 250,470 C223,410 142,349 170,300 C198,251 328,209 420,175 C512,141 622,114 720,95 C818,76 933,48 1010,60 C1087,72 1108,165 1180,170 C1252,175 1397,103 1440,90"/>
-          <g class="port" data-x="120" data-y="800"><circle class="route__dot" cx="120" cy="800" r="9"/><text x="114" y="848" text-anchor="middle">DOD</text></g>
-          <g class="port" data-x="330" data-y="660"><circle class="route__dot" cx="330" cy="660" r="9"/><text x="356" y="668" text-anchor="start">Learn tools, growing</text></g>
-          <g class="port" data-x="250" data-y="470"><circle class="route__dot" cx="250" cy="470" r="9"/><text x="276" y="478" text-anchor="start">Ezinore · DTU IIF</text></g>
-          <g class="port" data-x="170" data-y="300"><circle class="route__dot" cx="170" cy="300" r="9"/><text x="196" y="308" text-anchor="start">Stride</text></g>
-          <g class="port" data-x="420" data-y="175"><circle class="route__dot" cx="420" cy="175" r="9"/><text x="398" y="155" text-anchor="end">Debound</text></g>
-          <g class="port" data-x="720" data-y="95"><circle class="route__dot" cx="720" cy="95" r="9"/><text x="720" y="143" text-anchor="middle">Noise</text></g>
-          <g class="port" data-x="1010" data-y="60"><circle class="route__dot" cx="1010" cy="60" r="9"/><text x="1034" y="68" text-anchor="start">IIT Delhi</text></g>
-          <g class="port" data-x="1180" data-y="170"><circle class="route__dot" cx="1180" cy="170" r="9"/><text x="1180" y="220" text-anchor="middle">BharatPe</text></g>
-          <g class="port" data-x="1440" data-y="90"><path class="route__x" d="M1427,77 L1453,103 M1453,77 L1427,103"/><text x="1440" y="144" text-anchor="middle">Finding new</text></g>
-        </svg>
-        <ol class="ports">
-          <li>DOD</li>
-          <li>Learn tools, growing</li>
-          <li>Ezinore · DTU IIF</li>
-          <li>Stride</li>
-          <li>Debound</li>
-          <li>Noise</li>
-          <li>IIT Delhi</li>
-          <li>BharatPe</li>
-          <li>Finding new</li>
-        </ol>
-        <div class="tools">
-          <h3>Tool stack</h3>
-          <ul>
-            <li><span>Figma</span></li>
-            <li><span>FigJam</span></li>
-            <li><span>Procreate</span></li>
-            <li><span>Illustrator</span></li>
-            <li><span>Photoshop</span></li>
-            <li><span>After Effects</span></li>
-            <li><span>Framer</span></li>
-            <li><span>Notion</span></li>
-          </ul>
-        </div>
-      </section>
+      <dialog class="port-card" aria-labelledby="port-card-title">
+        <form method="dialog"><button class="port-card__close" aria-label="Close">×</button></form>
+        <img class="port-card__img" src="" alt="" width="300" height="230">
+        <p class="port-card__kicker"></p>
+        <h3 class="port-card__title" id="port-card-title"></h3>
+        <p class="port-card__line"></p>
+        <p class="port-card__text"></p>
+      </dialog>
     </section>
   </main>
 
@@ -127,5 +145,6 @@
   <script src="js/loader.js"></script>
   <script src="js/hero.js"></script>
   <script src="js/sea.js"></script>
+  <script src="js/map.js"></script>
 </body>
 </html>
