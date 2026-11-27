@@ -126,7 +126,7 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .ship__flag { top: 5.687%; }
 .ship__cloth { top: 2.989%; height: auto; }
 .scene.has-cloth .ship__flag { visibility: hidden; }
-/* spyglass: a strip of draw tube stretches out from under the eyepiece as the eyepiece slides forward */
+/* spyglass: stays still (Keshav dropped the zoom); a star sparkles on the lens */
 .spyglass-body { left: 26.882%; top: 43.049%; width: 2.688%; transform-origin: 100% 50%; }
 .spyglass-head { left: 22.849%; top: 40.758%; width: 6.541%; }
 .spyglass-head img { display: block; width: 100%; }
@@ -138,8 +138,6 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 }
 
 .hero.is-sailing .ship { animation: sail-in 4.2s cubic-bezier(.16, .68, .24, 1) forwards; }
-.hero.is-sailing .spyglass-body { animation: spy-body 7s cubic-bezier(.45, 0, .25, 1) 4s infinite; }
-.hero.is-sailing .spyglass-head { animation: spy-head 7s cubic-bezier(.45, 0, .25, 1) 4s infinite; }
 .hero.is-sailing .spyglass-head::after { animation: glint 7s ease-out 4s infinite; }
 
 .scene.is-paused *, .scene.is-paused *::after { animation-play-state: paused !important; }
@@ -149,21 +147,6 @@ a:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 @keyframes sail-in {
   0% { transform: translateX(125%); }
   100% { transform: translateX(0); }
-}
-/* the draw tube stretches and the rim slides out: she zooms in, looks, then zooms back */
-@keyframes spy-body {
-  0%, 10% { transform: scale(1, 1); }
-  24%, 68% { transform: scale(2.1, 1); }
-  82%, 100% { transform: scale(1, 1); }
-}
-@keyframes spy-head {
-  0%, 10% { transform: translate3d(0, 0, 0) scale(1); }
-  24%, 68% { transform: translate3d(-45%, 0, 0) scale(1.06); }
-  82%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-}
-@keyframes spy-lens {
-  0%, 18%, 76%, 100% { filter: brightness(1); }
-  30%, 60% { filter: brightness(1.25) saturate(1.15); }
 }
 @keyframes glint {
   0%, 24% { opacity: 0; transform: scale(.2) rotate(0deg); }
