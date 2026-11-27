@@ -322,7 +322,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
 }
 .tool img { width: 4.6cqw; height: 4.6cqw; object-fit: contain; }
 .tool__name { margin-top: .45cqw; font: 700 max(12px, .9cqw)/1.15 var(--f-serif); color: #4b2c16; }
-.tool:hover .tools-s { display: none; }
+.tools-s { display: none; }
 .mapl__boat, .toolsl__ship { display: none; }
 
 @media (max-aspect-ratio: 1/1), (max-width: 760px) {
@@ -345,7 +345,7 @@ html.is-loading .hero__copy > *, html.is-loading .logos li { opacity: 0; transfo
   .tools-s__grid .tool { opacity: 1; transform: none; }
   .tools-s__grid img { width: 56px; height: 56px; object-fit: contain; }
   .tools-s__grid .tool__name { font-size: 14px; }
-  .tools-s__grid   .map { display: block; padding: 48px 0 0; }
+  .map { display: block; padding: 48px 0 0; }
   .map__head { padding: 0 24px 16px; }
   .island__tag { display: none; }
   .map { overflow: hidden; }
